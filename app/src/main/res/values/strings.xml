@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">七磅</string>
+    <string name="spf_user">user</string>
+    <string name="index">index</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="click_head">点击头像登录</string>
+    <string name="night">夜间模式</string>
+    <string name="logincn">登录</string>
+    <string name="settingcn">设置</string>
+</resources>

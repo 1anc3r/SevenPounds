@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.MainActivity">
+
+    <item
+        android:id="@+id/menu_add_favorite"
+        android:title="收藏"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_del_favorite"
+        android:title="取关"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_renew"
+        android:title="续借"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <group
+        android:id="@+id/navigation_group_1"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navigation_item_1"
+            android:checked="true"
+            android:title="见闻如是说" />
+
+        <item
+            android:id="@+id/navigation_item_2"
+            android:title="读书如抽丝" />
+
+        <item
+            android:id="@+id/navigation_item_3"
+            android:title="听音如沐风" />
+
+        <item
+            android:id="@+id/navigation_item_4"
+            android:title="观影如造梦" />
+
+        <item
+            android:id="@+id/navigation_item_5"
+            android:title="吐槽如瀑布" />
+
+        <item
+            android:id="@+id/navigation_item_6"
+            android:title="游戏如人生" />
+
+        <item
+            android:id="@+id/navigation_item_7"
+            android:title="编程如逆旅" />
+
+    </group>
+
+    <group
+        android:id="@+id/navigation_group_2"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navigation_setting"
+            android:title="设置" />
+
+        <!--<item-->
+        <!--android:id="@+id/navigation_item_night"-->
+        <!--android:icon="@mipmap/ic_brightness_2_black_24dp"-->
+        <!--android:title="夜间模式" />-->
+
+    </group>
+
+</menu>
