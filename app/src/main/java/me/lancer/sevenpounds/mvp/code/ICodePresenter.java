@@ -19,4 +19,8 @@ public interface ICodePresenter {
     void loadRepositoriesSuccess(List<CodeBean> list);
 
     void loadRepositoriesFailure(String log);
+
+    void loadDetailSuccess(CodeBean bean);
+
+    void loadDetailFailure(String log);
 }

@@ -97,7 +97,7 @@ public class VideoTopFragment extends PresenterFragment<VideoPresenter> implemen
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_m);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -106,7 +106,7 @@ public class VideoTopFragment extends PresenterFragment<VideoPresenter> implemen
                 new Thread(loadTopVideo).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_m);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mGridLayoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());

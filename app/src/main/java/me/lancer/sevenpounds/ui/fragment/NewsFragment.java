@@ -45,7 +45,7 @@ public class NewsFragment extends BaseFragment {
 
     private void initTabLayout(View view) {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabs);
-        ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
+        ViewPager viewPager = (ViewPager) view.findViewById(R.id.vp_tab);
         setupViewPager(viewPager);
         viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
         tabLayout.setupWithViewPager(viewPager);

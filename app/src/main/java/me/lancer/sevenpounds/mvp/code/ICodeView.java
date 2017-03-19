@@ -15,4 +15,6 @@ public interface ICodeView extends IBaseView {
     void showOrganizations(List<CodeBean> list);
 
     void showRepositories(List<CodeBean> list);
+
+    void showDetail(CodeBean bean);
 }

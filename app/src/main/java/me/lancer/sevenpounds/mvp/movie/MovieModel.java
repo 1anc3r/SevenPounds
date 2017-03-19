@@ -52,6 +52,31 @@ public class MovieModel {
         }
     }
 
+    public void loadReviewerDetail(String url) {
+        String content = contentGetterSetter.getContentFromHtml(url);
+        MovieBean bean;
+        if (!content.contains("获取失败!")) {
+            bean = getReviewerDetailFromContent(content);
+            presenter.loadReviewerDetailSuccess(bean);
+        } else {
+            presenter.loadReviewerDetailFailure(content);
+            Log.e("loadReviewerDetail", content);
+        }
+    }
+
+    public void loadTopDetail(String url) {
+        String content = contentGetterSetter.getContentFromHtml(url);
+        String photos = contentGetterSetter.getContentFromHtml(url+"/all_photos");
+        MovieBean bean;
+        if (!content.contains("获取失败!")) {
+            bean = getTopDetailFromContent(content, photos);
+            presenter.loadTopDetailSuccess(bean);
+        } else {
+            presenter.loadTopDetailFailure(content);
+            Log.e("loadTopDetail", content);
+        }
+    }
+
     public List<MovieBean> getReviewerFromContent(String content){
         List<MovieBean> list = new ArrayList<>();
         Document document = Jsoup.parse(content);
@@ -86,5 +111,31 @@ public class MovieModel {
             list.add(mbItem);
         }
         return list;
+    }
+
+    public MovieBean getReviewerDetailFromContent(String content) {
+        MovieBean bean = new MovieBean();
+        Document document = Jsoup.parse(content);
+        Element element = document.getElementById("content");
+        bean.setSubTitle(element.getElementsByClass("info-list").get(0).html());
+        bean.setContent("— 影评 —<br>"+element.getElementsByClass("review-content clearfix").get(0).html());
+        return bean;
+    }
+
+    public MovieBean getTopDetailFromContent(String content, String photos) {
+        MovieBean bean = new MovieBean();
+        Document document0 = Jsoup.parse(content);
+        Element element0 = document0.getElementById("content");
+        bean.setSubTitle(element0.getElementById("info").html());
+        Document document1 = Jsoup.parse(photos);
+        Element element1 = document1.getElementById("content");
+        if (element0.getElementsByClass("all hidden").size()>0) {
+            bean.setContent("— 剧情简介 —<br>"+element0.getElementsByClass("all hidden").get(0).html()
+                    +element1.getElementsByClass("article").html());
+        }else{
+            bean.setContent("— 剧情简介 —<br>"+element0.getElementById("link-report").html()
+                    +element1.getElementsByClass("article").html());
+        }
+        return bean;
     }
 }

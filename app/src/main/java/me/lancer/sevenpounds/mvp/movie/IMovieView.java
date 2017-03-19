@@ -13,4 +13,8 @@ public interface IMovieView extends IBaseView {
     void showReviewer(List<MovieBean> list);
 
     void showTopMovie(List<MovieBean> list);
+
+    void showReviewerDetail(MovieBean bean);
+
+    void showTopDetail(MovieBean bean);
 }

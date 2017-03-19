@@ -52,6 +52,30 @@ public class MusicModel {
         }
     }
 
+    public void loadReviewerDetail(String url) {
+        String content = contentGetterSetter.getContentFromHtml(url);
+        MusicBean bean;
+        if (!content.contains("获取失败!")) {
+            bean = getReviewerDetailFromContent(content);
+            presenter.loadReviewerDetailSuccess(bean);
+        } else {
+            presenter.loadReviewerDetailFailure(content);
+            Log.e("loadReviewerDetail", content);
+        }
+    }
+
+    public void loadTopDetail(String url) {
+        String content = contentGetterSetter.getContentFromHtml(url);
+        MusicBean bean;
+        if (!content.contains("获取失败!")) {
+            bean = getTopDetailFromContent(content);
+            presenter.loadTopDetailSuccess(bean);
+        } else {
+            presenter.loadTopDetailFailure(content);
+            Log.e("loadTopDetail", content);
+        }
+    }
+
     public List<MusicBean> getReviewerFromContent(String content) {
         List<MusicBean> list = new ArrayList<>();
         Document document = Jsoup.parse(content);
@@ -85,5 +109,27 @@ public class MusicModel {
             list.add(mbItem);
         }
         return list;
+    }
+
+    public MusicBean getReviewerDetailFromContent(String content) {
+        MusicBean bean = new MusicBean();
+        Document document = Jsoup.parse(content);
+        Element element = document.getElementById("content");
+        bean.setSubTitle(element.getElementsByClass("info-list").get(0).html());
+        bean.setContent("— 乐评 —<br>"+element.getElementsByClass("review-content clearfix").get(0).html());
+        return bean;
+    }
+
+    public MusicBean getTopDetailFromContent(String content) {
+        MusicBean bean = new MusicBean();
+        Document document = Jsoup.parse(content);
+        Element element = document.getElementById("content");
+        bean.setSubTitle(element.getElementById("info").html());
+        if (element.getElementsByClass("all hidden").size()>0) {
+            bean.setContent("— 简介 —<br>" + element.getElementsByClass("all hidden").get(0).html());
+        }else{
+            bean.setContent("— 简介 —<br>" + element.getElementById("link-report").html());
+        }
+        return bean;
     }
 }

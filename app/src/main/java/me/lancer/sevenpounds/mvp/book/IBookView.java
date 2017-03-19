@@ -13,4 +13,8 @@ public interface IBookView extends IBaseView {
     void showReviewer(List<BookBean> list);
 
     void showTopBook(List<BookBean> list);
+
+    void showReviewerDetail(BookBean bean);
+
+    void showTopDetail(BookBean bean);
 }

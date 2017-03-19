@@ -96,4 +96,27 @@ public class CodePresenter implements IBasePresenter<ICodeView>, ICodePresenter 
             view.hideLoad();
         }
     }
+
+    public void loadDetail(String url) {
+        if (view != null) {
+            view.showLoad();
+            model.loadDetail(url);
+        }
+    }
+
+    @Override
+    public void loadDetailSuccess(CodeBean bean) {
+        if (view != null) {
+            view.showDetail(bean);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadDetailFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
 }

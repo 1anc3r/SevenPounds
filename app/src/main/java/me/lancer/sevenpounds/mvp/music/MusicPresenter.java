@@ -73,4 +73,50 @@ public class MusicPresenter implements IBasePresenter<IMusicView>, IMusicPresent
             view.hideLoad();
         }
     }
+
+    public void loadReviewerDetail(String url) {
+        if (view != null) {
+            view.showLoad();
+            model.loadReviewerDetail(url);
+        }
+    }
+
+    @Override
+    public void loadReviewerDetailSuccess(MusicBean bean) {
+        if (view != null) {
+            view.showReviewerDetail(bean);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadReviewerDetailFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    public void loadTopDetail(String url) {
+        if (view != null) {
+            view.showLoad();
+            model.loadTopDetail(url);
+        }
+    }
+
+    @Override
+    public void loadTopDetailSuccess(MusicBean bean) {
+        if (view != null) {
+            view.showTopDetail(bean);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadTopDetailFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
 }

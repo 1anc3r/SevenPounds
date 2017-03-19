@@ -15,4 +15,12 @@ public interface IMusicPresenter {
     void loadTopMusicSuccess(List<MusicBean> list);
 
     void loadTopMusicFailure(String log);
+
+    void loadReviewerDetailSuccess(MusicBean bean);
+
+    void loadReviewerDetailFailure(String log);
+
+    void loadTopDetailSuccess(MusicBean bean);
+
+    void loadTopDetailFailure(String log);
 }

@@ -97,7 +97,7 @@ public class MovieReviewerFragment extends PresenterFragment<MoviePresenter> imp
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_m);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -106,7 +106,7 @@ public class MovieReviewerFragment extends PresenterFragment<MoviePresenter> imp
                 new Thread(loadReviewer).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_m);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -149,6 +149,16 @@ public class MovieReviewerFragment extends PresenterFragment<MoviePresenter> imp
 
     @Override
     public void showTopMovie(List<MovieBean> list) {
+
+    }
+
+    @Override
+    public void showReviewerDetail(MovieBean bean) {
+
+    }
+
+    @Override
+    public void showTopDetail(MovieBean bean) {
 
     }
 

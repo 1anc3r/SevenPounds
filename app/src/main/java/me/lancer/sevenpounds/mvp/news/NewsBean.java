@@ -13,6 +13,7 @@ public class NewsBean {
     private String title;
     private String img;
     private String link;
+    private String content;
 
     public NewsBean() {
     }
@@ -60,5 +61,13 @@ public class NewsBean {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

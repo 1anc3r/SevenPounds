@@ -15,4 +15,12 @@ public interface IMoviePresenter {
     void loadTopMovieSuccess(List<MovieBean> list);
 
     void loadTopMovieFailure(String log);
+
+    void loadReviewerDetailSuccess(MovieBean bean);
+
+    void loadReviewerDetailFailure(String log);
+
+    void loadTopDetailSuccess(MovieBean bean);
+
+    void loadTopDetailFailure(String log);
 }

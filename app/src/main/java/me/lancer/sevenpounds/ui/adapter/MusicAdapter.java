@@ -1,6 +1,8 @@
 package me.lancer.sevenpounds.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,26 +19,30 @@ import java.util.List;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.music.MusicBean;
+import me.lancer.sevenpounds.ui.activity.BookDetailActivity;
+import me.lancer.sevenpounds.ui.activity.MusicDetailActivity;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> {
 
     private List<MusicBean> list;
     private RequestQueue mQueue;
+    private Context context;
 
     public MusicAdapter(Context context, List<MusicBean> list) {
+        this.context = context;
         this.list = list;
         mQueue = Volley.newRequestQueue(context);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.thing_item, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.medimu_item, viewGroup, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         if (list.get(position) != null) {
             viewHolder.tvTitle.setText(list.get(position).getMainTitle());
             String temp = "";
@@ -59,6 +65,16 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
             viewHolder.ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
             viewHolder.ivImg.setImageUrl(list.get(position).getImg(), loader);
         }
+        viewHolder.cvMedimu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (list.get(position).getSubTitle() == null || list.get(position).getSubTitle().equals("")) {
+                    MusicDetailActivity.startActivity((Activity) context, 0, list.get(position).getMainTitle(), list.get(position).getImg(), list.get(position).getMainLink(), viewHolder.ivImg);
+                }else{
+                    MusicDetailActivity.startActivity((Activity) context, 1, list.get(position).getMainTitle(), list.get(position).getImg(), list.get(position).getSubLink(), viewHolder.ivImg);
+                }
+            }
+        });
     }
 
     @Override
@@ -68,15 +84,17 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
+        public CardView cvMedimu;
         public NetworkImageView ivImg;
         public TextView tvTitle, tvContent;
         public RatingBar rbRating;
 
         public ViewHolder(View rootView) {
             super(rootView);
+            cvMedimu = (CardView) rootView.findViewById(R.id.cv_medimu);
             ivImg = (NetworkImageView) rootView.findViewById(R.id.iv_img);
             tvTitle = (TextView) rootView.findViewById(R.id.tv_title);
-            tvContent = (TextView) rootView.findViewById(R.id.tv_content);
+            tvContent = (TextView) rootView.findViewById(R.id.htv_content);
             rbRating = (RatingBar) rootView.findViewById(R.id.rb_rating);
         }
     }

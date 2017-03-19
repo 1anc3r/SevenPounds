@@ -36,6 +36,8 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
     StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     List<NewsBean> mList = new ArrayList<>();
 
+    int flag = 0, last = 0;
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -51,9 +53,22 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList = (List<NewsBean>) msg.obj;
+                        mList.clear();
+                        mList.add(new NewsBean(1, "— 最新 —"));
+                        mList.addAll((List<NewsBean>) msg.obj);
                         mAdapter = new NewsAdapter(getActivity(), mList);
                         mRecyclerView.setAdapter(mAdapter);
+                    }
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    break;
+                case 4:
+                    if (msg.obj != null) {
+                        int size = mList.size();
+                        mList.add(new NewsBean(1, "— 最热 —"));
+                        mList.addAll((List<NewsBean>) msg.obj);
+                        for (int i = 0; i < ((List<NewsBean>) msg.obj).size()+1; i++) {
+                            mAdapter.notifyItemInserted(size + 1 + i);
+                        }
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
@@ -65,6 +80,13 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
         @Override
         public void run() {
             presenter.loadLatest();
+        }
+    };
+
+    Runnable loadTop = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadTopNews();
         }
     };
 
@@ -88,15 +110,19 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_m);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new Thread(loadLatest).start();
+                Message msg = new Message();
+                msg.what = 0;
+                handler.sendMessageDelayed(msg, 800);
+//                flag = 0;
+//                new Thread(loadLatest).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_m);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -104,6 +130,35 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
         mAdapter = new NewsAdapter(getActivity(), mList);
         mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
+                        && last + 1 == mAdapter.getItemCount()) {
+                    if (flag < 1) {
+                        flag += 1;
+                        new Thread(loadTop).start();
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                last = getMax(mStaggeredGridLayoutManager.findLastVisibleItemPositions(new int[mStaggeredGridLayoutManager.getSpanCount()]));
+            }
+        });
+    }
+
+    private int getMax(int[] arr) {
+        int len = arr.length;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < len; i++) {
+            max = Math.max(max, arr[i]);
+        }
+        return max;
     }
 
     @Override
@@ -118,8 +173,16 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
     }
 
     @Override
-    public void showTop(List<NewsBean> list) {
+    public void showDetail(NewsBean bean) {
 
+    }
+
+    @Override
+    public void showTopNews(List<NewsBean> list) {
+        Message msg = new Message();
+        msg.what = 4;
+        msg.obj = list;
+        handler.sendMessage(msg);
     }
 
     @Override

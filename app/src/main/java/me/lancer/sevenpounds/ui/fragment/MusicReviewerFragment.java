@@ -97,7 +97,7 @@ public class MusicReviewerFragment extends PresenterFragment<MusicPresenter> imp
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_m);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -106,7 +106,7 @@ public class MusicReviewerFragment extends PresenterFragment<MusicPresenter> imp
                 new Thread(loadReviewer).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_m);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -149,6 +149,16 @@ public class MusicReviewerFragment extends PresenterFragment<MusicPresenter> imp
 
     @Override
     public void showTopMusic(List<MusicBean> list) {
+
+    }
+
+    @Override
+    public void showReviewerDetail(MusicBean bean) {
+
+    }
+
+    @Override
+    public void showTopDetail(MusicBean bean) {
 
     }
 

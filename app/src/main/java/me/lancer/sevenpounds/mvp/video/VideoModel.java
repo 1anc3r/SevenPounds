@@ -52,6 +52,18 @@ public class VideoModel {
         }
     }
 
+    public void loadDetail() {
+        String content = contentGetterSetter.getContentFromHtml(searchUrl);
+        List<VideoBean> list;
+        if (!content.contains("失败")) {
+            list = getTopVideoFromContent(content);
+            presenter.loadTopVideoSuccess(list);
+        } else {
+            presenter.loadTopVideoFailure(content);
+            Log.e("loadResult", content);
+        }
+    }
+
     public List<VideoBean> getTopVideoFromContent(String content) {
         try {
             List<VideoBean> list = new ArrayList<>();
@@ -109,6 +121,7 @@ public class VideoModel {
                 VideoBean nbItem = new VideoBean();
                 JSONObject jbItem = jbType.getJSONObject("" + i);
                 int id = jbItem.getInt("aid");
+                Log.e("get", id+"");
                 nbItem.setId(id);
                 nbItem.setTitle(decodeUnicode(jbItem.getString("title")));
                 nbItem.setPlay(jbItem.getString("play"));

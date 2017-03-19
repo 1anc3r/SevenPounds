@@ -1,14 +1,10 @@
 package me.lancer.sevenpounds.ui.fragment;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -21,7 +17,6 @@ import java.util.List;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.PresenterFragment;
-import me.lancer.sevenpounds.mvp.movie.MovieBean;
 import me.lancer.sevenpounds.mvp.news.INewsView;
 import me.lancer.sevenpounds.mvp.news.NewsBean;
 import me.lancer.sevenpounds.mvp.news.NewsPresenter;
@@ -43,9 +38,12 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
 
     int last = 0, flag = 0;
     final int[] typeint = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13};
-    final String[] typestr = {"游戏 · 发现", "电影 · 发现", "设计 · 发现", "企业 · 发现",
-            "财经 · 发现", "音乐 · 发现", "体育 · 发现", "动漫 · 发现",
-            "安全 · 发现", "娱乐 · 发现", "心理 · 发现"};
+    final String[] typestr = {"— 游戏 · 发现 —",
+            "— 电影 · 发现 —", "— 设计 · 发现 —",
+            "— 企业 · 发现 —", "— 财经 · 发现 —",
+            "— 音乐 · 发现 —", "— 体育 · 发现 —",
+            "— 动漫 · 发现 —", "— 安全 · 发现 —",
+            "— 娱乐 · 发现 —", "— 心理 · 发现 —"};
 
     Handler handler = new Handler() {
         @Override
@@ -62,27 +60,23 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
                     break;
                 case 3:
                     if (msg.obj != null) {
+                        mList.clear();
                         mList.add(new NewsBean(1, typestr[flag]));
                         mList.addAll((List<NewsBean>) msg.obj);
                         mAdapter = new NewsAdapter(getActivity(), mList);
                         mRecyclerView.setAdapter(mAdapter);
+//                        for (int i = 0; i < ((List<NewsBean>) msg.obj).size()+1; i++) {
+//                            mAdapter.notifyItemInserted(i);
+//                        }
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                case 11:
-                case 12:
-                case 13:
+                case 4:case 5:case 6:case 7:case 8:
+                case 9:case 10:case 11:case 12:case 13:
                     int len = mList.size();
                     mList.add(new NewsBean(1, typestr[flag]));
                     mList.addAll((List<NewsBean>) msg.obj);
-                    for (int i = 0; i < ((List<NewsBean>) msg.obj).size(); i++) {
+                    for (int i = 0; i < ((List<NewsBean>) msg.obj).size()+1; i++) {
                         mAdapter.notifyItemInserted(len + i);
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -118,17 +112,19 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
 
     private void initView(View view) {
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_m);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_list);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.blue, R.color.teal, R.color.green, R.color.yellow, R.color.orange, R.color.red, R.color.pink, R.color.purple);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 Message msg = new Message();
                 msg.what = 0;
-                handler.sendMessageDelayed(msg, 1000);
+                handler.sendMessageDelayed(msg, 800);
+//                flag = 0;
+//                new Thread(loadTheme).start();
             }
         });
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_m);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -182,7 +178,12 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
     }
 
     @Override
-    public void showTop(List<NewsBean> list) {
+    public void showDetail(NewsBean bean) {
+
+    }
+
+    @Override
+    public void showTopNews(List<NewsBean> list) {
 
     }
 

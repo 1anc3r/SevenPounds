@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface INewsPresenter {
 
-    void loadTopSuccess(List<NewsBean> list);
+    void loadTopNewsSuccess(List<NewsBean> list);
 
-    void loadTopFailure(String log);
+    void loadTopNewsFailure(String log);
 
     void loadLatestSuccess(List<NewsBean> list);
 
@@ -19,4 +19,8 @@ public interface INewsPresenter {
     void loadThemeSuccess(List<NewsBean> list);
 
     void loadThemeFailure(String log);
+
+    void loadDetailSuccess(NewsBean bean);
+
+    void loadDetailFailure(String log);
 }

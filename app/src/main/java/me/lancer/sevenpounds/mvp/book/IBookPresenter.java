@@ -15,4 +15,12 @@ public interface IBookPresenter {
     void loadTopBookSuccess(List<BookBean> list);
 
     void loadTopBookFailure(String log);
+
+    void loadReviewerDetailSuccess(BookBean bean);
+
+    void loadReviewerDetailFailure(String log);
+
+    void loadTopDetailSuccess(BookBean bean);
+
+    void loadTopDetailFailure(String log);
 }

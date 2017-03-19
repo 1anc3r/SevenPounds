@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cv_reviewer"
+        android:id="@+id/cv_large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -25,12 +25,12 @@
             android:orientation="vertical">
 
             <com.android.volley.toolbox.NetworkImageView
-                android:id="@+id/iv_img"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="2dp"
-                android:scaleType="centerCrop" />
+            android:id="@+id/iv_img"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="2dp"
+            android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -28,23 +28,23 @@ public class NewsPresenter implements IBasePresenter<INewsView>, INewsPresenter 
         this.view = null;
     }
 
-    public void loadTop() {
+    public void loadTopNews() {
         if (view != null) {
             view.showLoad();
-            model.loadTop();
+            model.loadTopNews();
         }
     }
 
     @Override
-    public void loadTopSuccess(List<NewsBean> list) {
+    public void loadTopNewsSuccess(List<NewsBean> list) {
         if (view != null) {
-            view.showTop(list);
+            view.showTopNews(list);
             view.hideLoad();
         }
     }
 
     @Override
-    public void loadTopFailure(String log) {
+    public void loadTopNewsFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();
@@ -91,6 +91,29 @@ public class NewsPresenter implements IBasePresenter<INewsView>, INewsPresenter 
 
     @Override
     public void loadThemeFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    public void loadDetail(String url) {
+        if (view != null) {
+            view.showLoad();
+            model.loadDetail(url);
+        }
+    }
+
+    @Override
+    public void loadDetailSuccess(NewsBean bean) {
+        if (view != null) {
+            view.showDetail(bean);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadDetailFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();

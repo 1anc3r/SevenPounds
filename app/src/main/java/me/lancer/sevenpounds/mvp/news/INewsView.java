@@ -10,9 +10,11 @@ import me.lancer.sevenpounds.mvp.base.IBaseView;
 
 public interface INewsView extends IBaseView {
 
-    void showTop(List<NewsBean> list);
+    void showTopNews(List<NewsBean> list);
 
     void showLatest(List<NewsBean> list);
 
     void showTheme(List<NewsBean> list);
+
+    void showDetail(NewsBean bean);
 }

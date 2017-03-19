@@ -13,23 +13,22 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="40dp"
-        android:src="@mipmap/ic_huh"
+        android:src="@mipmap/ic_launcher"
         app:civ_border_color="@color/white"
-        app:civ_border_width="1dp" />
+        app:civ_border_width="0dp" />
 
     <LinearLayout
-        android:layout_width="60dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginLeft="16dp"
-        android:gravity="center"
+        android:gravity="left|center_vertical"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_head"
-            android:layout_width="60dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/click_head"
+            android:text="七磅 — 灵魂的重量"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
 

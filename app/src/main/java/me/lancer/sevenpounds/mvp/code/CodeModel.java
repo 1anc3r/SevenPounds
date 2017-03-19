@@ -8,6 +8,7 @@ import com.squareup.okhttp.Response;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
@@ -69,6 +70,18 @@ public class CodeModel {
         }
     }
 
+    public void loadDetail(String url) {
+        String content = contentGetterSetter.getContentFromHtml(url);
+        CodeBean bean;
+        if (!content.contains("获取失败!")) {
+            bean = getDetailFromContent(content);
+            presenter.loadDetailSuccess(bean);
+        } else {
+            presenter.loadDetailFailure(content);
+            Log.e("loadDetail", content);
+        }
+    }
+
     public List<CodeBean> getListFromContent(String content) {
         List<CodeBean> list = new ArrayList<>();
         Document document = Jsoup.parse(content);
@@ -76,16 +89,35 @@ public class CodeModel {
         String temp1;
         String temp2;
         for (int i = 0; i < elements.size(); i++) {
-            CodeBean cbItem = new CodeBean();
+            CodeBean bean = new CodeBean();
             temp1 = elements.get(i).getElementsByClass("hidden-xs hidden-sm").text();
             temp2 =elements.get(i).getElementsByClass("hidden-md hidden-lg").text();
-            cbItem.setRank(elements.get(i).getElementsByClass("name").text().replace(temp1,"").replace(temp2,""));
-            cbItem.setName(temp1);
-            cbItem.setStar(elements.get(i).getElementsByClass("stargazers_count pull-right").text());
-            cbItem.setImg(elements.get(i).getElementsByTag("img").attr("src"));
-            cbItem.setLink(rankUrl + elements.get(i).getElementsByClass("list-group-item paginated_item").attr("href"));
-            list.add(cbItem);
+            bean.setType(0);
+            bean.setRank(elements.get(i).getElementsByClass("name").text().replace(temp1,"").replace(temp2,""));
+            bean.setName(temp1);
+            bean.setStar(elements.get(i).getElementsByClass("stargazers_count pull-right").text());
+            bean.setImg(elements.get(i).getElementsByTag("img").attr("src"));
+            bean.setLink(rankUrl + elements.get(i).getElementsByClass("list-group-item paginated_item").attr("href"));
+            list.add(bean);
         }
         return list;
+    }
+
+    public CodeBean getDetailFromContent(String content) {
+        CodeBean bean = new CodeBean();
+        List<CodeBean> list = new ArrayList<>();
+        Document document = Jsoup.parse(content);
+        bean.setStar(document.getElementsByClass("user_value col-xs-9").get(0).text());
+        bean.setRank(document.getElementsByClass("user_value col-xs-7").get(0).text());
+        Elements elements = document.getElementsByClass("list-group-item paginated_full_item");
+        for (int i = 0; i < elements.size(); i++) {
+            CodeBean item = new CodeBean();
+            item.setType(1);
+            item.setName(elements.get(i).getElementsByClass("login").get(0).text());
+            item.setStar(elements.get(i).getElementsByClass("stargazers_count pull-right").get(0).text());
+            list.add(item);
+        }
+        bean.setRepositories(list);
+        return bean;
     }
 }

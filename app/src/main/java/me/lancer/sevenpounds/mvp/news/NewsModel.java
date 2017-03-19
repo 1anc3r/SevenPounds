@@ -28,14 +28,14 @@ public class NewsModel {
         this.presenter = presenter;
     }
 
-    public void loadTop() {
+    public void loadTopNews() {
         String content = contentGetterSetter.getContentFromHtml(topNewsUrl);
         List<NewsBean> list;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             list = getTopNewsFromContent(content);
-            presenter.loadTopSuccess(list);
+            presenter.loadTopNewsSuccess(list);
         } else {
-            presenter.loadTopFailure(content);
+            presenter.loadTopNewsFailure(content);
             Log.e("loadTop", content);
         }
     }
@@ -43,7 +43,7 @@ public class NewsModel {
     public void loadLatest() {
         String content = contentGetterSetter.getContentFromHtml(topNewsUrl);
         List<NewsBean> list;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             list = getLatestNewsFromContent(content);
             presenter.loadLatestSuccess(list);
         } else {
@@ -55,12 +55,24 @@ public class NewsModel {
     public void loadTheme(int type) {
         String content = contentGetterSetter.getContentFromHtml(themeUrl + type);
         List<NewsBean> list;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             list = getThemeNewsFromContent(content);
             presenter.loadThemeSuccess(list);
         } else {
             presenter.loadThemeFailure(content);
             Log.e("loadTheme", content);
+        }
+    }
+
+    public void loadDetail(String url) {
+        String content = contentGetterSetter.getContentFromHtml(url);
+        NewsBean bean;
+        if (!content.contains("获取失败!")) {
+            bean = getDetailFromContent(content);
+            presenter.loadDetailSuccess(bean);
+        } else {
+            presenter.loadDetailFailure(content);
+            Log.e("loadDetail", content);
         }
     }
 
@@ -73,7 +85,11 @@ public class NewsModel {
                 NewsBean nbItem = new NewsBean();
                 JSONObject jbItem = jaNews.getJSONObject(i);
                 nbItem.setId(jbItem.getInt("id"));
-                nbItem.setType(0);
+                if (i == 0) {
+                    nbItem.setType(-1);
+                } else {
+                    nbItem.setType(0);
+                }
                 nbItem.setTitle(jbItem.getString("title"));
                 nbItem.setImg(jbItem.getString("image"));
                 nbItem.setLink(url + nbItem.getId());
@@ -95,7 +111,11 @@ public class NewsModel {
                 NewsBean nbItem = new NewsBean();
                 JSONObject jbItem = jaNews.getJSONObject(i);
                 nbItem.setId(jbItem.getInt("id"));
-                nbItem.setType(0);
+                if (i == 0) {
+                    nbItem.setType(-1);
+                } else {
+                    nbItem.setType(0);
+                }
                 nbItem.setTitle(jbItem.getString("title"));
                 JSONArray jaImg = jbItem.getJSONArray("images");
                 nbItem.setImg(jaImg.get(0).toString());
@@ -114,12 +134,18 @@ public class NewsModel {
             List<NewsBean> list = new ArrayList<>();
             JSONObject jbNews = new JSONObject(content);
             JSONArray jaNews = jbNews.getJSONArray("stories");
+            int flag = 0;
             for (int i = 0; i < jaNews.length(); i++) {
                 NewsBean nbItem = new NewsBean();
                 JSONObject jbItem = jaNews.getJSONObject(i);
                 if (!jbItem.isNull("images")) {
                     nbItem.setId(jbItem.getInt("id"));
-                    nbItem.setType(0);
+                    if (flag == 0) {
+                        nbItem.setType(-1);
+                        flag = 1;
+                    } else {
+                        nbItem.setType(0);
+                    }
                     nbItem.setTitle(jbItem.getString("title"));
                     JSONArray jaImg = jbItem.getJSONArray("images");
                     nbItem.setImg(jaImg.get(0).toString());
@@ -128,6 +154,21 @@ public class NewsModel {
                 }
             }
             return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public NewsBean getDetailFromContent(String content) {
+        try {
+            NewsBean bean = new NewsBean();
+            JSONObject jbNews = new JSONObject(content);
+            bean.setId(jbNews.getInt("id"));
+            bean.setType(jbNews.getInt("type"));
+            bean.setTitle(jbNews.getString("title"));
+            bean.setContent(jbNews.getString("body").replace("\\n", ""));
+            return bean;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
