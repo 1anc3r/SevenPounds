@@ -26,7 +26,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public Toolbar initToolbarAsHome() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
         setSupportActionBar(toolbar);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -36,7 +36,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public Toolbar initToolbar(String title) {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();

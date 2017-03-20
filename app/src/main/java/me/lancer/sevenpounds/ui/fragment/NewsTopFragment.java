@@ -36,7 +36,7 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
     StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     List<NewsBean> mList = new ArrayList<>();
 
-    int flag = 0, last = 0;
+    int flag = 0, last = 0,load = 0;
 
     Handler handler = new Handler() {
         @Override
@@ -59,6 +59,7 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
                         mAdapter = new NewsAdapter(getActivity(), mList);
                         mRecyclerView.setAdapter(mAdapter);
                     }
+                    load = 0;
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
                 case 4:
@@ -70,6 +71,7 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
                             mAdapter.notifyItemInserted(size + 1 + i);
                         }
                     }
+                    load = 0;
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
             }
@@ -137,7 +139,8 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && last + 1 == mAdapter.getItemCount()) {
-                    if (flag < 1) {
+                    if (flag < 1 && load == 0) {
+                        load = 1;
                         flag += 1;
                         new Thread(loadTop).start();
                     }

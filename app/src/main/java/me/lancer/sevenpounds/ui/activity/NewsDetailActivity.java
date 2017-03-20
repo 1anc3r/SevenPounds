@@ -2,7 +2,6 @@ package me.lancer.sevenpounds.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -14,8 +13,6 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 
 import com.android.volley.RequestQueue;
@@ -28,7 +25,6 @@ import net.steamcrafted.loadtoast.LoadToast;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlTextView;
 
-import java.net.URL;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
@@ -97,13 +93,13 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        layout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_large);
         layout.setTitle(title);
         ivImg = (NetworkImageView) findViewById(R.id.iv_img);
         ViewCompat.setTransitionName(ivImg, AppConstants.TRANSITION_PIC);
@@ -130,6 +126,13 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         ActivityOptionsCompat options = ActivityOptionsCompat
                 .makeSceneTransitionAnimation(activity, networkImageView, AppConstants.TRANSITION_PIC);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
+
+    @Override
+    protected void onDestroy() {
+        ivImg.destroyDrawingCache();
+        htvContent.destroyDrawingCache();
+        super.onDestroy();
     }
 
     @Override

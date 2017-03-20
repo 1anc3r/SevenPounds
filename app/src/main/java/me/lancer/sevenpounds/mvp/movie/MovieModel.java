@@ -131,10 +131,10 @@ public class MovieModel {
         Element element1 = document1.getElementById("content");
         if (element0.getElementsByClass("all hidden").size()>0) {
             bean.setContent("— 剧情简介 —<br>"+element0.getElementsByClass("all hidden").get(0).html()
-                    +element1.getElementsByClass("article").html());
+                    +element1.getElementsByClass("article").html().replace("li", "b"));
         }else{
             bean.setContent("— 剧情简介 —<br>"+element0.getElementById("link-report").html()
-                    +element1.getElementsByClass("article").html());
+                    +element1.getElementsByClass("article").html().replace("li", "b"));
         }
         return bean;
     }

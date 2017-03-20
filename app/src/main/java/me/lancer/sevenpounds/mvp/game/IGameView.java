@@ -12,5 +12,7 @@ public interface IGameView extends IBaseView {
 
     void showTopGame(List<GameBean> list);
 
-    void showAllGame(List<GameBean> list);
+    void showTheme(List<GameBean> list);
+
+    void showDetail(GameBean bean);
 }

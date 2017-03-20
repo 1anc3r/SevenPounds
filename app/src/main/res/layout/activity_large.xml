@@ -7,13 +7,13 @@
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/abl_large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+            android:id="@+id/ctl_large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentScrim="?attr/colorPrimary"
@@ -36,7 +36,7 @@
             </LinearLayout>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/t_large"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin" />
@@ -50,16 +50,23 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <me.lancer.sevenpounds.ui.view.htmltextview.HtmlTextView
-            android:id="@+id/htv_content"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingTop="8dp"
-            android:text=""
-            android:textAppearance="@android:style/TextAppearance.Small" />
+            android:orientation="vertical">
+
+            <me.lancer.sevenpounds.ui.view.htmltextview.HtmlTextView
+                android:id="@+id/htv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp" />
+
+        </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

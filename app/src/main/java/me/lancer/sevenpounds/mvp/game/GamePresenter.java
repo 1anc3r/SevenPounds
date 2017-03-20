@@ -51,23 +51,46 @@ public class GamePresenter implements IBasePresenter<IGameView>, IGamePresenter 
         }
     }
 
-    public void loadAllGame() {
+    public void loadTheme(String keyword) {
         if (view != null) {
             view.showLoad();
-            model.loadAllGame();
+            model.loadTheme(keyword);
         }
     }
 
     @Override
-    public void loadAllGameSuccess(List<GameBean> list) {
+    public void loadThemeSuccess(List<GameBean> list) {
         if (view != null) {
-            view.showAllGame(list);
+            view.showTheme(list);
             view.hideLoad();
         }
     }
 
     @Override
-    public void loadAllGameFailure(String log) {
+    public void loadThemeFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    public void loadDetail(String url) {
+        if (view != null) {
+            view.showLoad();
+            model.loadDetail(url);
+        }
+    }
+
+    @Override
+    public void loadDetailSuccess(GameBean bean) {
+        if (view != null) {
+            view.showDetail(bean);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadDetailFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();

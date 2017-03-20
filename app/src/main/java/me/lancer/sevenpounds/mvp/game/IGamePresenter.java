@@ -12,7 +12,11 @@ public interface IGamePresenter {
 
     void loadTopGameFailure(String log);
 
-    void loadAllGameSuccess(List<GameBean> list);
+    void loadThemeSuccess(List<GameBean> list);
 
-    void loadAllGameFailure(String log);
+    void loadThemeFailure(String log);
+
+    void loadDetailSuccess(GameBean bean);
+
+    void loadDetailFailure(String log);
 }

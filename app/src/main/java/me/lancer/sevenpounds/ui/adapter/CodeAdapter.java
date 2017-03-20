@@ -2,7 +2,6 @@ package me.lancer.sevenpounds.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -95,7 +94,7 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
             cvSmall = (CardView) rootView.findViewById(R.id.cv_small);
             tvRank = (TextView) rootView.findViewById(R.id.tv_rank);
             ivImg = (NetworkImageView) rootView.findViewById(R.id.iv_img);
-            tvName = (TextView) rootView.findViewById(R.id.tv_name);
+            tvName = (TextView) rootView.findViewById(R.id.tv_title);
             tvStar = (TextView) rootView.findViewById(R.id.tv_star);
         }
     }

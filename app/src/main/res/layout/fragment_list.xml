@@ -11,6 +11,7 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_list"
+            android:paddingTop="4dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"

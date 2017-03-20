@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
@@ -25,23 +26,22 @@ import java.util.List;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.PresenterActivity;
-import me.lancer.sevenpounds.mvp.book.BookBean;
-import me.lancer.sevenpounds.mvp.book.BookPresenter;
-import me.lancer.sevenpounds.mvp.book.IBookView;
+import me.lancer.sevenpounds.mvp.game.IGameView;
+import me.lancer.sevenpounds.mvp.game.GameBean;
+import me.lancer.sevenpounds.mvp.game.GamePresenter;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlTextView;
 import me.lancer.sevenpounds.util.AppConstants;
 import me.lancer.sevenpounds.util.LruImageCache;
 
-public class BookDetailActivity extends PresenterActivity<BookPresenter> implements IBookView {
+public class GameDetailActivity extends PresenterActivity<GamePresenter> implements IGameView {
 
+    CollapsingToolbarLayout layout;
     NetworkImageView ivImg;
-    HtmlTextView htvInfo;
     HtmlTextView htvContent;
     LoadToast loadToast;
 
     private RequestQueue mQueue;
-    private int type;
     private String title, img, link;
 
     Handler handler = new Handler() {
@@ -60,40 +60,31 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
                 case 3:
                     if (msg.obj != null) {
                         loadToast.success();
-                        BookBean bb = (BookBean) msg.obj;
-                        htvInfo.setHtml(bb.getSubTitle(), new HtmlHttpImageGetter(htvContent));
-                        htvContent.setHtml(bb.getContent(), new HtmlHttpImageGetter(htvContent));
+                        GameBean bb = (GameBean) msg.obj;
+                        htvContent.setHtml(bb.getTag(), new HtmlHttpImageGetter(htvContent));
                     }
                     break;
             }
         }
     };
 
-    Runnable loadReviewerDetail = new Runnable() {
+    Runnable loadDetail = new Runnable() {
         @Override
         public void run() {
-            presenter.loadReviewerDetail(link);
-        }
-    };
-
-    Runnable loadTopDetail = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadTopDetail(link);
+            presenter.loadDetail(link);
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medimu);
+        setContentView(R.layout.activity_large);
         initData();
         initView();
     }
 
     private void initData() {
         mQueue = Volley.newRequestQueue(this);
-        type = getIntent().getIntExtra("type", 0);
         title = getIntent().getStringExtra("title");
         img = getIntent().getStringExtra("img");
         link = getIntent().getStringExtra("link");
@@ -101,36 +92,32 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
 
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
-        toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        layout = (CollapsingToolbarLayout) findViewById(R.id.ctl_large);
+        layout.setTitle(title);
         ivImg = (NetworkImageView) findViewById(R.id.iv_img);
         ViewCompat.setTransitionName(ivImg, AppConstants.TRANSITION_PIC);
+        ivImg.setBackgroundResource(R.mipmap.ic_pictures_no);
         LruImageCache cache = LruImageCache.instance();
         ImageLoader loader = new ImageLoader(mQueue, cache);
+        ivImg.setDefaultImageResId(R.mipmap.ic_pictures_no);
         ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
         ivImg.setImageUrl(img, loader);
-        htvInfo = (HtmlTextView) findViewById(R.id.htv_info);
         htvContent = (HtmlTextView) findViewById(R.id.htv_content);
         loadToast = new LoadToast(this);
         loadToast.setTranslationY(160);
         loadToast.setText("玩命加载中...");
         loadToast.show();
-        if (type == 0) {
-            new Thread(loadTopDetail).start();
-        }else if (type == 1) {
-            new Thread(loadReviewerDetail).start();
-        }
+        new Thread(loadDetail).start();
     }
 
-    public static void startActivity(Activity activity, int type, String title, String img, String link, NetworkImageView networkImageView) {
+    public static void startActivity(Activity activity, String title, String img, String link, NetworkImageView networkImageView) {
         Intent intent = new Intent();
-        intent.setClass(activity, BookDetailActivity.class);
-        intent.putExtra("type", type);
+        intent.setClass(activity, GameDetailActivity.class);
         intent.putExtra("title", title);
         intent.putExtra("img", img);
         intent.putExtra("link", link);
@@ -141,15 +128,32 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         ivImg.destroyDrawingCache();
-        htvInfo.destroyDrawingCache();
         htvContent.destroyDrawingCache();
+        super.onDestroy();
     }
 
     @Override
-    protected BookPresenter onCreatePresenter() {
-        return new BookPresenter(this);
+    protected GamePresenter onCreatePresenter() {
+        return new GamePresenter(this);
+    }
+
+    @Override
+    public void showTopGame(List<GameBean> list) {
+
+    }
+
+    @Override
+    public void showTheme(List<GameBean> list) {
+
+    }
+
+    @Override
+    public void showDetail(GameBean bean) {
+        Message msg = new Message();
+        msg.what = 3;
+        msg.obj = bean;
+        handler.sendMessage(msg);
     }
 
     @Override
@@ -171,32 +175,6 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
     public void hideLoad() {
         Message msg = new Message();
         msg.what = 0;
-        handler.sendMessage(msg);
-    }
-
-    @Override
-    public void showReviewer(List<BookBean> list) {
-
-    }
-
-    @Override
-    public void showTopBook(List<BookBean> list) {
-
-    }
-
-    @Override
-    public void showReviewerDetail(BookBean bean) {
-        Message msg = new Message();
-        msg.what = 3;
-        msg.obj = bean;
-        handler.sendMessage(msg);
-    }
-
-    @Override
-    public void showTopDetail(BookBean bean) {
-        Message msg = new Message();
-        msg.what = 3;
-        msg.obj = bean;
         handler.sendMessage(msg);
     }
 }

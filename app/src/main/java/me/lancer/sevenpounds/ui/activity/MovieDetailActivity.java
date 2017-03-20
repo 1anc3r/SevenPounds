@@ -100,7 +100,7 @@ public class MovieDetailActivity extends PresenterActivity<MoviePresenter> imple
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();

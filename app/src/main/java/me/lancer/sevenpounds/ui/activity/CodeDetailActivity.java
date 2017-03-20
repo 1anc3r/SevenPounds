@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
@@ -105,7 +104,7 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.t_large);
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -119,7 +118,7 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
         ImageLoader loader = new ImageLoader(mQueue, cache);
         ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
         ivImg.setImageUrl(img, loader);
-        tvName = (TextView) findViewById(R.id.tv_name);
+        tvName = (TextView) findViewById(R.id.tv_title);
         tvName.setText(title);
         tvStar = (TextView) findViewById(R.id.tv_star);
         tvStar.setText("Star : "+star);

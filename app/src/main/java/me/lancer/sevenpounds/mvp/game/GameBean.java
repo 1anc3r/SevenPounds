@@ -6,6 +6,7 @@ package me.lancer.sevenpounds.mvp.game;
 
 public class GameBean {
 
+    private int type;
     private String appid;
     private String name;
     private String developer;
@@ -14,8 +15,23 @@ public class GameBean {
     private String owners;
     private String price;
     private String img;
+    private String link;
+    private String tag;
 
     public GameBean() {
+    }
+
+    public GameBean(int type, String name) {
+        this.type = type;
+        this.name = name;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public String getAppid() {
@@ -80,5 +96,21 @@ public class GameBean {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

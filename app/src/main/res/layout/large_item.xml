@@ -17,6 +17,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -25,19 +26,19 @@
             android:orientation="vertical">
 
             <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/iv_img"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="2dp"
-            android:scaleType="centerCrop" />
+                android:id="@+id/iv_img"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="2dp"
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="2dp"
                 android:orientation="horizontal">
 
@@ -45,10 +46,8 @@
                     android:id="@+id/tv_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_rank"
-                    android:ellipsize="marquee"
-                    android:maxLines="2"
-                    android:text=""/>
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -57,16 +56,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="2dp"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/tv_score"
+                    android:id="@+id/tv_obj1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -74,9 +75,11 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/tv_owners"
+                    android:id="@+id/tv_obj2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -84,9 +87,11 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/tv_price"
+                    android:id="@+id/tv_obj3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 

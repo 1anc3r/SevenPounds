@@ -33,7 +33,7 @@ public class GameFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        toolbar = (Toolbar) view.findViewById(R.id.t_large);
         toolbar.setTitle("游戏如人生");
         ((MainActivity) getActivity()).initDrawer(toolbar);
         initTabLayout(view);
@@ -62,12 +62,12 @@ public class GameFragment extends BaseFragment {
         newfragment.setArguments(data);
         adapter.addFrag(newfragment, "周榜");
 
-        newfragment = new GameAllFragment();
+        newfragment = new GameThemeFragment();
         data = new Bundle();
         data.putInt("id", 1);
-        data.putString("title", "总榜");
+        data.putString("title", "分类");
         newfragment.setArguments(data);
-        adapter.addFrag(newfragment, "总榜");
+        adapter.addFrag(newfragment, "分类");
 
         viewPager.setAdapter(adapter);
         if (getArguments() != null) {

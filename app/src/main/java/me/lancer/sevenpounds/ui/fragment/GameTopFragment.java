@@ -55,7 +55,7 @@ public class GameTopFragment extends PresenterFragment<GamePresenter> implements
                     if (msg.obj != null) {
                         if (pager == 0) {
                             mList = (List<GameBean>) msg.obj;
-                            mAdapter = new GameAdapter(getActivity(), mList);
+                            mAdapter = new GameAdapter(getActivity(), 1, mList);
                             mRecyclerView.setAdapter(mAdapter);
                         } else {
                             mList.addAll((List<GameBean>) msg.obj);
@@ -111,7 +111,7 @@ public class GameTopFragment extends PresenterFragment<GamePresenter> implements
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new GameAdapter(getActivity(), mList);
+        mAdapter = new GameAdapter(getActivity(), 1, mList);
         mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -131,7 +131,12 @@ public class GameTopFragment extends PresenterFragment<GamePresenter> implements
     }
 
     @Override
-    public void showAllGame(List<GameBean> list) {
+    public void showTheme(List<GameBean> list) {
+
+    }
+
+    @Override
+    public void showDetail(GameBean bean) {
 
     }
 

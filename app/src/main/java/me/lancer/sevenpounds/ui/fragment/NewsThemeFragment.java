@@ -36,7 +36,7 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
     StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     List<NewsBean> mList = new ArrayList<>();
 
-    int last = 0, flag = 0;
+    int last = 0, flag = 0, load = 0;
     final int[] typeint = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13};
     final String[] typestr = {"— 游戏 · 发现 —",
             "— 电影 · 发现 —", "— 设计 · 发现 —",
@@ -69,6 +69,7 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
 //                            mAdapter.notifyItemInserted(i);
 //                        }
                     }
+                    load = 0;
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
                 case 4:case 5:case 6:case 7:case 8:
@@ -79,6 +80,7 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
                     for (int i = 0; i < ((List<NewsBean>) msg.obj).size()+1; i++) {
                         mAdapter.notifyItemInserted(len + i);
                     }
+                    load = 0;
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
             }
@@ -139,7 +141,8 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && last + 1 == mAdapter.getItemCount()) {
-                    if (flag < 9) {
+                    if (flag < 9 && load == 0) {
+                        load = 1;
                         flag += 1;
                         new Thread(loadTheme).start();
                     }

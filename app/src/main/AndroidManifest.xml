@@ -28,6 +28,7 @@
         <activity android:name=".ui.activity.MusicDetailActivity" />
         <activity android:name=".ui.activity.MovieDetailActivity" />
         <activity android:name=".ui.activity.CodeDetailActivity" />
+        <activity android:name=".ui.activity.GameDetailActivity" />
         <activity android:name=".ui.activity.SmallActivity"></activity>
     </application>
 

@@ -33,7 +33,7 @@ public class VideoFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        toolbar = (Toolbar) view.findViewById(R.id.t_large);
         toolbar.setTitle("吐槽如瀑布");
         ((MainActivity) getActivity()).initDrawer(toolbar);
         initTabLayout(view);

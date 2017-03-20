@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initNavigationViewHeader() {
-        navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView = (NavigationView) findViewById(R.id.nv_main);
         View view = navigationView.inflateHeaderView(R.layout.drawer_header);
         CircleImageView civHead = (CircleImageView) view.findViewById(R.id.civ_head);
         TextView tvHead = (TextView) view.findViewById(R.id.tv_head);
@@ -157,7 +157,7 @@ public class MainActivity extends BaseActivity {
 
     public void switchContent(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.contentLayout, fragment).commit();
+        fragmentTransaction.replace(R.id.fl_main, fragment).commit();
         invalidateOptionsMenu();
     }
 

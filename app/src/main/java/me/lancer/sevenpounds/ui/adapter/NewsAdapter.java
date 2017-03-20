@@ -63,6 +63,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 viewHolder.ivImg.setDefaultImageResId(R.mipmap.ic_pictures_no);
                 viewHolder.ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
                 viewHolder.ivImg.setImageUrl(list.get(position).getImg(), loader);
+                viewHolder.cvLarge.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        NewsDetailActivity.startActivity((Activity) context, list.get(position).getTitle(), list.get(position).getImg(), list.get(position).getLink(), viewHolder.ivImg);
+                    }
+                });
             } else if (getItemViewType(position) == TYPE_CONTENT_LARGE) {
                 StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
                 layoutParams.setFullSpan(true);
@@ -72,13 +78,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 viewHolder.ivImg.setDefaultImageResId(R.mipmap.ic_pictures_no);
                 viewHolder.ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
                 viewHolder.ivImg.setImageUrl(list.get(position).getImg(), loader);
+                viewHolder.cvLarge.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        NewsDetailActivity.startActivity((Activity) context, list.get(position).getTitle(), list.get(position).getImg(), list.get(position).getLink(), viewHolder.ivImg);
+                    }
+                });
             }
-            viewHolder.cvLarge.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    NewsDetailActivity.startActivity((Activity) context, list.get(position).getTitle(), list.get(position).getImg(), list.get(position).getLink(), viewHolder.ivImg);
-                }
-            });
         }
     }
 
