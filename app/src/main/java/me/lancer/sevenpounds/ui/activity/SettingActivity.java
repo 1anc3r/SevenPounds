@@ -106,8 +106,8 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t — 数据来源 : SteamSpy\n\t\t\t\t（http://steamspy.com/api.php）");
         funcList.add("编程如逆旅 : \n" +
                 "\t\t\t\t个人 : GitHub上Star最多的个人\n" +
-                "\t\t\t\t个人 : GitHub上Star最多的组织\n" +
-                "\t\t\t\t个人 : GitHub上Star最多的项目\n" +
+                "\t\t\t\t组织 : GitHub上Star最多的组织\n" +
+                "\t\t\t\t目 : GitHub上Star最多的项目\n" +
                 "\t\t\t\t — 数据来源 : GithubRanking\n\t\t\t\t（https://github-ranking.com/）");
         problemList.add("应用内意见反馈通道尚未开启, 遇到Bug请发送邮件至huangfangzhi0@foxmail.com");
     }
