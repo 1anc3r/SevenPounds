@@ -55,16 +55,9 @@ public class VideoFragment extends BaseFragment {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
-        Fragment newfragment = new VideoTopFragment();
+        Fragment newfragment = new VideoThemeFragment();
         Bundle data = new Bundle();
         data.putInt("id", 0);
-        data.putString("title", "推荐");
-        newfragment.setArguments(data);
-        adapter.addFrag(newfragment, "推荐");
-
-        newfragment = new VideoThemeFragment();
-        data = new Bundle();
-        data.putInt("id", 1);
         data.putString("title", "分类");
         newfragment.setArguments(data);
         adapter.addFrag(newfragment, "分类");

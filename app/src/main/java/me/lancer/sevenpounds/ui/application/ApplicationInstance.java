@@ -3,8 +3,11 @@ package me.lancer.sevenpounds.ui.application;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
+
+import java.lang.reflect.Field;
 
 import me.lancer.sevenpounds.R;
 
@@ -13,6 +16,8 @@ import me.lancer.sevenpounds.R;
  */
 
 public class ApplicationInstance extends Application {
+
+    public static Typeface TypeFace;
 
     @Override
     public void onCreate() {
@@ -24,6 +29,16 @@ public class ApplicationInstance extends Application {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        TypeFace = Typeface.createFromAsset(getAssets(), "fonts/MaterialIcons_Regular.ttf");
+        try {
+            Field field = Typeface.class.getDeclaredField("SERIF");
+            field.setAccessible(true);
+            field.set(null, TypeFace);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 }

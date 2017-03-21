@@ -29,7 +29,10 @@
         <activity android:name=".ui.activity.MovieDetailActivity" />
         <activity android:name=".ui.activity.CodeDetailActivity" />
         <activity android:name=".ui.activity.GameDetailActivity" />
-        <activity android:name=".ui.activity.SmallActivity"></activity>
+        <activity
+            android:name=".ui.activity.VideoPlayerActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="sensorLandscape"></activity>
     </application>
 
 </manifest>

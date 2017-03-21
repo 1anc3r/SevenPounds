@@ -199,7 +199,7 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:backgroundTint="@color/red"
-            android:text="退出当前账号"
+            android:text="退出应用"
             android:textColor="@color/white"
             android:textSize="20sp" />
 

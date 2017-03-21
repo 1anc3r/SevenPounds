@@ -6,7 +6,9 @@ package me.lancer.sevenpounds.mvp.video;
 
 public class VideoBean {
 
-    private int id;
+    private int aid;
+    private int cid;
+    private int type;
     private String title;
     private String play;
     private String review;
@@ -19,12 +21,33 @@ public class VideoBean {
     public VideoBean() {
     }
 
-    public int getId() {
-        return id;
+    public VideoBean(int type, String title) {
+        this.type = type;
+        this.title = title;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getAid() {
+        return aid;
+    }
+
+    public void setAid(int aid) {
+        this.aid = aid;
+    }
+
+    public int getCid() {
+        return cid;
+    }
+
+    public void setCid(int cid) {
+        this.cid = cid;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public String getTitle() {

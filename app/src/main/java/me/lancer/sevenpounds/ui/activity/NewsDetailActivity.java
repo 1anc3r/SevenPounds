@@ -25,6 +25,8 @@ import net.steamcrafted.loadtoast.LoadToast;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlTextView;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
@@ -103,10 +105,8 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         layout.setTitle(title);
         ivImg = (NetworkImageView) findViewById(R.id.iv_img);
         ViewCompat.setTransitionName(ivImg, AppConstants.TRANSITION_PIC);
-        ivImg.setBackgroundResource(R.mipmap.ic_pictures_no);
         LruImageCache cache = LruImageCache.instance();
         ImageLoader loader = new ImageLoader(mQueue, cache);
-        ivImg.setDefaultImageResId(R.mipmap.ic_pictures_no);
         ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
         ivImg.setImageUrl(img, loader);
         htvContent = (HtmlTextView) findViewById(R.id.htv_content);
@@ -183,5 +183,21 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         Message msg = new Message();
         msg.what = 0;
         handler.sendMessage(msg);
+    }
+
+
+    public static String getMD5(String val) throws NoSuchAlgorithmException {
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        md5.update(val.getBytes());
+        byte[] m = md5.digest();
+        return getString(m);
+    }
+
+    private static String getString(byte[] b) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < b.length; i++) {
+            sb.append(b[i]);
+        }
+        return sb.toString();
     }
 }

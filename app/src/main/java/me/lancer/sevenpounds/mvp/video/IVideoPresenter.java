@@ -8,7 +8,11 @@ import java.util.List;
 
 public interface IVideoPresenter {
 
-    void loadTopVideoSuccess(List<VideoBean> list);
+    void loadThemeSuccess(List<VideoBean> list);
 
-    void loadTopVideoFailure(String log);
+    void loadThemeFailure(String log);
+
+    void loadDetailSuccess(VideoBean bean);
+
+    void loadDetailFailure(String log);
 }

@@ -38,12 +38,12 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
 
     int last = 0, flag = 0, load = 0;
     final int[] typeint = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13};
-    final String[] typestr = {"— 游戏 · 发现 —",
-            "— 电影 · 发现 —", "— 设计 · 发现 —",
-            "— 企业 · 发现 —", "— 财经 · 发现 —",
-            "— 音乐 · 发现 —", "— 体育 · 发现 —",
-            "— 动漫 · 发现 —", "— 安全 · 发现 —",
-            "— 娱乐 · 发现 —", "— 心理 · 发现 —"};
+    final String[] typestr = {"— 游戏 —",
+            "— 电影 —", "— 设计 —",
+            "— 企业 —", "— 财经 —",
+            "— 音乐 —", "— 体育 —",
+            "— 动漫 —", "— 安全 —",
+            "— 娱乐 —", "— 心理 —"};
 
     Handler handler = new Handler() {
         @Override

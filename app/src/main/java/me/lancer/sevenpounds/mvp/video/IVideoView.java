@@ -10,5 +10,7 @@ import me.lancer.sevenpounds.mvp.base.IBaseView;
 
 public interface IVideoView extends IBaseView {
 
-    void showTopVideo(List<VideoBean> list);
+    void showTheme(List<VideoBean> list);
+
+    void showDetail(VideoBean bean);
 }

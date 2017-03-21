@@ -28,23 +28,46 @@ public class VideoPresenter implements IBasePresenter<IVideoView>, IVideoPresent
         this.view = null;
     }
 
-    public void loadTopVideo() {
+    public void loadTheme() {
         if (view != null) {
             view.showLoad();
-            model.loadTopVideo();
+            model.loadTheme();
         }
     }
 
     @Override
-    public void loadTopVideoSuccess(List<VideoBean> list) {
+    public void loadThemeSuccess(List<VideoBean> list) {
         if (view != null) {
-            view.showTopVideo(list);
+            view.showTheme(list);
             view.hideLoad();
         }
     }
 
     @Override
-    public void loadTopVideoFailure(String log) {
+    public void loadThemeFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    public void loadDetail(String url) {
+        if (view != null) {
+            view.showLoad();
+            model.loadDetail(url);
+        }
+    }
+
+    @Override
+    public void loadDetailSuccess(VideoBean bean) {
+        if (view != null) {
+            view.showDetail(bean);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadDetailFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();

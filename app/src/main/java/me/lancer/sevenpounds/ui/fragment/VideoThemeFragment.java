@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,7 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
 
     VideoAdapter mAdapter;
 
-    GridLayoutManager mGridLayoutManager;
+    StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     List<VideoBean> mList = new ArrayList<>();
 
     int pager = 0, last = 0;
@@ -70,10 +71,10 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
         }
     };
 
-    Runnable loadTopVideo = new Runnable() {
+    Runnable loadTheme = new Runnable() {
         @Override
         public void run() {
-            presenter.loadTopVideo();
+            presenter.loadTheme();
         }
     };
 
@@ -92,7 +93,7 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
     }
 
     private void initData() {
-        new Thread(loadTopVideo).start();
+        new Thread(loadTheme).start();
     }
 
     private void initView(View view) {
@@ -103,12 +104,12 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
             @Override
             public void onRefresh() {
                 pager = 0;
-                new Thread(loadTopVideo).start();
+                new Thread(loadTheme).start();
             }
         });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
-        mGridLayoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(mGridLayoutManager);
+        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
         mAdapter = new VideoAdapter(getActivity(), mList);
@@ -122,11 +123,16 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
     }
 
     @Override
-    public void showTopVideo(List<VideoBean> list) {
+    public void showTheme(List<VideoBean> list) {
         Message msg = new Message();
         msg.what = 3;
         msg.obj = list;
         handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showDetail(VideoBean bean) {
+
     }
 
     @Override
