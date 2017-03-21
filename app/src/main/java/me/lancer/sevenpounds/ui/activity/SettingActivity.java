@@ -81,13 +81,34 @@ public class SettingActivity extends BaseActivity {
         isNight = sharedPreferences.getBoolean(ApplicationParameter.ISNIGHT, false);
         scNight.setChecked(isNight);
         scNight.setClickable(false);
-        funcList.add("教务处 : 查询课表、成绩和个人信息");
-        funcList.add("考勤表 : 查看考勤记录明细和统计, 也可以申诉");
-        funcList.add("图书馆 : 检索图书，查看当前借阅、历史借阅和收藏, 也可以(取消)收藏、续借");
-        funcList.add("四六级 : 查询英语四六级考试成绩, 包括听力、阅读、综合、写作和总分");
-        problemList.add("教务处 : 请使用西邮教务管理系统的账号和密码登录");
-        problemList.add("考勤表 : 使用西邮一卡通账号密码登录, 密码默认是学号后六位");
-        problemList.add("图书馆 : 使用西邮图书馆账号密码登录, 密码默认是123456");
+        funcList.add("见闻如是说 : \n" +
+                "\t\t\t\t每日 : 提供来自知乎社区的精选问答，还有国内一流媒体的专栏特稿\n" +
+                "\t\t\t\t分类 : 包括动漫、游戏、财经、电影、音乐、互联网安全等丰富内容\n" +
+                "\t\t\t\t — 数据来源 : 知乎日报\n\t\t\t\t（http://news-at.zhihu.com/api）");
+        funcList.add("读书如抽丝 : \n" +
+                "\t\t\t\t书评 : 豆瓣读书的最受欢迎书评\n" +
+                "\t\t\t\t书榜 : 爬取呈现豆瓣图书TOP250\n" +
+                "\t\t\t\t — 数据来源 : 豆瓣读书\n\t\t\t\t（https://book.douban.com/）");
+        funcList.add("听音如沐风 : \n" +
+                "\t\t\t\t乐评 : 豆瓣音乐的最受欢迎乐评\n" +
+                "\t\t\t\t乐榜 : 爬取呈现豆瓣音乐TOP250\n" +
+                "\t\t\t\t — 数据来源 : 豆瓣音乐\n\t\t\t\t（https://music.douban.com/）");
+        funcList.add("观影如造梦 : \n" +
+                "\t\t\t\t影评 : 豆瓣电影的最受欢迎影评\n" +
+                "\t\t\t\t影榜 : 爬取呈现豆瓣电影TOP250\n" +
+                "\t\t\t\t — 数据来源 : 豆瓣电影\n\t\t\t\t（https://movie.douban.com/）");
+        funcList.add("吐槽如幕布 : \n" +
+                "\t\t\t\t分类 : B站各分区排行榜\n" +
+                "\t\t\t\t — 数据来源 : BiliBili\n\t\t\t\t（http://api.bilibili.com）");
+        funcList.add("游戏如人生 : \n" +
+                "\t\t\t\t周榜 : SteamSpy统计的最近两周玩家数量最多的TOP100游戏\n" +
+                "\t\t\t\t分类 : Steam各分类排行榜\n" +
+                "\t\t\t\t — 数据来源 : SteamSpy\n\t\t\t\t（http://steamspy.com/api.php）");
+        funcList.add("编程如逆旅 : \n" +
+                "\t\t\t\t个人 : GitHub上Star最多的个人\n" +
+                "\t\t\t\t个人 : GitHub上Star最多的组织\n" +
+                "\t\t\t\t个人 : GitHub上Star最多的项目\n" +
+                "\t\t\t\t — 数据来源 : GithubRanking\n\t\t\t\t（https://github-ranking.com/）");
         problemList.add("应用内意见反馈通道尚未开启, 遇到Bug请发送邮件至huangfangzhi0@foxmail.com");
     }
 

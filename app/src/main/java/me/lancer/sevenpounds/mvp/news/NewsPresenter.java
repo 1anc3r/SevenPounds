@@ -74,6 +74,29 @@ public class NewsPresenter implements IBasePresenter<INewsView>, INewsPresenter 
         }
     }
 
+    public void loadBefore(String date) {
+        if (view != null) {
+            view.showLoad();
+            model.loadBefore(date);
+        }
+    }
+
+    @Override
+    public void loadBeforeSuccess(List<NewsBean> list) {
+        if (view != null) {
+            view.showBefore(list);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadBeforeFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
     public void loadTheme(int type) {
         if (view != null) {
             view.showLoad();

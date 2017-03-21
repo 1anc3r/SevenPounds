@@ -196,6 +196,11 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
     }
 
     @Override
+    public void showBefore(List<NewsBean> list) {
+
+    }
+
+    @Override
     public void showMsg(String log) {
         Message msg = new Message();
         msg.what = 2;

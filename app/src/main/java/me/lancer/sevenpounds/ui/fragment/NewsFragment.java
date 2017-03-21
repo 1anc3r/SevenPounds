@@ -58,9 +58,9 @@ public class NewsFragment extends BaseFragment {
         Fragment newfragment = new NewsTopFragment();
         Bundle data = new Bundle();
         data.putInt("id", 0);
-        data.putString("title", "今日");
+        data.putString("title", "每日");
         newfragment.setArguments(data);
-        adapter.addFrag(newfragment, "今日");
+        adapter.addFrag(newfragment, "每日");
 
         newfragment = new NewsThemeFragment();
         data = new Bundle();

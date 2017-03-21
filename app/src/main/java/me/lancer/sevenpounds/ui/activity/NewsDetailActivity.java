@@ -151,6 +151,11 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
     }
 
     @Override
+    public void showBefore(List<NewsBean> list) {
+
+    }
+
+    @Override
     public void showTheme(List<NewsBean> list) {
 
     }

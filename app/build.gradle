@@ -41,10 +41,8 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'org.jsoup:jsoup:1.10.1'
     compile 'com.android.volley:volley:1.0.0'
-    compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
-    compile 'com.squareup.picasso:picasso:2.3.2'
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'net.steamcrafted:load-toast:1.0.10'
+//    compile 'com.bigkoo:convenientbanner:2.0.5'
+//    compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
     testCompile 'junit:junit:4.12'
 }

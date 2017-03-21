@@ -14,6 +14,8 @@ public interface INewsView extends IBaseView {
 
     void showLatest(List<NewsBean> list);
 
+    void showBefore(List<NewsBean> list);
+
     void showTheme(List<NewsBean> list);
 
     void showDetail(NewsBean bean);

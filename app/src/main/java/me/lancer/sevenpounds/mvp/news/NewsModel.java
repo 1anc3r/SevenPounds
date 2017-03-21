@@ -20,8 +20,9 @@ public class NewsModel {
     INewsPresenter presenter;
 
     ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
-    String url = "http://news-at.zhihu.com/api/4/news/";
-    String topNewsUrl = "http://news-at.zhihu.com/api/4/news/latest";
+    String newsUrl = "http://news-at.zhihu.com/api/4/news/";
+    String beforeUrl = "http://news-at.zhihu.com/api/4/news/before/";
+    String latestUrl = "http://news-at.zhihu.com/api/4/news/latest";
     String themeUrl = "http://news-at.zhihu.com/api/4/theme/";
 
     public NewsModel(INewsPresenter presenter) {
@@ -29,7 +30,7 @@ public class NewsModel {
     }
 
     public void loadTopNews() {
-        String content = contentGetterSetter.getContentFromHtml(topNewsUrl);
+        String content = contentGetterSetter.getContentFromHtml(latestUrl);
         List<NewsBean> list;
         if (!content.contains("获取失败!")) {
             list = getTopNewsFromContent(content);
@@ -41,13 +42,25 @@ public class NewsModel {
     }
 
     public void loadLatest() {
-        String content = contentGetterSetter.getContentFromHtml(topNewsUrl);
+        String content = contentGetterSetter.getContentFromHtml(latestUrl);
         List<NewsBean> list;
         if (!content.contains("获取失败!")) {
             list = getLatestNewsFromContent(content);
             presenter.loadLatestSuccess(list);
         } else {
             presenter.loadLatestFailure(content);
+            Log.e("loadLatest", content);
+        }
+    }
+
+    public void loadBefore(String date) {
+        String content = contentGetterSetter.getContentFromHtml(beforeUrl+date);
+        List<NewsBean> list;
+        if (!content.contains("获取失败!")) {
+            list = getLatestNewsFromContent(content);
+            presenter.loadBeforeSuccess(list);
+        } else {
+            presenter.loadBeforeFailure(content);
             Log.e("loadLatest", content);
         }
     }
@@ -92,7 +105,7 @@ public class NewsModel {
                 }
                 nbItem.setTitle(jbItem.getString("title"));
                 nbItem.setImg(jbItem.getString("image"));
-                nbItem.setLink(url + nbItem.getId());
+                nbItem.setLink(newsUrl + nbItem.getId());
                 list.add(nbItem);
             }
             return list;
@@ -119,7 +132,7 @@ public class NewsModel {
                 nbItem.setTitle(jbItem.getString("title"));
                 JSONArray jaImg = jbItem.getJSONArray("images");
                 nbItem.setImg(jaImg.get(0).toString());
-                nbItem.setLink(url + nbItem.getId());
+                nbItem.setLink(newsUrl + nbItem.getId());
                 list.add(nbItem);
             }
             return list;
@@ -149,7 +162,7 @@ public class NewsModel {
                     nbItem.setTitle(jbItem.getString("title"));
                     JSONArray jaImg = jbItem.getJSONArray("images");
                     nbItem.setImg(jaImg.get(0).toString());
-                    nbItem.setLink(url + nbItem.getId());
+                    nbItem.setLink(newsUrl + nbItem.getId());
                     list.add(nbItem);
                 }
             }

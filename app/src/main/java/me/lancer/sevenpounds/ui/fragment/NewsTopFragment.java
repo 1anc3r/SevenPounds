@@ -12,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
@@ -28,17 +30,18 @@ import me.lancer.sevenpounds.ui.adapter.NewsAdapter;
 
 public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements INewsView {
 
-    SwipeRefreshLayout mSwipeRefreshLayout;
-    RecyclerView mRecyclerView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private RecyclerView mRecyclerView;
 
-    NewsAdapter mAdapter;
+    private NewsAdapter mAdapter;
 
-    StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    List<NewsBean> mList = new ArrayList<>();
+    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private List<NewsBean> mDayList = new ArrayList<>();
 
-    int flag = 0, last = 0,load = 0;
+    private int last = 0, flag = 0, load = 0;
+    private String date;
 
-    Handler handler = new Handler() {
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -53,26 +56,28 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList.clear();
-                        mList.add(new NewsBean(1, "— 最新 —"));
-                        mList.addAll((List<NewsBean>) msg.obj);
-                        mAdapter = new NewsAdapter(getActivity(), mList);
+                        mDayList.clear();
+                        mDayList.add(new NewsBean(1, "— 今日 —"));
+                        mDayList.addAll((List<NewsBean>) msg.obj);
+                        mAdapter = new NewsAdapter(getActivity(), mDayList);
                         mRecyclerView.setAdapter(mAdapter);
                     }
-                    load = 0;
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
                 case 4:
-                    if (msg.obj != null) {
-                        int size = mList.size();
-                        mList.add(new NewsBean(1, "— 最热 —"));
-                        mList.addAll((List<NewsBean>) msg.obj);
-                        for (int i = 0; i < ((List<NewsBean>) msg.obj).size()+1; i++) {
+                    if (msg.obj != null && load == 1) {
+                        int size = mDayList.size();
+                        date = date.substring(0, 4) + "年" + date.substring(4, 6) + "月" + date.substring(6, 8) + "日";
+                        mDayList.add(new NewsBean(1, "— " + date + " —"));
+                        mDayList.addAll((List<NewsBean>) msg.obj);
+                        for (int i = 0; i < ((List<NewsBean>) msg.obj).size() + 1; i++) {
                             mAdapter.notifyItemInserted(size + 1 + i);
                         }
+                        load = 0;
                     }
-                    load = 0;
                     mSwipeRefreshLayout.setRefreshing(false);
+                    break;
+                case 5:
                     break;
             }
         }
@@ -82,6 +87,13 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
         @Override
         public void run() {
             presenter.loadLatest();
+        }
+    };
+
+    Runnable loadBefore = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadBefore(date);
         }
     };
 
@@ -129,7 +141,7 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new NewsAdapter(getActivity(), mList);
+        mAdapter = new NewsAdapter(getActivity(), mDayList);
         mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -139,11 +151,10 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && last + 1 == mAdapter.getItemCount()) {
-                    if (flag < 1 && load == 0) {
-                        load = 1;
-                        flag += 1;
-                        new Thread(loadTop).start();
-                    }
+                    load = 1;
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+                    date = formatter.format(new Date(System.currentTimeMillis() - 24 * 3600 * 1000 * (flag++)));
+                    new Thread(loadBefore).start();
                 }
             }
 
@@ -183,7 +194,7 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
     @Override
     public void showTopNews(List<NewsBean> list) {
         Message msg = new Message();
-        msg.what = 4;
+        msg.what = 5;
         msg.obj = list;
         handler.sendMessage(msg);
     }
@@ -192,6 +203,14 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
     public void showLatest(List<NewsBean> list) {
         Message msg = new Message();
         msg.what = 3;
+        msg.obj = list;
+        handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showBefore(List<NewsBean> list) {
+        Message msg = new Message();
+        msg.what = 4;
         msg.obj = list;
         handler.sendMessage(msg);
     }
@@ -218,3 +237,4 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
         handler.sendMessage(msg);
     }
 }
+
