@@ -45,7 +45,7 @@
 
 ## 应用界面:
 
-<img src="https://github.com/1anc3r/SevenPounds/tree/master/screenshot/Screenshot_1490085145.gif" width = "288" height = "512" alt="" /><img src="https://github.com/1anc3r/SevenPounds/tree/master/screenshot/Screenshot_1490085146.gif" width = "288" height = "512" alt=""/><img src="https://github.com/1anc3r/SevenPounds/tree/master/screenshot/Screenshot_1490085147.png" width = "288" height = "512" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085145.gif?raw=true" width = "288" height = "512" alt="" /><img src="https://github.com/1anc3r/SevenPounds/tree/master/screenshot/Screenshot_1490085146.gif" width = "288" height = "512" alt=""/><img src="https://github.com/1anc3r/SevenPounds/tree/master/screenshot/Screenshot_1490085147.png" width = "288" height = "512" alt=""/>
 <img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_1490085147.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_1490085175.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_1490085214.png" width = "288" height = "512" alt=""/>
 
 ## 关于
