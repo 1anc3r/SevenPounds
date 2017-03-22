@@ -21,30 +21,30 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
-import me.lancer.sevenpounds.ui.adapter.StringAdapter;
-import me.lancer.sevenpounds.ui.application.ApplicationInstance;
-import me.lancer.sevenpounds.ui.application.ApplicationParameter;
+import me.lancer.sevenpounds.mvp.base.activity.BaseActivity;
+import me.lancer.sevenpounds.ui.adapter.SettingAdapter;
+import me.lancer.sevenpounds.ui.application.mApp;
+import me.lancer.sevenpounds.ui.application.mParams;
 
 public class SettingActivity extends BaseActivity {
 
-    ApplicationInstance app;
+    private mApp app;
 
-    LinearLayout llNight, llFunc, llProblem, llFeedback, llAboutUs;
-    Button btnLoginOut;
-    SwitchCompat scNight;
-    BottomSheetDialog listDialog;
-    AlertDialog aboutDialog;
+    private LinearLayout llNight, llFunc, llProblem, llFeedback, llAboutUs;
+    private Button btnLoginOut;
+    private SwitchCompat scNight;
+    private BottomSheetDialog listDialog;
+    private AlertDialog aboutDialog;
 
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-    boolean isNight = false;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private boolean isNight = false;
 
-    List<String> funcList = new ArrayList<>(), problemList = new ArrayList<>();
+    private List<String> funcList = new ArrayList<>(), problemList = new ArrayList<>();
 
     private final String root = Environment.getExternalStorageDirectory() + "/";
 
@@ -75,10 +75,10 @@ public class SettingActivity extends BaseActivity {
     }
 
     private void initData() {
-        app = (ApplicationInstance) getApplication();
+        app = (mApp) getApplication();
         sharedPreferences = getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        isNight = sharedPreferences.getBoolean(ApplicationParameter.ISNIGHT, false);
+        isNight = sharedPreferences.getBoolean(mParams.ISNIGHT, false);
         scNight.setChecked(isNight);
         scNight.setClickable(false);
         funcList.add("见闻如是说 : \n" +
@@ -117,13 +117,13 @@ public class SettingActivity extends BaseActivity {
         public void onClick(View v) {
             if (v == llNight){
                 if (!isNight) {
-                    editor.putBoolean(ApplicationParameter.ISNIGHT, true);
+                    editor.putBoolean(mParams.ISNIGHT, true);
                     editor.apply();
                     scNight.setChecked(true);
                     getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     recreate();
                 } else {
-                    editor.putBoolean(ApplicationParameter.ISNIGHT, false);
+                    editor.putBoolean(mParams.ISNIGHT, false);
                     editor.apply();
                     scNight.setChecked(false);
                     getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -176,7 +176,7 @@ public class SettingActivity extends BaseActivity {
         RecyclerView rvList = (RecyclerView) listDialogView.findViewById(R.id.rv_list);
         rvList.setItemAnimator(new DefaultItemAnimator());
         rvList.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false));
-        RecyclerView.Adapter adapter = new StringAdapter(list);
+        RecyclerView.Adapter adapter = new SettingAdapter(list);
         rvList.setAdapter(adapter);
 
         listDialog = new BottomSheetDialog(mActivity);

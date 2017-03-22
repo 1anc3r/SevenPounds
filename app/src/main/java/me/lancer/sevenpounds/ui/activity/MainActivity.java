@@ -16,20 +16,21 @@ import android.view.View;
 import android.widget.TextView;
 
 import me.lancer.sevenpounds.R;
-import me.lancer.sevenpounds.ui.application.ApplicationInstance;
-import me.lancer.sevenpounds.ui.application.ApplicationParameter;
-import me.lancer.sevenpounds.ui.fragment.BookFragment;
-import me.lancer.sevenpounds.ui.fragment.CodeFragment;
-import me.lancer.sevenpounds.ui.fragment.GameFragment;
-import me.lancer.sevenpounds.ui.fragment.MovieFragment;
-import me.lancer.sevenpounds.ui.fragment.MusicFragment;
-import me.lancer.sevenpounds.ui.fragment.NewsFragment;
-import me.lancer.sevenpounds.ui.fragment.VideoFragment;
+import me.lancer.sevenpounds.mvp.base.activity.BaseActivity;
+import me.lancer.sevenpounds.ui.application.mApp;
+import me.lancer.sevenpounds.ui.application.mParams;
+import me.lancer.sevenpounds.mvp.book.fragment.BookFragment;
+import me.lancer.sevenpounds.mvp.code.fragment.CodeFragment;
+import me.lancer.sevenpounds.mvp.game.fragment.GameFragment;
+import me.lancer.sevenpounds.mvp.movie.fragment.MovieFragment;
+import me.lancer.sevenpounds.mvp.music.fragment.MusicFragment;
+import me.lancer.sevenpounds.mvp.news.fragment.NewsFragment;
+import me.lancer.sevenpounds.mvp.video.fragment.VideoFragment;
 import me.lancer.sevenpounds.ui.view.CircleImageView;
 
 public class MainActivity extends BaseActivity {
 
-    ApplicationInstance app = new ApplicationInstance();
+    private mApp app = new mApp();
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -43,7 +44,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        app = (ApplicationInstance) this.getApplication();
+        app = (mApp) this.getApplication();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         initNavigationViewHeader();
         initFragment(savedInstanceState);
@@ -163,7 +164,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt(ApplicationParameter.CURRENT_INDEX, currentIndex);
+        outState.putInt(mParams.CURRENT_INDEX, currentIndex);
         super.onSaveInstanceState(outState);
     }
 

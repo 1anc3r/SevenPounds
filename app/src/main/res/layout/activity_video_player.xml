@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black_dark"
     android:orientation="vertical"
-    tools:context=".ui.activity.VideoPlayerActivity">
+    tools:context=".mvp.video.activity.VideoPlayerActivity">
 
     <WebView
         android:id="@+id/wv_video"

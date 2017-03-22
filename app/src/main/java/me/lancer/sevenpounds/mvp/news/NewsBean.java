@@ -1,7 +1,5 @@
 package me.lancer.sevenpounds.mvp.news;
 
-import me.lancer.sevenpounds.ui.adapter.StringAdapter;
-
 /**
  * Created by HuangFangzhi on 2017/3/13.
  */
