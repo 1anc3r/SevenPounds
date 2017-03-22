@@ -8,7 +8,7 @@
 * Github: [https://github.com/1anc3r](https://github.com/1anc3r)
 * 我的博客: [1anc3r.me](http://www.1anc3r.me/)
 * 实验室主页: [xiyoumobile](http://www.xiyoumobile.com/)
-* 下载链接: [download](http://o7gy5l0ax.bkt.clouddn.com/sevenpounds.apk)
+* 下载链接: [download](https://raw.githubusercontent.com/1anc3r/SevenPounds/master/screenshot/sevenpounds.apk)
 
 ## 功能介绍:
 1. 见闻如是说: 
@@ -45,8 +45,8 @@
 
 ## 应用界面:
 
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085145.gif?raw=true" width = "288" height = "512" alt="" /><img src="https://github.com/1anc3r/SevenPounds/tree/master/screenshot/Screenshot_1490085146.gif" width = "288" height = "512" alt=""/><img src="https://github.com/1anc3r/SevenPounds/tree/master/screenshot/Screenshot_1490085147.png" width = "288" height = "512" alt=""/>
-<img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_1490085147.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_1490085175.png" width = "288" height = "512" alt=""/><img src="http://o7gy5l0ax.bkt.clouddn.com/Screenshot_1490085214.png" width = "288" height = "512" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085145.gif?raw=true" width = "288" height = "512" alt="" /><img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085146.gif?raw=true" width = "288" height = "512" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085147.png?raw=true" width = "288" height = "512" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085148.png?raw=true" width = "288" height = "512" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085149.png?raw=true" width = "288" height = "512" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085150.png?raw=true" width = "288" height = "512" alt=""/>
 
 ## 关于
 ### 组织
