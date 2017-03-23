@@ -34,11 +34,11 @@ public class SettingActivity extends BaseActivity {
 
     private mApp app;
 
-    private LinearLayout llNight, llFunc, llProblem, llFeedback, llAboutUs;
+    private LinearLayout llNight, llFunc, llProblem, llFeedback, llDownload, llAboutUs;
     private Button btnLoginOut;
     private SwitchCompat scNight;
     private BottomSheetDialog listDialog;
-    private AlertDialog aboutDialog;
+    private AlertDialog aboutDialog, downloadDialog;
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -66,12 +66,15 @@ public class SettingActivity extends BaseActivity {
         llProblem.setOnClickListener(vOnClickListener);
         llFeedback = (LinearLayout) findViewById(R.id.ll_feedback);
         llFeedback.setOnClickListener(vOnClickListener);
+        llDownload = (LinearLayout) findViewById(R.id.ll_download);
+        llDownload.setOnClickListener(vOnClickListener);
         llAboutUs = (LinearLayout) findViewById(R.id.ll_about_us);
         llAboutUs.setOnClickListener(vOnClickListener);
         btnLoginOut = (Button) findViewById(R.id.btn_login_out);
         btnLoginOut.setOnClickListener(vOnClickListener);
         scNight = (SwitchCompat) findViewById(R.id.sc_night);
         showAboutDialog();
+        showDownloadDialog();
     }
 
     private void initData() {
@@ -135,6 +138,8 @@ public class SettingActivity extends BaseActivity {
                 showListDialog(2, problemList);
             } else if (v == llFeedback){
 
+            } else if (v == llDownload){
+                downloadDialog.show();
             } else if (v == llAboutUs){
                 aboutDialog.show();
             } else if (v == btnLoginOut){
@@ -213,5 +218,120 @@ public class SettingActivity extends BaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
         builder.setView(aboutDialogView);
         aboutDialog = builder.create();
+    }
+
+    private void showDownloadDialog(){
+        View downloadDialogView = LayoutInflater.from(mActivity).inflate(R.layout.download_dialog, null);
+        TextView tvAirFreeDownload = (TextView) downloadDialogView.findViewById(R.id.tv_airfree_download);
+        tvAirFreeDownload.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("http://o7gy5l0ax.bkt.clouddn.com/AirFree-Client.apk");
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        });
+        TextView tvAirFreeBlog = (TextView) downloadDialogView.findViewById(R.id.tv_airfree_blog);
+        tvAirFreeBlog.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://www.1anc3r.me/airfree-android-to-pc-remote/");
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        });
+        TextView tvAirFreeGithub = (TextView) downloadDialogView.findViewById(R.id.tv_airfree_github);
+        tvAirFreeGithub.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://github.com/1anc3r/AirFree-Client");
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        });
+        TextView tvXuptDownload = (TextView) downloadDialogView.findViewById(R.id.tv_xupt_download);
+        tvXuptDownload.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://raw.githubusercontent.com/1anc3r/XUPT/master/screenshot/xupt.apk");
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        });
+        TextView tvXuptBlog = (TextView) downloadDialogView.findViewById(R.id.tv_xupt_blog);
+        tvXuptBlog.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://www.1anc3r.me/%E8%A5%BF%E9%82%AE%E8%AE%B0xupt/");
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        });
+        TextView tvXuptGithub = (TextView) downloadDialogView.findViewById(R.id.tv_xupt_github);
+        tvXuptGithub.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://github.com/1anc3r/XUPT");
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        });
+        TextView tvSevenPoundsDownload = (TextView) downloadDialogView.findViewById(R.id.tv_sevenpounds_download);
+        tvSevenPoundsDownload.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://raw.githubusercontent.com/1anc3r/SevenPounds/master/screenshot/sevenpounds.apk");
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        });
+        TextView tvSevenPoundsBlog = (TextView) downloadDialogView.findViewById(R.id.tv_sevenpounds_blog);
+        tvSevenPoundsBlog.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://www.1anc3r.me/%E4%B8%83%E7%A3%85sevenpounds/");
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        });
+        TextView tvSevenPoundsGithub = (TextView) downloadDialogView.findViewById(R.id.tv_sevenpounds_github);
+        tvSevenPoundsGithub.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://github.com/1anc3r/AirFree-Client");
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        });
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        builder.setView(downloadDialogView);
+        downloadDialog = builder.create();
     }
 }

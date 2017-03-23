@@ -57,7 +57,7 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
                 case 3:
                     if (msg.obj != null) {
                         mDayList.clear();
-                        mDayList.add(new NewsBean(1, "— 今日 —"));
+                        mDayList.add(new NewsBean(1, "— 最新 —"));
                         mDayList.addAll((List<NewsBean>) msg.obj);
                         mAdapter = new NewsAdapter(getActivity(), mDayList);
                         mRecyclerView.setAdapter(mAdapter);
