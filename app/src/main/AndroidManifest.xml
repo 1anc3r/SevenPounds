@@ -23,15 +23,28 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.SettingActivity" />
-        <activity android:name=".mvp.news.activity.NewsDetailActivity" />
-        <activity android:name=".mvp.book.activity.BookDetailActivity" />
-        <activity android:name=".mvp.music.activity.MusicDetailActivity" />
-        <activity android:name=".mvp.movie.activity.MovieDetailActivity" />
-        <activity android:name=".mvp.code.activity.CodeDetailActivity" />
-        <activity android:name=".mvp.game.activity.GameDetailActivity" />
+        <activity
+            android:name=".mvp.news.activity.NewsDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mvp.book.activity.BookDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mvp.music.activity.MusicDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mvp.movie.activity.MovieDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mvp.code.activity.CodeDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mvp.game.activity.GameDetailActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".mvp.video.activity.VideoPlayerActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
             android:screenOrientation="sensorLandscape"></activity>
     </application>
 

@@ -35,7 +35,7 @@ public class CodeModel {
     }
 
     public void loadUsers(int pager) {//个人
-        String content = contentGetterSetter.getContentFromHtml(usersUrl+pager);
+        String content = contentGetterSetter.getContentFromHtml(usersUrl + pager);
         List<CodeBean> list;
         if (!content.contains("失败")) {
             list = getListFromContent(content);
@@ -47,7 +47,7 @@ public class CodeModel {
     }
 
     public void loadOrganizations(int pager) {//组织
-        String content = contentGetterSetter.getContentFromHtml(organizationsUrl+pager);
+        String content = contentGetterSetter.getContentFromHtml(organizationsUrl + pager);
         List<CodeBean> list;
         if (!content.contains("失败")) {
             list = getListFromContent(content);
@@ -59,7 +59,7 @@ public class CodeModel {
     }
 
     public void loadRepositories(int pager) {//项目
-        String content = contentGetterSetter.getContentFromHtml(repositoriesUrl+pager);
+        String content = contentGetterSetter.getContentFromHtml(repositoriesUrl + pager);
         List<CodeBean> list;
         if (!content.contains("失败")) {
             list = getListFromContent(content);
@@ -91,9 +91,9 @@ public class CodeModel {
         for (int i = 0; i < elements.size(); i++) {
             CodeBean bean = new CodeBean();
             temp1 = elements.get(i).getElementsByClass("hidden-xs hidden-sm").text();
-            temp2 =elements.get(i).getElementsByClass("hidden-md hidden-lg").text();
+            temp2 = elements.get(i).getElementsByClass("hidden-md hidden-lg").text();
             bean.setType(0);
-            bean.setRank(elements.get(i).getElementsByClass("name").text().replace(temp1,"").replace(temp2,""));
+            bean.setRank(elements.get(i).getElementsByClass("name").text().replace(temp1, "").replace(temp2, ""));
             bean.setName(temp1);
             bean.setStar(elements.get(i).getElementsByClass("stargazers_count pull-right").text());
             bean.setImg(elements.get(i).getElementsByTag("img").attr("src"));
@@ -107,14 +107,19 @@ public class CodeModel {
         CodeBean bean = new CodeBean();
         List<CodeBean> list = new ArrayList<>();
         Document document = Jsoup.parse(content);
-        bean.setStar(document.getElementsByClass("user_value col-xs-9").get(0).text());
-        bean.setRank(document.getElementsByClass("user_value col-xs-7").get(0).text());
+        if (document.getElementsByClass("user_value col-xs-9").size() > 0)
+            bean.setStar(document.getElementsByClass("user_value col-xs-9").get(0).text());
+        if (document.getElementsByClass("user_value col-xs-7").size() > 0)
+            bean.setRank(document.getElementsByClass("user_value col-xs-7").get(0).text());
+        if (document.getElementsByTag("link").size() > 0)
+            bean.setLink(document.getElementsByTag("link").get(1).text());
         Elements elements = document.getElementsByClass("list-group-item paginated_full_item");
         for (int i = 0; i < elements.size(); i++) {
             CodeBean item = new CodeBean();
             item.setType(1);
             item.setName(elements.get(i).getElementsByClass("login").get(0).text());
             item.setStar(elements.get(i).getElementsByClass("stargazers_count pull-right").get(0).text());
+            item.setLink(bean.getLink() + "/" + item.getName());
             list.add(item);
         }
         bean.setRepositories(list);

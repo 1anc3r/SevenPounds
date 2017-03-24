@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
@@ -60,26 +61,14 @@ public class VideoPlayerActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) wvVideo.getLayoutParams();
         params.height = height + DensityUtil.dip2px(this, Float.parseFloat("80"));
         wvVideo.setLayoutParams(params);
+        wvVideo.getSettings().setSupportZoom(true);
+        wvVideo.getSettings().setBuiltInZoomControls(true);
+        wvVideo.getSettings().setUseWideViewPort(true);
         wvVideo.getSettings().setJavaScriptEnabled(true);
         wvVideo.getSettings().setLoadWithOverviewMode(true);
+        wvVideo.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        wvVideo.getSettings().setLoadWithOverviewMode(true);
         videoUrl = "http://www.bilibili.com/video/av" + aid;
-        wvVideo.setWebViewClient(new WebViewClient() {
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                String fun1 = "javascript:function getClass(parent,sClass) { var aEle=parent.getElementsByTagName('nav'); var aResult=[]; var i=0; for(i<0;i<aEle.length;i++) { if(aEle[i].className==sClass) { aResult.push(aEle[i]); } }; return aResult; } ";
-                view.loadUrl(fun1);
-                String fun2 = "javascript:function hideOther() {getClass(document,'nav-bar')[0].style.display='none';getClass(document,'search toggle-panel')[0].style.display='none';}";
-                view.loadUrl(fun2);
-                view.loadUrl("javascript:hideOther();");
-                super.onPageFinished(view, url);
-            }
-        });
         wvVideo.loadUrl(videoUrl);
     }
 
