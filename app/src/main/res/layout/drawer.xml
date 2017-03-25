@@ -15,33 +15,38 @@
 
         <item
             android:id="@+id/navigation_item_2"
+            android:icon="@mipmap/ic_image_black_24dp"
+            android:title="览图如流水" />
+
+        <item
+            android:id="@+id/navigation_item_3"
             android:icon="@mipmap/ic_book_black_24dp"
             android:title="读书如抽丝" />
 
         <item
-            android:id="@+id/navigation_item_3"
+            android:id="@+id/navigation_item_4"
             android:icon="@mipmap/ic_music_note_black_24dp"
             android:title="听音如沐风" />
 
         <item
-            android:id="@+id/navigation_item_4"
+            android:id="@+id/navigation_item_5"
             android:icon="@mipmap/ic_movie_black_24dp"
             android:title="观影如造梦" />
 
         <item
-            android:id="@+id/navigation_item_5"
+            android:id="@+id/navigation_item_6"
             android:icon="@mipmap/ic_assistant_photo_black_24dp"
             android:title="吐槽如幕布" />
-
-        <item
-            android:id="@+id/navigation_item_6"
-            android:icon="@mipmap/ic_extension_black_24dp"
-            android:title="游戏如人生" />
 
         <item
             android:id="@+id/navigation_item_7"
             android:icon="@mipmap/ic_code_black_24dp"
             android:title="编程如逆旅" />
+
+        <!--<item-->
+            <!--android:id="@+id/navigation_item_7"-->
+            <!--android:icon="@mipmap/ic_extension_black_24dp"-->
+            <!--android:title="游戏如人生" />-->
 
     </group>
 

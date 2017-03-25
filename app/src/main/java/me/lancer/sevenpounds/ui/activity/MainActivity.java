@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.base.activity.BaseActivity;
+import me.lancer.sevenpounds.mvp.photo.fragment.PhotoFragment;
 import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.ui.application.mParams;
 import me.lancer.sevenpounds.mvp.book.fragment.BookFragment;
@@ -101,7 +102,7 @@ public class MainActivity extends BaseActivity {
                 case R.id.navigation_item_2:
                     currentIndex = 0;
                     menuItem.setChecked(true);
-                    currentFragment = new BookFragment();
+                    currentFragment = new PhotoFragment();
                     bundle.putInt(getString(R.string.index), currentIndex);
                     currentFragment.setArguments(bundle);
                     switchContent(currentFragment);
@@ -109,7 +110,7 @@ public class MainActivity extends BaseActivity {
                 case R.id.navigation_item_3:
                     currentIndex = 0;
                     menuItem.setChecked(true);
-                    currentFragment = new MusicFragment();
+                    currentFragment = new BookFragment();
                     bundle.putInt(getString(R.string.index), currentIndex);
                     currentFragment.setArguments(bundle);
                     switchContent(currentFragment);
@@ -117,7 +118,7 @@ public class MainActivity extends BaseActivity {
                 case R.id.navigation_item_4:
                     currentIndex = 0;
                     menuItem.setChecked(true);
-                    currentFragment = new MovieFragment();
+                    currentFragment = new MusicFragment();
                     bundle.putInt(getString(R.string.index), currentIndex);
                     currentFragment.setArguments(bundle);
                     switchContent(currentFragment);
@@ -125,7 +126,7 @@ public class MainActivity extends BaseActivity {
                 case R.id.navigation_item_5:
                     currentIndex = 0;
                     menuItem.setChecked(true);
-                    currentFragment = new VideoFragment();
+                    currentFragment = new MovieFragment();
                     bundle.putInt(getString(R.string.index), currentIndex);
                     currentFragment.setArguments(bundle);
                     switchContent(currentFragment);
@@ -133,7 +134,7 @@ public class MainActivity extends BaseActivity {
                 case R.id.navigation_item_6:
                     currentIndex = 0;
                     menuItem.setChecked(true);
-                    currentFragment = new GameFragment();
+                    currentFragment = new VideoFragment();
                     bundle.putInt(getString(R.string.index), currentIndex);
                     currentFragment.setArguments(bundle);
                     switchContent(currentFragment);
@@ -146,6 +147,14 @@ public class MainActivity extends BaseActivity {
                     currentFragment.setArguments(bundle);
                     switchContent(currentFragment);
                     return true;
+//                case R.id.navigation_item_6:
+//                    currentIndex = 0;
+//                    menuItem.setChecked(true);
+//                    currentFragment = new GameFragment();
+//                    bundle.putInt(getString(R.string.index), currentIndex);
+//                    currentFragment.setArguments(bundle);
+//                    switchContent(currentFragment);
+//                    return true;
                 case R.id.navigation_setting:
                     startActivity(new Intent().setClass(MainActivity.this, SettingActivity.class));
                     finish();

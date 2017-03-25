@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -68,6 +69,14 @@ public class VideoPlayerActivity extends BaseActivity {
         wvVideo.getSettings().setLoadWithOverviewMode(true);
         wvVideo.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         wvVideo.getSettings().setLoadWithOverviewMode(true);
+        wvVideo.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return false;
+            }
+
+        });
         videoUrl = "http://www.bilibili.com/video/av" + aid;
         wvVideo.loadUrl(videoUrl);
     }
