@@ -63,7 +63,7 @@ public class PhotoModel {
             if (imgSmall.contains("auto=compress&cs=tinysrgb")) {
                 mbItem.setType(0);
                 mbItem.setImgSmall(imgSmall);
-                mbItem.setImgLarge(imgSmall.split("/?")[0]+imgDetailUrl);
+                mbItem.setImgLarge(imgSmall.substring(0, imgSmall.indexOf('?'))+imgDetailUrl);
                 list.add(mbItem);
             }
         }

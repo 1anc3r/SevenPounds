@@ -1,5 +1,6 @@
 package me.lancer.sevenpounds.mvp.photo.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.photo.PhotoBean;
+import me.lancer.sevenpounds.mvp.photo.activity.PhotoDetailActivity;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
@@ -64,7 +66,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
                 viewHolder.ivImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.e("onClick: ", list.get(position).getImgSmall());
+                        PhotoDetailActivity.startActivity((Activity) context, list.get(position).getImgLarge(), viewHolder.ivImg);
                     }
                 });
             }

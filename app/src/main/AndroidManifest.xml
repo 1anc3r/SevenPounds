@@ -27,6 +27,9 @@
             android:name=".mvp.news.activity.NewsDetailActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".mvp.photo.activity.PhotoDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".mvp.book.activity.BookDetailActivity"
             android:launchMode="singleTask" />
         <activity
