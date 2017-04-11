@@ -56,12 +56,19 @@ public class NewsFragment extends BaseFragment {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
-        Fragment newfragment = new NewsTopFragment();
+        Fragment newfragment = new NewsLatestFragment();
         Bundle data = new Bundle();
         data.putInt("id", 0);
         data.putString("title", "每日");
         newfragment.setArguments(data);
         adapter.addFrag(newfragment, "每日");
+
+        newfragment = new NewsHotestFragment();
+        data = new Bundle();
+        data.putInt("id", 0);
+        data.putString("title", "热门");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "热门");
 
         newfragment = new NewsThemeFragment();
         data = new Bundle();

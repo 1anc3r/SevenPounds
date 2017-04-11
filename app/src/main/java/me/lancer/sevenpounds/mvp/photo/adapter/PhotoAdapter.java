@@ -66,7 +66,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
                 viewHolder.ivImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        PhotoDetailActivity.startActivity((Activity) context, list.get(position).getImgLarge(), viewHolder.ivImg);
+                        PhotoDetailActivity.startActivity((Activity) context, list.get(position).getImgLarge(), list.get(position).getTitle(), viewHolder.ivImg);
                     }
                 });
             }

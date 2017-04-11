@@ -165,6 +165,11 @@ public class PhotoTopFragment extends PresenterFragment<PhotoPresenter> implemen
     }
 
     @Override
+    public void showWelfare(List<PhotoBean> list) {
+
+    }
+
+    @Override
     public void showMsg(String log) {
         Message msg = new Message();
         msg.what = 2;

@@ -1,4 +1,4 @@
-package me.lancer.sevenpounds.mvp.video.fragment;
+package me.lancer.sevenpounds.mvp.news.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,31 +12,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.base.activity.PresenterFragment;
-import me.lancer.sevenpounds.mvp.video.IVideoView;
-import me.lancer.sevenpounds.mvp.video.VideoBean;
-import me.lancer.sevenpounds.mvp.video.VideoPresenter;
-import me.lancer.sevenpounds.mvp.video.adapter.VideoAdapter;
+import me.lancer.sevenpounds.mvp.news.INewsView;
+import me.lancer.sevenpounds.mvp.news.NewsBean;
+import me.lancer.sevenpounds.mvp.news.NewsPresenter;
+import me.lancer.sevenpounds.mvp.news.adapter.NewsAdapter;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implements IVideoView {
+public class NewsHotestFragment extends PresenterFragment<NewsPresenter> implements INewsView {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
 
-    private VideoAdapter mAdapter;
+    private NewsAdapter mAdapter;
 
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    private List<VideoBean> mList = new ArrayList<>();
+    private List<NewsBean> mList = new ArrayList<>();
 
-    private int pager = 0, last = 0;
+    private int last = 0, flag = 0, load = 0;
+    private String date;
 
     private Handler handler = new Handler() {
         @Override
@@ -53,16 +56,10 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        if (pager == 0) {
-                            mList = (List<VideoBean>) msg.obj;
-                            mAdapter = new VideoAdapter(getActivity(), mList);
-                            mRecyclerView.setAdapter(mAdapter);
-                        } else {
-                            mList.addAll((List<VideoBean>) msg.obj);
-                            for (int i = 0; i < 10; i++) {
-                                mAdapter.notifyItemInserted(pager*10 + i);
-                            }
-                        }
+                        mList.clear();
+                        mList.addAll((List<NewsBean>) msg.obj);
+                        mAdapter = new NewsAdapter(getActivity(), mList);
+                        mRecyclerView.setAdapter(mAdapter);
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
@@ -70,10 +67,10 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
         }
     };
 
-    private Runnable loadTheme = new Runnable() {
+    private Runnable loadHotest = new Runnable() {
         @Override
         public void run() {
-            presenter.loadTheme();
+            presenter.loadHotest();
         }
     };
 
@@ -92,7 +89,7 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
     }
 
     private void initData() {
-        new Thread(loadTheme).start();
+        new Thread(loadHotest).start();
     }
 
     private void initView(View view) {
@@ -105,8 +102,8 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
                 Message msg = new Message();
                 msg.what = 0;
                 handler.sendMessageDelayed(msg, 800);
-//                pager = 0;
-//                new Thread(loadPhotos).start();
+//                flag = 0;
+//                new Thread(loadLatest).start();
             }
         });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
@@ -114,18 +111,29 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new VideoAdapter(getActivity(), mList);
+        mAdapter = new NewsAdapter(getActivity(), mList);
         mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
-    protected VideoPresenter onCreatePresenter() {
-        return new VideoPresenter(this);
+    protected NewsPresenter onCreatePresenter() {
+        return new NewsPresenter(this);
+    }
+
+
+    @Override
+    public void showTheme(List<NewsBean> list) {
+
     }
 
     @Override
-    public void showTheme(List<VideoBean> list) {
+    public void showDetail(NewsBean bean) {
+
+    }
+
+    @Override
+    public void showHotest(List<NewsBean> list) {
         Message msg = new Message();
         msg.what = 3;
         msg.obj = list;
@@ -133,8 +141,13 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
     }
 
     @Override
-    public void showDetail(VideoBean bean) {
+    public void showLatest(List<NewsBean> list) {
+        
+    }
 
+    @Override
+    public void showBefore(List<NewsBean> list) {
+        
     }
 
     @Override
@@ -159,3 +172,4 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
         handler.sendMessage(msg);
     }
 }
+

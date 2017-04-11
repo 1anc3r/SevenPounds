@@ -8,6 +8,10 @@ import java.util.List;
 
 public interface IPhotoPresenter {
 
+    void downloadSuccess(String log);
+
+    void downloadFailure(String log);
+
     void loadLatestSuccess(List<PhotoBean> list);
 
     void loadLatestFailure(String log);
@@ -15,4 +19,8 @@ public interface IPhotoPresenter {
     void loadThemeSuccess(List<PhotoBean> list);
 
     void loadThemeFailure(String log);
+
+    void loadWelfareSuccess(List<PhotoBean> list);
+
+    void loadWelfareFailure(String log);
 }

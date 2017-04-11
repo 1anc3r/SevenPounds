@@ -141,7 +141,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
     }
 
     @Override
-    public void showTopNews(List<NewsBean> list) {
+    public void showHotest(List<NewsBean> list) {
 
     }
 

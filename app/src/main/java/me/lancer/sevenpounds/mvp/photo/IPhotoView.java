@@ -13,4 +13,6 @@ public interface IPhotoView extends IBaseView {
     void showLatest(List<PhotoBean> list);
 
     void showTheme(List<PhotoBean> list);
+
+    void showWelfare(List<PhotoBean> list);
 }

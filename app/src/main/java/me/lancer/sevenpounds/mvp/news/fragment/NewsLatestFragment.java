@@ -1,4 +1,4 @@
-package me.lancer.sevenpounds.mvp.photo.fragment;
+package me.lancer.sevenpounds.mvp.news.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,39 +12,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.base.activity.PresenterFragment;
-import me.lancer.sevenpounds.mvp.photo.IPhotoView;
-import me.lancer.sevenpounds.mvp.photo.PhotoBean;
-import me.lancer.sevenpounds.mvp.photo.PhotoPresenter;
-import me.lancer.sevenpounds.mvp.photo.adapter.PhotoAdapter;
+import me.lancer.sevenpounds.mvp.news.INewsView;
+import me.lancer.sevenpounds.mvp.news.NewsBean;
+import me.lancer.sevenpounds.mvp.news.NewsPresenter;
+import me.lancer.sevenpounds.mvp.news.adapter.NewsAdapter;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implements IPhotoView {
+public class NewsLatestFragment extends PresenterFragment<NewsPresenter> implements INewsView {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
 
-    private PhotoAdapter mAdapter;
+    private NewsAdapter mAdapter;
 
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    private List<PhotoBean> mList = new ArrayList<>();
+    private List<NewsBean> mDayList = new ArrayList<>();
 
     private int last = 0, flag = 0, load = 0;
-    private final String[] typeen = {"art", "beach", "car", "ocean", "sunset", "business", "flowers",
-            "music", "sport", "technology", "animal", "black-and-white", "mountains", "road", "universe",
-            "abstract", "fashion", "landscape", "night", "people", "coffee", "photography", "sky",
-            "vintage", "waterfall", "city", "food", "love", "summer", "travel", "desert"};
-    private final String[] typezn = {"— 艺术 —", "— 沙滩 —", "— 跑车 —", "— 海洋 —", "— 夕阳 —", "— 商务 —", "— 花草 —",
-            "— 音乐 —", "— 运动 —", "— 科技 —", "— 动物 —", "— 黑白 —", "— 山脉 —", "— 道路 —", "— 宇宙 —",
-            "— 抽象 —", "— 时尚 —", "— 景观 —", "— 夜景 —", "— 人像 —", "— 咖啡 —", "— 摄影 —", "— 天空 —",
-            "— 复古 —", "— 瀑布 —", "— 城市 —", "— 美食 —", "— 爱情 —", "— 盛夏 —", "— 旅途 —", "— 沙漠 —"};
+    private String date;
 
     private Handler handler = new Handler() {
         @Override
@@ -61,45 +56,51 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mList.clear();
-                        mList.add(new PhotoBean(1, typezn[flag]));
-                        mList.addAll((List<PhotoBean>) msg.obj);
-                        mAdapter = new PhotoAdapter(getActivity(), mList);
+                        mDayList.clear();
+                        mDayList.add(new NewsBean(1, "— 最新 —"));
+                        mDayList.addAll((List<NewsBean>) msg.obj);
+                        mAdapter = new NewsAdapter(getActivity(), mDayList);
                         mRecyclerView.setAdapter(mAdapter);
-//                        for (int i = 0; i < ((List<PhotoBean>) msg.obj).size()+1; i++) {
-//                            mAdapter.notifyItemInserted(i);
-//                        }
                     }
-                    load = 0;
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
                 case 4:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                case 11:
-                case 12:
-                case 13:
-                    int len = mList.size();
-                    mList.add(new PhotoBean(1, typezn[flag]));
-                    mList.addAll((List<PhotoBean>) msg.obj);
-                    for (int i = 0; i < ((List<PhotoBean>) msg.obj).size() + 1; i++) {
-                        mAdapter.notifyItemInserted(len + i);
+                    if (msg.obj != null && load == 1) {
+                        int size = mDayList.size();
+                        date = date.substring(0, 4) + "年" + date.substring(4, 6) + "月" + date.substring(6, 8) + "日";
+                        mDayList.add(new NewsBean(1, "— " + date + " —"));
+                        mDayList.addAll((List<NewsBean>) msg.obj);
+                        for (int i = 0; i < ((List<NewsBean>) msg.obj).size() + 1; i++) {
+                            mAdapter.notifyItemInserted(size + 1 + i);
+                        }
+                        load = 0;
                     }
-                    load = 0;
                     mSwipeRefreshLayout.setRefreshing(false);
+                    break;
+                case 5:
                     break;
             }
         }
     };
 
-    private Runnable loadTheme = new Runnable() {
+    private Runnable loadLatest = new Runnable() {
         @Override
         public void run() {
-            presenter.loadTheme(typeen[flag]);
+            presenter.loadLatest();
+        }
+    };
+
+    private Runnable loadBefore = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadBefore(date);
+        }
+    };
+
+    private Runnable loadHotest = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadHotest();
         }
     };
 
@@ -118,7 +119,7 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
     }
 
     private void initData() {
-        new Thread(loadTheme).start();
+        new Thread(loadLatest).start();
     }
 
     private void initView(View view) {
@@ -132,7 +133,7 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
                 msg.what = 0;
                 handler.sendMessageDelayed(msg, 800);
 //                flag = 0;
-//                new Thread(loadTheme).start();
+//                new Thread(loadLatest).start();
             }
         });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
@@ -140,21 +141,20 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new PhotoAdapter(getActivity(), mList);
+        mAdapter = new NewsAdapter(getActivity(), mDayList);
         mAdapter.setHasStableIds(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int Phototate) {
-                super.onScrollStateChanged(recyclerView, Phototate);
-                if (Phototate == RecyclerView.SCROLL_STATE_IDLE
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && last + 1 == mAdapter.getItemCount()) {
-                    if (flag < 30 && load == 0) {
-                        load = 1;
-                        flag += 1;
-                        new Thread(loadTheme).start();
-                    }
+                    load = 1;
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+                    date = formatter.format(new Date(System.currentTimeMillis() - 24 * 3600 * 1000 * (flag++)));
+                    new Thread(loadBefore).start();
                 }
             }
 
@@ -176,26 +176,43 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
     }
 
     @Override
-    protected PhotoPresenter onCreatePresenter() {
-        return new PhotoPresenter(this);
+    protected NewsPresenter onCreatePresenter() {
+        return new NewsPresenter(this);
+    }
+
+
+    @Override
+    public void showTheme(List<NewsBean> list) {
+
     }
 
     @Override
-    public void showLatest(List<PhotoBean> list) {
+    public void showDetail(NewsBean bean) {
 
     }
 
     @Override
-    public void showTheme(List<PhotoBean> list) {
+    public void showHotest(List<NewsBean> list) {
         Message msg = new Message();
-        msg.what = flag + 3;
+        msg.what = 5;
         msg.obj = list;
         handler.sendMessage(msg);
     }
 
     @Override
-    public void showWelfare(List<PhotoBean> list) {
+    public void showLatest(List<NewsBean> list) {
+        Message msg = new Message();
+        msg.what = 3;
+        msg.obj = list;
+        handler.sendMessage(msg);
+    }
 
+    @Override
+    public void showBefore(List<NewsBean> list) {
+        Message msg = new Message();
+        msg.what = 4;
+        msg.obj = list;
+        handler.sendMessage(msg);
     }
 
     @Override
@@ -220,3 +237,4 @@ public class PhotoThemeFragment extends PresenterFragment<PhotoPresenter> implem
         handler.sendMessage(msg);
     }
 }
+

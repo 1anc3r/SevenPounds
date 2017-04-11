@@ -28,23 +28,23 @@ public class NewsPresenter implements IBasePresenter<INewsView>, INewsPresenter 
         this.view = null;
     }
 
-    public void loadTopNews() {
+    public void loadHotest() {
         if (view != null) {
             view.showLoad();
-            model.loadTopNews();
+            model.loadHotest();
         }
     }
 
     @Override
-    public void loadTopNewsSuccess(List<NewsBean> list) {
+    public void loadHotestSuccess(List<NewsBean> list) {
         if (view != null) {
-            view.showTopNews(list);
+            view.showHotest(list);
             view.hideLoad();
         }
     }
 
     @Override
-    public void loadTopNewsFailure(String log) {
+    public void loadHotestFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();

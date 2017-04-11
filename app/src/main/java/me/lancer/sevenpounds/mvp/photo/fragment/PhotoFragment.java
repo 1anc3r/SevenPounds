@@ -56,12 +56,19 @@ public class PhotoFragment extends BaseFragment {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
-        Fragment newfragment = new PhotoTopFragment();
+        Fragment newfragment = new PhotoWelfareFragment();
         Bundle data = new Bundle();
         data.putInt("id", 0);
-        data.putString("title", "每日");
+        data.putString("title", "佳人");
         newfragment.setArguments(data);
-        adapter.addFrag(newfragment, "每日");
+        adapter.addFrag(newfragment, "佳人");
+
+        newfragment = new PhotoTopFragment();
+        data = new Bundle();
+        data.putInt("id", 0);
+        data.putString("title", "美景");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "美景");
 
         newfragment = new PhotoThemeFragment();
         data = new Bundle();

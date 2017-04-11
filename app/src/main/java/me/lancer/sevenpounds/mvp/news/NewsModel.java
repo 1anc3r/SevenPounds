@@ -5,6 +5,9 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,21 +26,22 @@ public class NewsModel {
     String newsUrl = "http://news-at.zhihu.com/api/4/news/";
     String beforeUrl = "http://news-at.zhihu.com/api/4/news/before/";
     String latestUrl = "http://news-at.zhihu.com/api/4/news/latest";
+    String hotestUrl = "http://news-at.zhihu.com/api/3/news/hot";
     String themeUrl = "http://news-at.zhihu.com/api/4/theme/";
 
     public NewsModel(INewsPresenter presenter) {
         this.presenter = presenter;
     }
 
-    public void loadTopNews() {
-        String content = contentGetterSetter.getContentFromHtml(latestUrl);
+    public void loadHotest() {
+        String content = contentGetterSetter.getContentFromHtml(hotestUrl);
         List<NewsBean> list;
         if (!content.contains("获取失败!")) {
-            list = getTopNewsFromContent(content);
-            presenter.loadTopNewsSuccess(list);
+            list = getHotestNewsFromContent(content);
+            presenter.loadHotestSuccess(list);
         } else {
-            presenter.loadTopNewsFailure(content);
-            Log.e("loadTop", content);
+            presenter.loadHotestFailure(content);
+            Log.e("loadHotest", content);
         }
     }
 
@@ -54,7 +58,7 @@ public class NewsModel {
     }
 
     public void loadBefore(String date) {
-        String content = contentGetterSetter.getContentFromHtml(beforeUrl+date);
+        String content = contentGetterSetter.getContentFromHtml(beforeUrl + date);
         List<NewsBean> list;
         if (!content.contains("获取失败!")) {
             list = getLatestNewsFromContent(content);
@@ -89,23 +93,19 @@ public class NewsModel {
         }
     }
 
-    public List<NewsBean> getTopNewsFromContent(String content) {
+    public List<NewsBean> getHotestNewsFromContent(String content) {
         try {
             List<NewsBean> list = new ArrayList<>();
             JSONObject jbNews = new JSONObject(content);
-            JSONArray jaNews = jbNews.getJSONArray("top_stories");
+            JSONArray jaNews = jbNews.getJSONArray("recent");
             for (int i = 0; i < jaNews.length(); i++) {
                 NewsBean nbItem = new NewsBean();
                 JSONObject jbItem = jaNews.getJSONObject(i);
-                nbItem.setId(jbItem.getInt("id"));
-                if (i == 0) {
-                    nbItem.setType(-1);
-                } else {
-                    nbItem.setType(0);
-                }
+                nbItem.setId(jbItem.getInt("news_id"));
+                nbItem.setType(0);
                 nbItem.setTitle(jbItem.getString("title"));
-                nbItem.setImg(jbItem.getString("image"));
-                nbItem.setLink(newsUrl + nbItem.getId());
+                nbItem.setImg(jbItem.getString("thumbnail"));
+                nbItem.setLink(jbItem.getString("url"));
                 list.add(nbItem);
             }
             return list;
@@ -178,7 +178,9 @@ public class NewsModel {
             NewsBean bean = new NewsBean();
             JSONObject jbNews = new JSONObject(content);
             bean.setId(jbNews.getInt("id"));
-            bean.setType(jbNews.getInt("type"));
+            if (jbNews.has("type")) {
+                bean.setType(jbNews.getInt("type"));
+            }
             bean.setTitle(jbNews.getString("title"));
             bean.setContent(jbNews.getString("body").replace("\\n", ""));
             return bean;

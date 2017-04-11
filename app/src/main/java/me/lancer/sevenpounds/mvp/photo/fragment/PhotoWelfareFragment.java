@@ -1,4 +1,4 @@
-package me.lancer.sevenpounds.mvp.news.fragment;
+package me.lancer.sevenpounds.mvp.photo.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,34 +12,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.base.activity.PresenterFragment;
-import me.lancer.sevenpounds.mvp.news.INewsView;
-import me.lancer.sevenpounds.mvp.news.NewsBean;
-import me.lancer.sevenpounds.mvp.news.NewsPresenter;
-import me.lancer.sevenpounds.mvp.news.adapter.NewsAdapter;
+import me.lancer.sevenpounds.mvp.photo.IPhotoView;
+import me.lancer.sevenpounds.mvp.photo.PhotoBean;
+import me.lancer.sevenpounds.mvp.photo.PhotoPresenter;
+import me.lancer.sevenpounds.mvp.photo.adapter.PhotoAdapter;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements INewsView {
+public class PhotoWelfareFragment extends PresenterFragment<PhotoPresenter> implements IPhotoView {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
 
-    private NewsAdapter mAdapter;
+    private PhotoAdapter mAdapter;
 
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    private List<NewsBean> mDayList = new ArrayList<>();
+    private List<PhotoBean> mList = new ArrayList<>();
 
-    private int last = 0, flag = 0, load = 0;
-    private String date;
+    private int pager = 1, last = 0;
 
     private Handler handler = new Handler() {
         @Override
@@ -56,51 +53,27 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        mDayList.clear();
-                        mDayList.add(new NewsBean(1, "— 最新 —"));
-                        mDayList.addAll((List<NewsBean>) msg.obj);
-                        mAdapter = new NewsAdapter(getActivity(), mDayList);
-                        mRecyclerView.setAdapter(mAdapter);
-                    }
-                    mSwipeRefreshLayout.setRefreshing(false);
-                    break;
-                case 4:
-                    if (msg.obj != null && load == 1) {
-                        int size = mDayList.size();
-                        date = date.substring(0, 4) + "年" + date.substring(4, 6) + "月" + date.substring(6, 8) + "日";
-                        mDayList.add(new NewsBean(1, "— " + date + " —"));
-                        mDayList.addAll((List<NewsBean>) msg.obj);
-                        for (int i = 0; i < ((List<NewsBean>) msg.obj).size() + 1; i++) {
-                            mAdapter.notifyItemInserted(size + 1 + i);
+                        if (pager == 1) {
+                            mList = (List<PhotoBean>) msg.obj;
+                            mAdapter = new PhotoAdapter(getActivity(), mList);
+                            mRecyclerView.setAdapter(mAdapter);
+                        } else {
+                            mList.addAll((List<PhotoBean>) msg.obj);
+                            for (int i = 0; i < 10; i++) {
+                                mAdapter.notifyItemInserted((pager-1)*10 + i);
+                            }
                         }
-                        load = 0;
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
-                    break;
-                case 5:
                     break;
             }
         }
     };
 
-    private Runnable loadLatest = new Runnable() {
+    private Runnable loadWelfare = new Runnable() {
         @Override
         public void run() {
-            presenter.loadLatest();
-        }
-    };
-
-    private Runnable loadBefore = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadBefore(date);
-        }
-    };
-
-    private Runnable loadTop = new Runnable() {
-        @Override
-        public void run() {
-            presenter.loadTopNews();
+            presenter.loadWelfare(pager);
         }
     };
 
@@ -119,7 +92,7 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
     }
 
     private void initData() {
-        new Thread(loadLatest).start();
+        new Thread(loadWelfare).start();
     }
 
     private void initView(View view) {
@@ -132,8 +105,8 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
                 Message msg = new Message();
                 msg.what = 0;
                 handler.sendMessageDelayed(msg, 800);
-//                flag = 0;
-//                new Thread(loadLatest).start();
+//                pager = 1;
+//                new Thread(loadPhotos).start();
             }
         });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
@@ -141,8 +114,7 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new NewsAdapter(getActivity(), mDayList);
-        mAdapter.setHasStableIds(true);
+        mAdapter = new PhotoAdapter(getActivity(), mList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -151,10 +123,8 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && last + 1 == mAdapter.getItemCount()) {
-                    load = 1;
-                    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-                    date = formatter.format(new Date(System.currentTimeMillis() - 24 * 3600 * 1000 * (flag++)));
-                    new Thread(loadBefore).start();
+                    pager += 1;
+                    new Thread(loadWelfare).start();
                 }
             }
 
@@ -176,41 +146,24 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
     }
 
     @Override
-    protected NewsPresenter onCreatePresenter() {
-        return new NewsPresenter(this);
-    }
-
-
-    @Override
-    public void showTheme(List<NewsBean> list) {
-
+    protected PhotoPresenter onCreatePresenter() {
+        return new PhotoPresenter(this);
     }
 
     @Override
-    public void showDetail(NewsBean bean) {
+    public void showLatest(List<PhotoBean> list) {
 
     }
 
     @Override
-    public void showTopNews(List<NewsBean> list) {
-        Message msg = new Message();
-        msg.what = 5;
-        msg.obj = list;
-        handler.sendMessage(msg);
+    public void showTheme(List<PhotoBean> list) {
+
     }
 
     @Override
-    public void showLatest(List<NewsBean> list) {
+    public void showWelfare(List<PhotoBean> list) {
         Message msg = new Message();
         msg.what = 3;
-        msg.obj = list;
-        handler.sendMessage(msg);
-    }
-
-    @Override
-    public void showBefore(List<NewsBean> list) {
-        Message msg = new Message();
-        msg.what = 4;
         msg.obj = list;
         handler.sendMessage(msg);
     }
@@ -237,4 +190,3 @@ public class NewsTopFragment extends PresenterFragment<NewsPresenter> implements
         handler.sendMessage(msg);
     }
 }
-

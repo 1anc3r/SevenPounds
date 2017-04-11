@@ -186,7 +186,7 @@ public class NewsThemeFragment extends PresenterFragment<NewsPresenter> implemen
     }
 
     @Override
-    public void showTopNews(List<NewsBean> list) {
+    public void showHotest(List<NewsBean> list) {
 
     }
 

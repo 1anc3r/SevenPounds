@@ -28,6 +28,29 @@ public class PhotoPresenter implements IBasePresenter<IPhotoView>, IPhotoPresent
         this.view = null;
     }
 
+    public void download(String url, String title) {
+        if (view != null) {
+            view.showLoad();
+            model.download(url, title);
+        }
+    }
+
+    @Override
+    public void downloadSuccess(String log) {
+        if (view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void downloadFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
     public void loadLatest(int pager) {
         if (view != null) {
             view.showLoad();
@@ -68,6 +91,29 @@ public class PhotoPresenter implements IBasePresenter<IPhotoView>, IPhotoPresent
 
     @Override
     public void loadThemeFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
+    public void loadWelfare(int pager) {
+        if (view != null) {
+            view.showLoad();
+            model.loadWelfare(pager);
+        }
+    }
+
+    @Override
+    public void loadWelfareSuccess(List<PhotoBean> list) {
+        if (view != null) {
+            view.showWelfare(list);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadWelfareFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();
