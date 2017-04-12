@@ -32,11 +32,11 @@ public class VideoModel {
         this.presenter = presenter;
     }
 
-    public void loadTheme() {
-        String content = contentGetterSetter.getContentFromHtml(ThemeUrl);
+    public void loadTheme(int pager) {
+        String content = contentGetterSetter.getContentFromHtml("Video.loadTheme", ThemeUrl);
         List<VideoBean> list;
         if (!content.contains("失败")) {
-            list = getThemeFromContent(content);
+            list = getThemeFromContent(content, pager);
             presenter.loadThemeSuccess(list);
         } else {
             presenter.loadThemeFailure(content);
@@ -45,7 +45,7 @@ public class VideoModel {
     }
 
     public void loadDetail(String url) {
-        String content = contentGetterSetter.getContentFromHtml(url);
+        String content = contentGetterSetter.getContentFromHtml("Video.loadDetail", url);
         VideoBean bean;
         if (!content.contains("失败")) {
             bean = getDetailFromContent(content);
@@ -56,229 +56,240 @@ public class VideoModel {
         }
     }
 
-    public List<VideoBean> getThemeFromContent(String content) {
+    public List<VideoBean> getThemeFromContent(String content, int pager) {
         try {
             List<VideoBean> list = new ArrayList<>();
             JSONObject jbVideo = new JSONObject(content);
-            list.add(new VideoBean(1, "— 动画 —"));
-            JSONObject jbType = jbVideo.getJSONObject("type1");//动画
-            for (int i = 0; i < 9; i++) {
-                VideoBean bean = new VideoBean();
-                JSONObject jbItem = jbType.getJSONObject("" + i);
-                int aid = jbItem.getInt("aid");
-                bean.setAid(aid);
-                if (i == 0) {
-                    bean.setType(-1);
-                } else {
-                    bean.setType(0);
+            JSONObject jbType;
+            if (pager == 0) {
+                jbType = jbVideo.getJSONObject("type1");//动画
+                for (int i = 0; i < 9; i++) {
+                    VideoBean bean = new VideoBean();
+                    JSONObject jbItem = jbType.getJSONObject("" + i);
+                    int aid = jbItem.getInt("aid");
+                    bean.setAid(aid);
+                    if (i == 0) {
+                        bean.setType(-1);
+                    } else {
+                        bean.setType(0);
+                    }
+                    bean.setTitle(decodeUnicode(jbItem.getString("title")));
+                    bean.setPlay(jbItem.getString("play"));
+                    bean.setReview(jbItem.getString("review"));
+                    bean.setComment(jbItem.getString("video_review"));
+                    bean.setFavorites(jbItem.getString("favorites"));
+                    bean.setAuthor(decodeUnicode(jbItem.getString("author")));
+                    bean.setImg(jbItem.getString("pic"));
+                    bean.setLink(cidUrl + aid);
+                    list.add(bean);
                 }
-                bean.setTitle(decodeUnicode(jbItem.getString("title")));
-                bean.setPlay(jbItem.getString("play"));
-                bean.setReview(jbItem.getString("review"));
-                bean.setComment(jbItem.getString("video_review"));
-                bean.setFavorites(jbItem.getString("favorites"));
-                bean.setAuthor(decodeUnicode(jbItem.getString("author")));
-                bean.setImg(jbItem.getString("pic"));
-                bean.setLink(cidUrl + aid);
-                list.add(bean);
             }
-            list.add(new VideoBean(1, "— 番剧 —"));
-            jbType = jbVideo.getJSONObject("type13");//番剧
-            for (int i = 0; i < 9; i++) {
-                VideoBean bean = new VideoBean();
-                JSONObject jbItem = jbType.getJSONObject("" + i);
-                int aid = jbItem.getInt("aid");
-                bean.setAid(aid);
-                if (i == 0) {
-                    bean.setType(-1);
-                } else {
-                    bean.setType(0);
+            if (pager == 1) {
+                jbType = jbVideo.getJSONObject("type13");//番剧
+                for (int i = 0; i < 9; i++) {
+                    VideoBean bean = new VideoBean();
+                    JSONObject jbItem = jbType.getJSONObject("" + i);
+                    int aid = jbItem.getInt("aid");
+                    bean.setAid(aid);
+                    if (i == 0) {
+                        bean.setType(-1);
+                    } else {
+                        bean.setType(0);
+                    }
+                    bean.setTitle(decodeUnicode(jbItem.getString("title")));
+                    bean.setPlay(jbItem.getString("play"));
+                    bean.setReview(jbItem.getString("review"));
+                    bean.setComment(jbItem.getString("video_review"));
+                    bean.setFavorites(jbItem.getString("favorites"));
+                    bean.setAuthor(decodeUnicode(jbItem.getString("author")));
+                    bean.setImg(jbItem.getString("pic"));
+                    bean.setLink(cidUrl + aid);
+                    list.add(bean);
                 }
-                bean.setTitle(decodeUnicode(jbItem.getString("title")));
-                bean.setPlay(jbItem.getString("play"));
-                bean.setReview(jbItem.getString("review"));
-                bean.setComment(jbItem.getString("video_review"));
-                bean.setFavorites(jbItem.getString("favorites"));
-                bean.setAuthor(decodeUnicode(jbItem.getString("author")));
-                bean.setImg(jbItem.getString("pic"));
-                bean.setLink(cidUrl + aid);
-                list.add(bean);
             }
-            list.add(new VideoBean(1, "— 音乐 —"));
-            jbType = jbVideo.getJSONObject("type3");//音乐
-            for (int i = 0; i < 9; i++) {
-                VideoBean bean = new VideoBean();
-                JSONObject jbItem = jbType.getJSONObject("" + i);
-                int aid = jbItem.getInt("aid");
-                bean.setAid(aid);
-                if (i == 0) {
-                    bean.setType(-1);
-                } else {
-                    bean.setType(0);
+            if (pager == 2) {
+                jbType = jbVideo.getJSONObject("type3");//音乐
+                for (int i = 0; i < 9; i++) {
+                    VideoBean bean = new VideoBean();
+                    JSONObject jbItem = jbType.getJSONObject("" + i);
+                    int aid = jbItem.getInt("aid");
+                    bean.setAid(aid);
+                    if (i == 0) {
+                        bean.setType(-1);
+                    } else {
+                        bean.setType(0);
+                    }
+                    bean.setTitle(decodeUnicode(jbItem.getString("title")));
+                    bean.setPlay(jbItem.getString("play"));
+                    bean.setReview(jbItem.getString("review"));
+                    bean.setComment(jbItem.getString("video_review"));
+                    bean.setFavorites(jbItem.getString("favorites"));
+                    bean.setAuthor(decodeUnicode(jbItem.getString("author")));
+                    bean.setImg(jbItem.getString("pic"));
+                    bean.setLink(cidUrl + aid);
+                    list.add(bean);
                 }
-                bean.setTitle(decodeUnicode(jbItem.getString("title")));
-                bean.setPlay(jbItem.getString("play"));
-                bean.setReview(jbItem.getString("review"));
-                bean.setComment(jbItem.getString("video_review"));
-                bean.setFavorites(jbItem.getString("favorites"));
-                bean.setAuthor(decodeUnicode(jbItem.getString("author")));
-                bean.setImg(jbItem.getString("pic"));
-                bean.setLink(cidUrl + aid);
-                list.add(bean);
             }
-            list.add(new VideoBean(1, "— 舞蹈 —"));
-            jbType = jbVideo.getJSONObject("type129");//舞蹈
-            for (int i = 0; i < 9; i++) {
-                VideoBean bean = new VideoBean();
-                JSONObject jbItem = jbType.getJSONObject("" + i);
-                int aid = jbItem.getInt("aid");
-                bean.setAid(aid);
-                if (i == 0) {
-                    bean.setType(-1);
-                } else {
-                    bean.setType(0);
+            if (pager == 3) {
+                jbType = jbVideo.getJSONObject("type129");//舞蹈
+                for (int i = 0; i < 9; i++) {
+                    VideoBean bean = new VideoBean();
+                    JSONObject jbItem = jbType.getJSONObject("" + i);
+                    int aid = jbItem.getInt("aid");
+                    bean.setAid(aid);
+                    if (i == 0) {
+                        bean.setType(-1);
+                    } else {
+                        bean.setType(0);
+                    }
+                    bean.setTitle(decodeUnicode(jbItem.getString("title")));
+                    bean.setPlay(jbItem.getString("play"));
+                    bean.setReview(jbItem.getString("review"));
+                    bean.setComment(jbItem.getString("video_review"));
+                    bean.setFavorites(jbItem.getString("favorites"));
+                    bean.setAuthor(decodeUnicode(jbItem.getString("author")));
+                    bean.setImg(jbItem.getString("pic"));
+                    bean.setLink(cidUrl + aid);
+                    list.add(bean);
                 }
-                bean.setTitle(decodeUnicode(jbItem.getString("title")));
-                bean.setPlay(jbItem.getString("play"));
-                bean.setReview(jbItem.getString("review"));
-                bean.setComment(jbItem.getString("video_review"));
-                bean.setFavorites(jbItem.getString("favorites"));
-                bean.setAuthor(decodeUnicode(jbItem.getString("author")));
-                bean.setImg(jbItem.getString("pic"));
-                bean.setLink(cidUrl + aid);
-                list.add(bean);
             }
-            list.add(new VideoBean(1, "— 游戏 —"));
-            jbType = jbVideo.getJSONObject("type4");//游戏
-            for (int i = 0; i < 9; i++) {
-                VideoBean bean = new VideoBean();
-                JSONObject jbItem = jbType.getJSONObject("" + i);
-                int aid = jbItem.getInt("aid");
-                bean.setAid(aid);
-                if (i == 0) {
-                    bean.setType(-1);
-                } else {
-                    bean.setType(0);
+            if (pager == 4) {
+                jbType = jbVideo.getJSONObject("type4");//游戏
+                for (int i = 0; i < 9; i++) {
+                    VideoBean bean = new VideoBean();
+                    JSONObject jbItem = jbType.getJSONObject("" + i);
+                    int aid = jbItem.getInt("aid");
+                    bean.setAid(aid);
+                    if (i == 0) {
+                        bean.setType(-1);
+                    } else {
+                        bean.setType(0);
+                    }
+                    bean.setTitle(decodeUnicode(jbItem.getString("title")));
+                    bean.setPlay(jbItem.getString("play"));
+                    bean.setReview(jbItem.getString("review"));
+                    bean.setComment(jbItem.getString("video_review"));
+                    bean.setFavorites(jbItem.getString("favorites"));
+                    bean.setAuthor(decodeUnicode(jbItem.getString("author")));
+                    bean.setImg(jbItem.getString("pic"));
+                    bean.setLink(cidUrl + aid);
+                    list.add(bean);
                 }
-                bean.setTitle(decodeUnicode(jbItem.getString("title")));
-                bean.setPlay(jbItem.getString("play"));
-                bean.setReview(jbItem.getString("review"));
-                bean.setComment(jbItem.getString("video_review"));
-                bean.setFavorites(jbItem.getString("favorites"));
-                bean.setAuthor(decodeUnicode(jbItem.getString("author")));
-                bean.setImg(jbItem.getString("pic"));
-                bean.setLink(cidUrl + aid);
-                list.add(bean);
             }
-            list.add(new VideoBean(1, "— 科技 —"));
-            jbType = jbVideo.getJSONObject("type36");//科技
-            for (int i = 0; i < 9; i++) {
-                VideoBean bean = new VideoBean();
-                JSONObject jbItem = jbType.getJSONObject("" + i);
-                int aid = jbItem.getInt("aid");
-                bean.setAid(aid);
-                if (i == 0) {
-                    bean.setType(-1);
-                } else {
-                    bean.setType(0);
+            if (pager == 5) {
+                jbType = jbVideo.getJSONObject("type36");//科技
+                for (int i = 0; i < 9; i++) {
+                    VideoBean bean = new VideoBean();
+                    JSONObject jbItem = jbType.getJSONObject("" + i);
+                    int aid = jbItem.getInt("aid");
+                    bean.setAid(aid);
+                    if (i == 0) {
+                        bean.setType(-1);
+                    } else {
+                        bean.setType(0);
+                    }
+                    bean.setTitle(decodeUnicode(jbItem.getString("title")));
+                    bean.setPlay(jbItem.getString("play"));
+                    bean.setReview(jbItem.getString("review"));
+                    bean.setComment(jbItem.getString("video_review"));
+                    bean.setFavorites(jbItem.getString("favorites"));
+                    bean.setAuthor(decodeUnicode(jbItem.getString("author")));
+                    bean.setImg(jbItem.getString("pic"));
+                    bean.setLink(cidUrl + aid);
+                    list.add(bean);
                 }
-                bean.setTitle(decodeUnicode(jbItem.getString("title")));
-                bean.setPlay(jbItem.getString("play"));
-                bean.setReview(jbItem.getString("review"));
-                bean.setComment(jbItem.getString("video_review"));
-                bean.setFavorites(jbItem.getString("favorites"));
-                bean.setAuthor(decodeUnicode(jbItem.getString("author")));
-                bean.setImg(jbItem.getString("pic"));
-                bean.setLink(cidUrl + aid);
-                list.add(bean);
             }
-            list.add(new VideoBean(1, "— 鬼畜 —"));
-            jbType = jbVideo.getJSONObject("type119");//鬼畜
-            for (int i = 0; i < 9; i++) {
-                VideoBean bean = new VideoBean();
-                JSONObject jbItem = jbType.getJSONObject("" + i);
-                int aid = jbItem.getInt("aid");
-                bean.setAid(aid);
-                if (i == 0) {
-                    bean.setType(-1);
-                } else {
-                    bean.setType(0);
+            if (pager == 6) {
+                jbType = jbVideo.getJSONObject("type119");//鬼畜
+                for (int i = 0; i < 9; i++) {
+                    VideoBean bean = new VideoBean();
+                    JSONObject jbItem = jbType.getJSONObject("" + i);
+                    int aid = jbItem.getInt("aid");
+                    bean.setAid(aid);
+                    if (i == 0) {
+                        bean.setType(-1);
+                    } else {
+                        bean.setType(0);
+                    }
+                    bean.setTitle(decodeUnicode(jbItem.getString("title")));
+                    bean.setPlay(jbItem.getString("play"));
+                    bean.setReview(jbItem.getString("review"));
+                    bean.setComment(jbItem.getString("video_review"));
+                    bean.setFavorites(jbItem.getString("favorites"));
+                    bean.setAuthor(decodeUnicode(jbItem.getString("author")));
+                    bean.setImg(jbItem.getString("pic"));
+                    bean.setLink(cidUrl + aid);
+                    list.add(bean);
                 }
-                bean.setTitle(decodeUnicode(jbItem.getString("title")));
-                bean.setPlay(jbItem.getString("play"));
-                bean.setReview(jbItem.getString("review"));
-                bean.setComment(jbItem.getString("video_review"));
-                bean.setFavorites(jbItem.getString("favorites"));
-                bean.setAuthor(decodeUnicode(jbItem.getString("author")));
-                bean.setImg(jbItem.getString("pic"));
-                bean.setLink(cidUrl + aid);
-                list.add(bean);
             }
-            list.add(new VideoBean(1, "— 娱乐 —"));
-            jbType = jbVideo.getJSONObject("type5");//娱乐
-            for (int i = 0; i < 9; i++) {
-                VideoBean bean = new VideoBean();
-                JSONObject jbItem = jbType.getJSONObject("" + i);
-                int aid = jbItem.getInt("aid");
-                bean.setAid(aid);
-                if (i == 0) {
-                    bean.setType(-1);
-                } else {
-                    bean.setType(0);
+            if (pager == 7) {
+                jbType = jbVideo.getJSONObject("type5");//娱乐
+                for (int i = 0; i < 9; i++) {
+                    VideoBean bean = new VideoBean();
+                    JSONObject jbItem = jbType.getJSONObject("" + i);
+                    int aid = jbItem.getInt("aid");
+                    bean.setAid(aid);
+                    if (i == 0) {
+                        bean.setType(-1);
+                    } else {
+                        bean.setType(0);
+                    }
+                    bean.setTitle(decodeUnicode(jbItem.getString("title")));
+                    bean.setPlay(jbItem.getString("play"));
+                    bean.setReview(jbItem.getString("review"));
+                    bean.setComment(jbItem.getString("video_review"));
+                    bean.setFavorites(jbItem.getString("favorites"));
+                    bean.setAuthor(decodeUnicode(jbItem.getString("author")));
+                    bean.setImg(jbItem.getString("pic"));
+                    bean.setLink(cidUrl + aid);
+                    list.add(bean);
                 }
-                bean.setTitle(decodeUnicode(jbItem.getString("title")));
-                bean.setPlay(jbItem.getString("play"));
-                bean.setReview(jbItem.getString("review"));
-                bean.setComment(jbItem.getString("video_review"));
-                bean.setFavorites(jbItem.getString("favorites"));
-                bean.setAuthor(decodeUnicode(jbItem.getString("author")));
-                bean.setImg(jbItem.getString("pic"));
-                bean.setLink(cidUrl + aid);
-                list.add(bean);
             }
-            list.add(new VideoBean(1, "— 电影 —"));
-            jbType = jbVideo.getJSONObject("type11");//电影
-            for (int i = 0; i < 9; i++) {
-                VideoBean bean = new VideoBean();
-                JSONObject jbItem = jbType.getJSONObject("" + i);
-                int aid = jbItem.getInt("aid");
-                bean.setAid(aid);
-                if (i == 0) {
-                    bean.setType(-1);
-                } else {
-                    bean.setType(0);
+            if (pager == 8) {
+                jbType = jbVideo.getJSONObject("type11");//电影
+                for (int i = 0; i < 9; i++) {
+                    VideoBean bean = new VideoBean();
+                    JSONObject jbItem = jbType.getJSONObject("" + i);
+                    int aid = jbItem.getInt("aid");
+                    bean.setAid(aid);
+                    if (i == 0) {
+                        bean.setType(-1);
+                    } else {
+                        bean.setType(0);
+                    }
+                    bean.setTitle(decodeUnicode(jbItem.getString("title")));
+                    bean.setPlay(jbItem.getString("play"));
+                    bean.setReview(jbItem.getString("review"));
+                    bean.setComment(jbItem.getString("video_review"));
+                    bean.setFavorites(jbItem.getString("favorites"));
+                    bean.setAuthor(decodeUnicode(jbItem.getString("author")));
+                    bean.setImg(jbItem.getString("pic"));
+                    bean.setLink(cidUrl + aid);
+                    list.add(bean);
                 }
-                bean.setTitle(decodeUnicode(jbItem.getString("title")));
-                bean.setPlay(jbItem.getString("play"));
-                bean.setReview(jbItem.getString("review"));
-                bean.setComment(jbItem.getString("video_review"));
-                bean.setFavorites(jbItem.getString("favorites"));
-                bean.setAuthor(decodeUnicode(jbItem.getString("author")));
-                bean.setImg(jbItem.getString("pic"));
-                bean.setLink(cidUrl + aid);
-                list.add(bean);
             }
-            list.add(new VideoBean(1, "— 电视剧 —"));
-            jbType = jbVideo.getJSONObject("type23");//电视剧
-            for (int i = 0; i < 9; i++) {
-                VideoBean bean = new VideoBean();
-                JSONObject jbItem = jbType.getJSONObject("" + i);
-                int aid = jbItem.getInt("aid");
-                bean.setAid(aid);
-                if (i == 0) {
-                    bean.setType(-1);
-                } else {
-                    bean.setType(0);
+            if (pager == 9) {
+                jbType = jbVideo.getJSONObject("type23");//电视剧
+                for (int i = 0; i < 9; i++) {
+                    VideoBean bean = new VideoBean();
+                    JSONObject jbItem = jbType.getJSONObject("" + i);
+                    int aid = jbItem.getInt("aid");
+                    bean.setAid(aid);
+                    if (i == 0) {
+                        bean.setType(-1);
+                    } else {
+                        bean.setType(0);
+                    }
+                    bean.setTitle(decodeUnicode(jbItem.getString("title")));
+                    bean.setPlay(jbItem.getString("play"));
+                    bean.setReview(jbItem.getString("review"));
+                    bean.setComment(jbItem.getString("video_review"));
+                    bean.setFavorites(jbItem.getString("favorites"));
+                    bean.setAuthor(decodeUnicode(jbItem.getString("author")));
+                    bean.setImg(jbItem.getString("pic"));
+                    bean.setLink(cidUrl + aid);
+                    list.add(bean);
                 }
-                bean.setTitle(decodeUnicode(jbItem.getString("title")));
-                bean.setPlay(jbItem.getString("play"));
-                bean.setReview(jbItem.getString("review"));
-                bean.setComment(jbItem.getString("video_review"));
-                bean.setFavorites(jbItem.getString("favorites"));
-                bean.setAuthor(decodeUnicode(jbItem.getString("author")));
-                bean.setImg(jbItem.getString("pic"));
-                bean.setLink(cidUrl + aid);
-                list.add(bean);
             }
             return list;
         } catch (JSONException e) {
