@@ -21,7 +21,7 @@ public class ContentGetterSetter {
     public ContentGetterSetter() {
     }
 
-    public String getContentFromHtml(String url) {
+    public String getContentFromHtml(String log,String url) {
         StringBuilder content = new StringBuilder();
         OkHttpClient client = new OkHttpClient();
         client.setFollowRedirects(false);
@@ -35,14 +35,14 @@ public class ContentGetterSetter {
                     content.append(line);
                 }
                 reader.close();
-                Log.e("getContentFromHtml", "获取成功!");
+                Log.e(log, "获取成功!");
                 return content.toString();
             } else {
-                Log.e("getContentFromHtml", "获取失败!状态码:" + response.code());
+                Log.e(log, "获取失败!状态码:" + response.code());
                 return "获取失败!状态码:" + response.code();
             }
         } catch (IOException e) {
-            Log.e("getContentFromHtml", "获取失败!捕获异常:" + e.toString());
+            Log.e(log, "获取失败!捕获异常:" + e.toString());
             return "获取失败!捕获异常:" + e.toString();
         }
     }

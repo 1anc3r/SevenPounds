@@ -29,7 +29,7 @@ public class MovieModel {
     }
 
     public void loadReviewer(int pager) {//评论
-        String content = contentGetterSetter.getContentFromHtml(reviewerUrl+pager);
+        String content = contentGetterSetter.getContentFromHtml("Movie.loadReviewer", reviewerUrl+pager);
         List<MovieBean> list;
         if (!content.contains("失败")) {
             list = getReviewerFromContent(content);
@@ -41,7 +41,7 @@ public class MovieModel {
     }
 
     public void loadTopMovie(int pager) {//电影top250
-        String content = contentGetterSetter.getContentFromHtml(topMovieUrl+pager);
+        String content = contentGetterSetter.getContentFromHtml("Movie.loadTopMovie", topMovieUrl+pager);
         List<MovieBean> list;
         if (!content.contains("失败")) {
             list = getTopMovieFromContent(content);
@@ -53,7 +53,7 @@ public class MovieModel {
     }
 
     public void loadReviewerDetail(String url) {
-        String content = contentGetterSetter.getContentFromHtml(url);
+        String content = contentGetterSetter.getContentFromHtml("Movie.loadReviewerDetail", url);
         MovieBean bean;
         if (!content.contains("获取失败!")) {
             bean = getReviewerDetailFromContent(content);
@@ -65,8 +65,8 @@ public class MovieModel {
     }
 
     public void loadTopDetail(String url) {
-        String content = contentGetterSetter.getContentFromHtml(url);
-        String photos = contentGetterSetter.getContentFromHtml(url+"/all_photos");
+        String content = contentGetterSetter.getContentFromHtml("Movie.loadTopDetail", url);
+        String photos = contentGetterSetter.getContentFromHtml("Movie.loadTopDetail", url+"/all_photos");
         MovieBean bean;
         if (!content.contains("获取失败!")) {
             bean = getTopDetailFromContent(content, photos);

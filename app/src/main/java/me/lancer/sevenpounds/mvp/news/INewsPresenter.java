@@ -20,9 +20,13 @@ public interface INewsPresenter {
 
     void loadBeforeFailure(String log);
 
-    void loadThemeSuccess(List<NewsBean> list);
+    void loadListSuccess(List<NewsBean> list);
 
-    void loadThemeFailure(String log);
+    void loadListFailure(String log);
+
+    void loadItemSuccess(List<NewsBean> list);
+
+    void loadItemFailure(String log);
 
     void loadDetailSuccess(NewsBean bean);
 

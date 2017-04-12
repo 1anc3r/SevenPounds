@@ -182,7 +182,7 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
 
 
     @Override
-    public void showTheme(List<NewsBean> list) {
+    public void showItem(List<NewsBean> list) {
 
     }
 
@@ -213,6 +213,11 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
         msg.what = 4;
         msg.obj = list;
         handler.sendMessage(msg);
+    }
+
+    @Override
+    public void showList(List<NewsBean> list) {
+
     }
 
     @Override

@@ -50,7 +50,7 @@ public class VideoFragment extends BaseFragment {
         setupViewPager(viewPager);
         viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -59,9 +59,72 @@ public class VideoFragment extends BaseFragment {
         Fragment newfragment = new VideoThemeFragment();
         Bundle data = new Bundle();
         data.putInt("id", 0);
-        data.putString("title", "分类");
+        data.putString("title", "动画");
         newfragment.setArguments(data);
-        adapter.addFrag(newfragment, "分类");
+        adapter.addFrag(newfragment, "动画");
+
+        newfragment = new VideoThemeFragment();
+        data = new Bundle();
+        data.putInt("id", 1);
+        data.putString("title", "番剧");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "番剧");
+
+        newfragment = new VideoThemeFragment();
+        data = new Bundle();
+        data.putInt("id", 2);
+        data.putString("title", "音乐");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "音乐");
+
+        newfragment = new VideoThemeFragment();
+        data = new Bundle();
+        data.putInt("id", 3);
+        data.putString("title", "舞蹈");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "舞蹈");
+
+        newfragment = new VideoThemeFragment();
+        data = new Bundle();
+        data.putInt("id", 4);
+        data.putString("title", "游戏");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "游戏");
+
+        newfragment = new VideoThemeFragment();
+        data = new Bundle();
+        data.putInt("id", 5);
+        data.putString("title", "科技");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "科技");
+
+        newfragment = new VideoThemeFragment();
+        data = new Bundle();
+        data.putInt("id", 6);
+        data.putString("title", "鬼畜");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "鬼畜");
+
+        newfragment = new VideoThemeFragment();
+        data = new Bundle();
+        data.putInt("id", 7);
+        data.putString("title", "娱乐");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "娱乐");
+
+        newfragment = new VideoThemeFragment();
+        data = new Bundle();
+        data.putInt("id", 8);
+        data.putString("title", "电影");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "电影");
+
+        newfragment = new VideoThemeFragment();
+        data = new Bundle();
+        data.putInt("id", 9);
+        data.putString("title", "电视剧");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "电视剧");
 
         viewPager.setAdapter(adapter);
         if (getArguments() != null) {

@@ -29,7 +29,7 @@ public class MusicModel {
     }
 
     public void loadReviewer(int pager) {//评论
-        String content = contentGetterSetter.getContentFromHtml(reviewerUrl+pager);
+        String content = contentGetterSetter.getContentFromHtml("Music.loadReviewer", reviewerUrl+pager);
         List<MusicBean> list;
         if (!content.contains("失败")) {
             list = getReviewerFromContent(content);
@@ -41,7 +41,7 @@ public class MusicModel {
     }
 
     public void loadTopMusic(int pager) {//音乐top250
-        String content = contentGetterSetter.getContentFromHtml(topMusicUrl+pager);
+        String content = contentGetterSetter.getContentFromHtml("Music.loadTopMusic", topMusicUrl+pager);
         List<MusicBean> list;
         if (!content.contains("失败")) {
             list = getTopMusicFromContent(content);
@@ -53,7 +53,7 @@ public class MusicModel {
     }
 
     public void loadReviewerDetail(String url) {
-        String content = contentGetterSetter.getContentFromHtml(url);
+        String content = contentGetterSetter.getContentFromHtml("Music.loadReviewerDetail", url);
         MusicBean bean;
         if (!content.contains("获取失败!")) {
             bean = getReviewerDetailFromContent(content);
@@ -65,7 +65,7 @@ public class MusicModel {
     }
 
     public void loadTopDetail(String url) {
-        String content = contentGetterSetter.getContentFromHtml(url);
+        String content = contentGetterSetter.getContentFromHtml("Music.loadTopDetail", url);
         MusicBean bean;
         if (!content.contains("获取失败!")) {
             bean = getTopDetailFromContent(content);

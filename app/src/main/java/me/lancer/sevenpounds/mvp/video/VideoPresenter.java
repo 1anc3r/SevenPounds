@@ -28,10 +28,10 @@ public class VideoPresenter implements IBasePresenter<IVideoView>, IVideoPresent
         this.view = null;
     }
 
-    public void loadTheme() {
+    public void loadTheme(int pager) {
         if (view != null) {
             view.showLoad();
-            model.loadTheme();
+            model.loadTheme(pager);
         }
     }
 

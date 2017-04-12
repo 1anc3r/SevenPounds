@@ -53,16 +53,16 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        if (pager == 0) {
+//                        if (pager == 0) {
                             mList = (List<VideoBean>) msg.obj;
                             mAdapter = new VideoAdapter(getActivity(), mList);
                             mRecyclerView.setAdapter(mAdapter);
-                        } else {
-                            mList.addAll((List<VideoBean>) msg.obj);
-                            for (int i = 0; i < 10; i++) {
-                                mAdapter.notifyItemInserted(pager*10 + i);
-                            }
-                        }
+//                        } else {
+//                            mList.addAll((List<VideoBean>) msg.obj);
+//                            for (int i = 0; i < 10; i++) {
+//                                mAdapter.notifyItemInserted(pager*10 + i);
+//                            }
+//                        }
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
@@ -73,7 +73,7 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
     private Runnable loadTheme = new Runnable() {
         @Override
         public void run() {
-            presenter.loadTheme();
+            presenter.loadTheme(pager);
         }
     };
 
@@ -86,7 +86,8 @@ public class VideoThemeFragment extends PresenterFragment<VideoPresenter> implem
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        Bundle data = this.getArguments();
+        pager = data.getInt("id");
         initView(view);
         initData();
     }

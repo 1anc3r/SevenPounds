@@ -36,7 +36,7 @@ public class GameModel {
     }
 
     public void loadTopGame() {
-        String content = contentGetterSetter.getContentFromHtml(topGameUrl);
+        String content = contentGetterSetter.getContentFromHtml("Game.loadTopGame", topGameUrl);
         List<GameBean> list;
         if (!content.contains("失败")) {
             list = getGameFromContent(content);
@@ -48,7 +48,7 @@ public class GameModel {
     }
 
     public void loadTheme(String keyword) {
-        String content = contentGetterSetter.getContentFromHtml(themeUrl+keyword);
+        String content = contentGetterSetter.getContentFromHtml("Game.loadTheme", themeUrl+keyword);
         List<GameBean> list;
         if (!content.contains("失败")) {
             list = getThemeFromContent(content);
@@ -60,7 +60,7 @@ public class GameModel {
     }
 
     public void loadDetail(String url) {
-        String content = contentGetterSetter.getContentFromHtml(url);
+        String content = contentGetterSetter.getContentFromHtml("Game.loadDetail", url);
         GameBean bean;
         if (!content.contains("失败")) {
             bean = getDetailFromContent(content);

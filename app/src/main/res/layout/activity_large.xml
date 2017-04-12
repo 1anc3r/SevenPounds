@@ -65,6 +65,18 @@
                 android:paddingRight="16dp"
                 android:paddingTop="8dp" />
 
+            <android.support.v7.widget.RecyclerView
+                android:clickable="true"
+                android:id="@+id/rv_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:visibility="gone"
+                android:paddingBottom="4dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:scrollbars="none" />
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

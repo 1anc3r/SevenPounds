@@ -24,8 +24,7 @@
         </activity>
         <activity android:name=".ui.activity.SettingActivity" />
         <activity
-            android:name=".mvp.news.activity.NewsDetailActivity"
-            android:launchMode="singleTask" />
+            android:name=".mvp.news.activity.NewsDetailActivity" />
         <activity
             android:name=".mvp.photo.activity.PhotoDetailActivity"
             android:launchMode="singleTask" />

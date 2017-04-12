@@ -123,7 +123,7 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
 
 
     @Override
-    public void showTheme(List<NewsBean> list) {
+    public void showItem(List<NewsBean> list) {
 
     }
 
@@ -148,6 +148,11 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
     @Override
     public void showBefore(List<NewsBean> list) {
         
+    }
+
+    @Override
+    public void showList(List<NewsBean> list) {
+
     }
 
     @Override

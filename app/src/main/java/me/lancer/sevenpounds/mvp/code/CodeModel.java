@@ -35,7 +35,7 @@ public class CodeModel {
     }
 
     public void loadUsers(int pager) {//个人
-        String content = contentGetterSetter.getContentFromHtml(usersUrl + pager);
+        String content = contentGetterSetter.getContentFromHtml("Code.loadUsers", usersUrl + pager);
         List<CodeBean> list;
         if (!content.contains("失败")) {
             list = getListFromContent(content);
@@ -47,7 +47,7 @@ public class CodeModel {
     }
 
     public void loadOrganizations(int pager) {//组织
-        String content = contentGetterSetter.getContentFromHtml(organizationsUrl + pager);
+        String content = contentGetterSetter.getContentFromHtml("Code.loadOrganizations", organizationsUrl + pager);
         List<CodeBean> list;
         if (!content.contains("失败")) {
             list = getListFromContent(content);
@@ -59,7 +59,7 @@ public class CodeModel {
     }
 
     public void loadRepositories(int pager) {//项目
-        String content = contentGetterSetter.getContentFromHtml(repositoriesUrl + pager);
+        String content = contentGetterSetter.getContentFromHtml("Code.loadRepositories", repositoriesUrl + pager);
         List<CodeBean> list;
         if (!content.contains("失败")) {
             list = getListFromContent(content);
@@ -71,7 +71,7 @@ public class CodeModel {
     }
 
     public void loadDetail(String url) {
-        String content = contentGetterSetter.getContentFromHtml(url);
+        String content = contentGetterSetter.getContentFromHtml("Code.loadDetail", url);
         CodeBean bean;
         if (!content.contains("获取失败!")) {
             bean = getDetailFromContent(content);

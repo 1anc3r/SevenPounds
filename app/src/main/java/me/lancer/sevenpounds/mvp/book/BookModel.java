@@ -35,7 +35,7 @@ public class BookModel {
     }
 
     public void loadReviewer(int pager) {//评论
-        String content = contentGetterSetter.getContentFromHtml(reviewerUrl + pager);
+        String content = contentGetterSetter.getContentFromHtml("Book.loadReviewer", reviewerUrl + pager);
         List<BookBean> list;
         if (!content.contains("获取失败!")) {
             list = getReviewerFromContent(content);
@@ -47,7 +47,7 @@ public class BookModel {
     }
 
     public void loadTopBook(int pager) {//图书top250
-        String content = contentGetterSetter.getContentFromHtml(topBookUrl + pager);
+        String content = contentGetterSetter.getContentFromHtml("Book.loadTopBook", topBookUrl + pager);
         List<BookBean> list;
         if (!content.contains("获取失败!")) {
             list = getTopBookFromContent(content);
@@ -59,7 +59,7 @@ public class BookModel {
     }
 
     public void loadReviewerDetail(String url) {
-        String content = contentGetterSetter.getContentFromHtml(url);
+        String content = contentGetterSetter.getContentFromHtml("Book.loadReviewerDetail", url);
         BookBean bean;
         if (!content.contains("获取失败!")) {
             bean = getReviewerDetailFromContent(content);
@@ -71,7 +71,7 @@ public class BookModel {
     }
 
     public void loadTopDetail(String url) {
-        String content = contentGetterSetter.getContentFromHtml(url);
+        String content = contentGetterSetter.getContentFromHtml("Book.loadTopDetail", url);
         BookBean bean;
         if (!content.contains("获取失败!")) {
             bean = getTopDetailFromContent(content);

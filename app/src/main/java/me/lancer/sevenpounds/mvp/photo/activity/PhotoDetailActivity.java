@@ -62,6 +62,13 @@ public class PhotoDetailActivity extends PresenterActivity<PhotoPresenter> imple
         }
     };
 
+//    private Runnable loadTheme = new Runnable() {
+//        @Overridez
+//        public void run() {
+//            presenter.loadTheme(typeen[flag]);
+//        }
+//    };z
+
     private Runnable download = new Runnable() {
         @Override
         public void run() {

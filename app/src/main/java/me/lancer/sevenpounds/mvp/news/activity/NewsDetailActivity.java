@@ -7,13 +7,18 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -22,12 +27,14 @@ import com.android.volley.toolbox.Volley;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
+import me.lancer.sevenpounds.mvp.news.adapter.NewsAdapter;
 import me.lancer.sevenpounds.ui.application.mParams;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlTextView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
@@ -39,12 +46,18 @@ import me.lancer.sevenpounds.util.LruImageCache;
 
 public class NewsDetailActivity extends PresenterActivity<NewsPresenter> implements INewsView {
 
+    private RecyclerView mRecyclerView;
+    private NewsAdapter mAdapter;
+    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private List<NewsBean> mList = new ArrayList<>();
+
     private CollapsingToolbarLayout layout;
     private NetworkImageView ivImg;
     private HtmlTextView htvContent;
     private LoadToast loadToast;
 
     private RequestQueue mQueue;
+    private int id;
     private String title, img, link;
 
     private  Handler handler = new Handler() {
@@ -68,6 +81,15 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
                         htvContent.setHtml(nb.getContent(), new HtmlHttpImageGetter(htvContent));
                     }
                     break;
+                case 4:
+                    if (msg.obj != null) {
+                        loadToast.success();
+                        mList.clear();
+                        mList.addAll((List<NewsBean>) msg.obj);
+                        mAdapter = new NewsAdapter(NewsDetailActivity.this, mList);
+                        mRecyclerView.setAdapter(mAdapter);
+                    }
+                    break;
             }
         }
     };
@@ -76,6 +98,13 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         @Override
         public void run() {
             presenter.loadDetail(link);
+        }
+    };
+
+    private Runnable loadItem = new Runnable() {
+        @Override
+        public void run() {
+            presenter.loadItem(id);
         }
     };
 
@@ -89,6 +118,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
 
     private void initData() {
         mQueue = Volley.newRequestQueue(this);
+        id = getIntent().getIntExtra("id", 2);
         title = getIntent().getStringExtra("title");
         img = getIntent().getStringExtra("img");
         link = getIntent().getStringExtra("link");
@@ -110,16 +140,36 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
         ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
         ivImg.setImageUrl(img, loader);
         htvContent = (HtmlTextView) findViewById(R.id.htv_content);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
+        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mStaggeredGridLayoutManager.setAutoMeasureEnabled(true);
+        mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setNestedScrollingEnabled(false);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setHasFixedSize(true);
+        mAdapter = new NewsAdapter(this, mList);
+        mAdapter.setHasStableIds(true);
+        mRecyclerView.setAdapter(mAdapter);
         loadToast = new LoadToast(this);
         loadToast.setTranslationY(160);
         loadToast.setText("玩命加载中...");
         loadToast.show();
-        new Thread(loadDetail).start();
+        if (link != null && !link.equals("")) {
+            htvContent.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+            new Thread(loadDetail).start();
+        }else{
+            htvContent.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            new Thread(loadItem).start();
+        }
     }
 
-    public static void startActivity(Activity activity, String title, String img, String link, NetworkImageView networkImageView) {
+    public static void startActivity(Activity activity, int id, String title, String img, String link, NetworkImageView networkImageView) {
         Intent intent = new Intent();
         intent.setClass(activity, NewsDetailActivity.class);
+        intent.putExtra("id", id);
         intent.putExtra("title", title);
         intent.putExtra("img", img);
         intent.putExtra("link", link);
@@ -156,8 +206,16 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
     }
 
     @Override
-    public void showTheme(List<NewsBean> list) {
+    public void showList(List<NewsBean> list) {
 
+    }
+
+    @Override
+    public void showItem(List<NewsBean> list) {
+        Message msg = new Message();
+        msg.what = 4;
+        msg.obj = list;
+        handler.sendMessage(msg);
     }
 
     @Override

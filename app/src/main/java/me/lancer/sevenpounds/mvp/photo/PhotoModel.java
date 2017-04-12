@@ -58,9 +58,6 @@ public class PhotoModel {
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MMdd_HHmm");
-                Date date = new Date(System.currentTimeMillis());
-                String dates = sdf.format(date);
                 File file = new File(dir.getPath() + "/" + title + ".jpeg");
                 InputStream is = response.body().byteStream();
                 OutputStream os = new FileOutputStream(file);
@@ -81,7 +78,7 @@ public class PhotoModel {
     }
 
     public void loadLatest(int pager) {
-        String content = contentGetterSetter.getContentFromHtml(imgListUrl + pager);
+        String content = contentGetterSetter.getContentFromHtml("Photo.loadLatest", imgListUrl + pager);
         List<PhotoBean> list;
         if (!content.contains("获取失败!")) {
             list = getPhotosFromHtmlContent(content);
@@ -93,19 +90,19 @@ public class PhotoModel {
     }
 
     public void loadTheme(String type) {
-        String content = contentGetterSetter.getContentFromHtml(imgThemeUrl + type);
+        String content = contentGetterSetter.getContentFromHtml("Photo.loadTheme", imgThemeUrl + type);
         List<PhotoBean> list;
         if (!content.contains("获取失败!")) {
             list = getPhotosFromHtmlContent(content);
             presenter.loadThemeSuccess(list);
         } else {
             presenter.loadThemeFailure(content);
-            Log.e("loadReviewer", content);
+            Log.e("loadTheme", content);
         }
     }
 
     public void loadWelfare(int pager) {
-        String content = contentGetterSetter.getContentFromHtml(imgWelfareUrl + pager);
+        String content = contentGetterSetter.getContentFromHtml("Photo.loadWelfare", imgWelfareUrl + pager);
         List<PhotoBean> list;
         if (!content.contains("获取失败!")) {
             list = getPhotosFromJsonContent(content);
