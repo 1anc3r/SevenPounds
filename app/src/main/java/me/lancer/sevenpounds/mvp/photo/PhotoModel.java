@@ -122,7 +122,7 @@ public class PhotoModel {
             String imgSmall = element.getElementsByTag("img").attr("src");
             if (imgSmall.contains("auto=compress&cs=tinysrgb")) {
                 bean.setType(0);
-                bean.setTitle(imgSmall.substring(0, imgSmall.indexOf('?')).replace("https://images.pexels.com/photos/", "").substring(0, imgSmall.indexOf('/')));
+                bean.setTitle(imgSmall.substring(0, imgSmall.indexOf('?')).replace("https://images.pexels.com/photos/", "").substring(0, imgSmall.indexOf('/')).replace("/", ""));
                 bean.setImgSmall(imgSmall);
                 bean.setImgLarge(imgSmall.substring(0, imgSmall.indexOf('?')) + imgDetailUrl);
                 list.add(bean);

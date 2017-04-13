@@ -67,7 +67,7 @@
                     android:layout_marginRight="2dp"
                     android:ellipsize="marquee"
                     android:maxLines="1"
-                    android:text="10493" />
+                    android:text="" />
 
                 <ImageView
                     android:layout_width="16dp"

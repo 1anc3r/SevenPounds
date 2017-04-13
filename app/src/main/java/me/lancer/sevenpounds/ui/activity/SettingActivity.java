@@ -86,8 +86,15 @@ public class SettingActivity extends BaseActivity {
         scNight.setClickable(false);
         funcList.add("见闻如是说 : \n" +
                 "\t\t\t\t每日 : 提供来自知乎社区的精选问答，还有国内一流媒体的专栏特稿\n" +
+                "\t\t\t\t热门 : 包括动漫、游戏、财经、电影、音乐、互联网安全等丰富内容\n" +
                 "\t\t\t\t分类 : 包括动漫、游戏、财经、电影、音乐、互联网安全等丰富内容\n" +
                 "\t\t\t\t — 数据来源 : 知乎日报\n\t\t\t\t（http://news-at.zhihu.com/api）");
+        funcList.add("览图如流水 : \n" +
+                "\t\t\t\t佳人 : 豆瓣读书的最受欢迎书评\n" +
+                "\t\t\t\t美图 : 爬取呈现豆瓣图书TOP250\n" +
+                "\t\t\t\t — 数据来源 : " +
+                "\n\t\t\t\t 佳人 : Gank.io\n\t\t\t\t（http://gank.io）"+
+                "\n\t\t\t\t 美图 : Pexels Popular Photos\n\t\t\t\t（https://www.pexels.com/）");
         funcList.add("读书如抽丝 : \n" +
                 "\t\t\t\t书评 : 豆瓣读书的最受欢迎书评\n" +
                 "\t\t\t\t书榜 : 爬取呈现豆瓣图书TOP250\n" +
@@ -101,16 +108,16 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t影榜 : 爬取呈现豆瓣电影TOP250\n" +
                 "\t\t\t\t — 数据来源 : 豆瓣电影\n\t\t\t\t（https://movie.douban.com/）");
         funcList.add("吐槽如幕布 : \n" +
-                "\t\t\t\t分类 : B站各分区排行榜\n" +
+                "\t\t\t\t分类 : 来自B站各分区排行榜前十\n" +
                 "\t\t\t\t — 数据来源 : BiliBili\n\t\t\t\t（http://api.bilibili.com）");
-        funcList.add("游戏如人生 : \n" +
-                "\t\t\t\t周榜 : SteamSpy统计的最近两周玩家数量最多的TOP100游戏\n" +
-                "\t\t\t\t分类 : Steam各分类排行榜\n" +
-                "\t\t\t\t — 数据来源 : SteamSpy\n\t\t\t\t（http://steamspy.com/api.php）");
+//        funcList.add("游戏如人生 : \n" +
+//                "\t\t\t\t周榜 : SteamSpy统计的最近两周玩家数量最多的TOP100游戏\n" +
+//                "\t\t\t\t分类 : Steam各分类排行榜\n" +
+//                "\t\t\t\t — 数据来源 : SteamSpy\n\t\t\t\t（http://steamspy.com/api.php）");
         funcList.add("编程如逆旅 : \n" +
                 "\t\t\t\t个人 : GitHub上Star最多的个人\n" +
                 "\t\t\t\t组织 : GitHub上Star最多的组织\n" +
-                "\t\t\t\t目 : GitHub上Star最多的项目\n" +
+                "\t\t\t\t项目 : GitHub上Star最多的项目\n" +
                 "\t\t\t\t — 数据来源 : GithubRanking\n\t\t\t\t（https://github-ranking.com/）");
         problemList.add("应用内意见反馈通道尚未开启, 遇到Bug请发送邮件至huangfangzhi0@foxmail.com");
     }

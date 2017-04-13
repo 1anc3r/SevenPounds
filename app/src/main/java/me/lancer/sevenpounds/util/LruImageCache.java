@@ -27,8 +27,12 @@ public class LruImageCache implements ImageCache {
     }
 
     public static LruImageCache instance() {
-        if (lruImageCache == null) {
-            lruImageCache = new LruImageCache();
+        if(lruImageCache == null){
+            synchronized(LruImageCache.class){
+                if(lruImageCache == null){
+                    lruImageCache = new LruImageCache();
+                }
+            }
         }
         return lruImageCache;
     }

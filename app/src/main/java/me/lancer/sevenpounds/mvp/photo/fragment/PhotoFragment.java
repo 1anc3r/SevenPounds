@@ -70,12 +70,12 @@ public class PhotoFragment extends BaseFragment {
         newfragment.setArguments(data);
         adapter.addFrag(newfragment, "美景");
 
-        newfragment = new PhotoThemeFragment();
-        data = new Bundle();
-        data.putInt("id", 0);
-        data.putString("title", "分类");
-        newfragment.setArguments(data);
-        adapter.addFrag(newfragment, "分类");
+//        newfragment = new PhotoThemeFragment();
+//        data = new Bundle();
+//        data.putInt("id", 0);
+//        data.putString("title", "分类");
+//        newfragment.setArguments(data);
+//        adapter.addFrag(newfragment, "分类");
 
         viewPager.setAdapter(adapter);
         if (getArguments() != null) {
