@@ -8,7 +8,7 @@
 * Github: [https://github.com/1anc3r](https://github.com/1anc3r)
 * 我的博客: [1anc3r.me](http://www.1anc3r.me/)
 * 实验室主页: [xiyoumobile](http://www.xiyoumobile.com/)
-* 下载链接: <img src="https://img.shields.io/badge/download-v1.1-blue.svg" width = "" height = "" alt="" />(http://sj.qq.com/myapp/detail.htm?apkName=me.lancer.sevenpounds)
+* 下载链接: ![](https://img.shields.io/badge/download-v1.1-blue.svg)
 
 ## 功能介绍:
 1. 见闻如是说: 
