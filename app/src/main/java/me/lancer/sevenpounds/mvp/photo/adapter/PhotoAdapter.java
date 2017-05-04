@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -25,12 +26,13 @@ import java.util.List;
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.photo.PhotoBean;
 import me.lancer.sevenpounds.mvp.photo.activity.PhotoDetailActivity;
+import me.lancer.sevenpounds.util.DensityUtil;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
 
-    private static final int TYPE_CONTENT_NORMAL = 0;
-    private static final int TYPE_TITLE = 1;
+    private static final int TYPE_CONTENT_NORMAL = 1;
+    private static final int TYPE_TITLE = 0;
 
     private List<PhotoBean> list;
     private RequestQueue mQueue;
@@ -56,8 +58,11 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
                 viewHolder.tvTitle.setTextSize(20);
                 viewHolder.tvTitle.setGravity(Gravity.CENTER);
                 viewHolder.ivImg.setVisibility(View.GONE);
-            }else if (getItemViewType(position) == TYPE_CONTENT_NORMAL) {
+            } else if (getItemViewType(position) == TYPE_CONTENT_NORMAL) {
                 viewHolder.tvTitle.setVisibility(View.GONE);
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHolder.ivImg.getLayoutParams();
+                params.height = DensityUtil.dip2px(context, 120 + 40 * (list.get(position).getType() - 1));
+                viewHolder.ivImg.setLayoutParams(params);
                 LruImageCache cache = LruImageCache.instance();
                 ImageLoader loader = new ImageLoader(mQueue, cache);
                 viewHolder.ivImg.setDefaultImageResId(R.mipmap.ic_pictures_no);
@@ -80,9 +85,9 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
 
     @Override
     public int getItemViewType(int position) {
-        if (list.get(position).getType() == 0) {
+        if (list.get(position).getType() > 0) {
             return TYPE_CONTENT_NORMAL;
-        } else if (list.get(position).getType() == 1) {
+        } else if (list.get(position).getType() == 0) {
             return TYPE_TITLE;
         }
         return super.getItemViewType(position);
@@ -90,6 +95,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
+        public LinearLayout llTop;
         public NetworkImageView ivImg;
         public TextView tvTitle;
 

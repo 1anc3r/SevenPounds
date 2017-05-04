@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import me.lancer.sevenpounds.util.ContentGetterSetter;
 
@@ -121,7 +122,7 @@ public class PhotoModel {
             PhotoBean bean = new PhotoBean();
             String imgSmall = element.getElementsByTag("img").attr("src");
             if (imgSmall.contains("auto=compress&cs=tinysrgb")) {
-                bean.setType(0);
+                bean.setType(new Random().nextInt(3) % (3 - 1 + 1) + 1);
                 bean.setTitle(imgSmall.substring(0, imgSmall.indexOf('?')).replace("https://images.pexels.com/photos/", "").substring(0, imgSmall.indexOf('/')).replace("/", ""));
                 bean.setImgSmall(imgSmall);
                 bean.setImgLarge(imgSmall.substring(0, imgSmall.indexOf('?')) + imgDetailUrl);
@@ -140,7 +141,7 @@ public class PhotoModel {
                 for (int i = 0; i < jaPhoto.length(); i++) {
                     JSONObject jbItem = (JSONObject) jaPhoto.get(i);
                     PhotoBean bean = new PhotoBean();
-                    bean.setType(0);
+                    bean.setType(new Random().nextInt(3) % (3 - 1 + 1) + 1);
                     bean.setTitle(jbItem.getString("_id"));
                     bean.setImgLarge(jbItem.getString("url"));
                     bean.setImgSmall(jbItem.getString("url"));

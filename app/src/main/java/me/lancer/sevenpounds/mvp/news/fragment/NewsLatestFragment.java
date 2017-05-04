@@ -57,7 +57,7 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
                 case 3:
                     if (msg.obj != null) {
                         mDayList.clear();
-                        mDayList.add(new NewsBean(1, "— 最新 —"));
+                        mDayList.add(new NewsBean(1, "— 今日 —"));
                         mDayList.addAll((List<NewsBean>) msg.obj);
                         mAdapter = new NewsAdapter(getActivity(), mDayList);
                         mRecyclerView.setAdapter(mAdapter);
@@ -67,6 +67,8 @@ public class NewsLatestFragment extends PresenterFragment<NewsPresenter> impleme
                 case 4:
                     if (msg.obj != null && load == 1) {
                         int size = mDayList.size();
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+                        date = formatter.format(new Date(System.currentTimeMillis() - 24 * 3600 * 1000 * (flag)));
                         date = date.substring(0, 4) + "年" + date.substring(4, 6) + "月" + date.substring(6, 8) + "日";
                         mDayList.add(new NewsBean(1, "— " + date + " —"));
                         mDayList.addAll((List<NewsBean>) msg.obj);

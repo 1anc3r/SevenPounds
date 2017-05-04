@@ -69,8 +69,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                     }
                 });
             } else if (getItemViewType(position) == TYPE_CONTENT_LARGE) {
-                StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
-                layoutParams.setFullSpan(true);
+//                StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
+//                layoutParams.setFullSpan(true);
                 viewHolder.tvTitle.setText(list.get(position).getTitle());
                 LruImageCache cache = LruImageCache.instance();
                 ImageLoader loader = new ImageLoader(mQueue, cache);
