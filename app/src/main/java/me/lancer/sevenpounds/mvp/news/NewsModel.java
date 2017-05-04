@@ -208,16 +208,18 @@ public class NewsModel {
         try {
             NewsBean bean = new NewsBean();
             JSONObject jbNews = new JSONObject(content);
-            if (!jbNews.isNull("images")) {
-                bean.setId(jbNews.getInt("id"));
-                if (jbNews.has("type")) {
-                    bean.setType(jbNews.getInt("type"));
-                }
-                bean.setTitle(jbNews.getString("title"));
+            bean.setId(jbNews.getInt("id"));
+            if (jbNews.has("type")) {
+                bean.setType(jbNews.getInt("type"));
+            }
+            bean.setTitle(jbNews.getString("title"));
+            if (jbNews.has("image")) {
+                bean.setImg(jbNews.getString("image"));
+            } else if (jbNews.has("images")) {
                 JSONArray jaImg = jbNews.getJSONArray("images");
                 bean.setImg(jaImg.get(0).toString());
-                bean.setContent(jbNews.getString("body").replace("\\n", ""));
             }
+            bean.setContent(jbNews.getString("body").replace("\\n", ""));
             return bean;
         } catch (JSONException e) {
             e.printStackTrace();

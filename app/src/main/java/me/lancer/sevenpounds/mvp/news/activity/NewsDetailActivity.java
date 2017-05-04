@@ -81,7 +81,6 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
                         ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
                         LruImageCache cache = LruImageCache.instance();
                         ImageLoader loader = new ImageLoader(mQueue, cache);
-                        ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
                         ivImg.setImageUrl(nb.getImg(), loader);
                         if (nb.getContent()!=null) {
                             htvContent.setHtml(nb.getContent(), new HtmlHttpImageGetter(htvContent));
