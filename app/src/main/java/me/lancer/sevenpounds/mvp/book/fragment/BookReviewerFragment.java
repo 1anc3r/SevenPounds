@@ -21,6 +21,7 @@ import me.lancer.sevenpounds.mvp.book.BookBean;
 import me.lancer.sevenpounds.mvp.book.BookPresenter;
 import me.lancer.sevenpounds.mvp.book.IBookView;
 import me.lancer.sevenpounds.mvp.book.adapter.BookAdapter;
+import me.lancer.sevenpounds.mvp.news.NewsPresenter;
 
 /**
  * Created by HuangFangzhi on 2016/12/18.
