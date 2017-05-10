@@ -2,6 +2,7 @@ package me.lancer.sevenpounds.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -40,6 +41,8 @@ public class MainActivity extends BaseActivity {
 
     private int currentIndex;
     private long exitTime;
+
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,9 +159,13 @@ public class MainActivity extends BaseActivity {
 //                    switchContent(currentFragment);
 //                    return true;
                 case R.id.navigation_setting:
-                    startActivity(new Intent().setClass(MainActivity.this, SettingActivity.class));
-                    finish();
-                    return true;
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(new Intent().setClass(MainActivity.this, SettingActivity.class));
+                            finish();
+                        }
+                    }, 180);
                 default:
                     return true;
             }

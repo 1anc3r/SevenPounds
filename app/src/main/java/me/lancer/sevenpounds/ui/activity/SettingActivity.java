@@ -178,8 +178,7 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t组织 : GitHub上Star最多的组织\n" +
                 "\t\t\t\t项目 : GitHub上Star最多的项目\n" +
                 "\t\t\t\t — 数据来源 : GithubRanking\n\t\t\t\t（https://github-ranking.com/）");
-        problemList.add("遇到Bug可以憋在心里∑(っ°Д°)っ");
-        problemList.add("遇到Bug也可以发送邮件至huangfangzhi0@foxmail.com");
+        problemList.add("遇到Bug不要憋在心里∑(っ°Д°)っ\n请发送邮件至huangfangzhi0@foxmail.com");
     }
 
     private View.OnClickListener vOnClickListener = new View.OnClickListener() {
