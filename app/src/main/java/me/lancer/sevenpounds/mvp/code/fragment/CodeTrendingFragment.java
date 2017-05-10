@@ -26,7 +26,7 @@ import me.lancer.sevenpounds.mvp.code.adapter.CodeAdapter;
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class CodeOrganFragment extends PresenterFragment<CodePresenter> implements ICodeView {
+public class CodeTrendingFragment extends PresenterFragment<CodePresenter> implements ICodeView {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -36,7 +36,8 @@ public class CodeOrganFragment extends PresenterFragment<CodePresenter> implemen
     private LinearLayoutManager mLinearLayoutManager;
     private List<CodeBean> mList = new ArrayList<>();
 
-    private int pager = 1, last = 0;
+    private int last = 0;
+    private String since = "daily";
 
     private Handler handler = new Handler() {
         @Override
@@ -53,16 +54,9 @@ public class CodeOrganFragment extends PresenterFragment<CodePresenter> implemen
                     break;
                 case 3:
                     if (msg.obj != null) {
-                        if (pager == 1) {
-                            mList = (List<CodeBean>) msg.obj;
-                            mAdapter = new CodeAdapter(getActivity(), mList);
-                            mRecyclerView.setAdapter(mAdapter);
-                        } else {
-                            mList.addAll((List<CodeBean>) msg.obj);
-                            for (int i = 0; i < 100; i++) {
-                                mAdapter.notifyItemInserted(pager*100 + i);
-                            }
-                        }
+                        mList = (List<CodeBean>) msg.obj;
+                        mAdapter = new CodeAdapter(getActivity(), mList);
+                        mRecyclerView.setAdapter(mAdapter);
                     }
                     mSwipeRefreshLayout.setRefreshing(false);
                     break;
@@ -70,10 +64,10 @@ public class CodeOrganFragment extends PresenterFragment<CodePresenter> implemen
         }
     };
 
-    private Runnable loadOrganizations = new Runnable() {
+    private Runnable loadTrending = new Runnable() {
         @Override
         public void run() {
-            presenter.loadOrganizations(pager);
+            presenter.loadTrending(since);
         }
     };
 
@@ -92,7 +86,7 @@ public class CodeOrganFragment extends PresenterFragment<CodePresenter> implemen
     }
 
     private void initData() {
-        new Thread(loadOrganizations).start();
+        new Thread(loadTrending).start();
     }
 
     private void initView(View view) {
@@ -102,8 +96,7 @@ public class CodeOrganFragment extends PresenterFragment<CodePresenter> implemen
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                pager = 1;
-                new Thread(loadOrganizations).start();
+                new Thread(loadTrending).start();
             }
         });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
@@ -120,8 +113,7 @@ public class CodeOrganFragment extends PresenterFragment<CodePresenter> implemen
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && last + 1 == mAdapter.getItemCount()) {
-                    pager += 1;
-                    new Thread(loadOrganizations).start();
+//                    new Thread(loadTrending).start();
                 }
             }
 
@@ -146,10 +138,7 @@ public class CodeOrganFragment extends PresenterFragment<CodePresenter> implemen
 
     @Override
     public void showOrganizations(List<CodeBean> list) {
-        Message msg = new Message();
-        msg.what = 3;
-        msg.obj = list;
-        handler.sendMessage(msg);
+
     }
 
     @Override
@@ -159,7 +148,10 @@ public class CodeOrganFragment extends PresenterFragment<CodePresenter> implemen
 
     @Override
     public void showTrending(List<CodeBean> list) {
-
+        Message msg = new Message();
+        msg.what = 3;
+        msg.obj = list;
+        handler.sendMessage(msg);
     }
 
     @Override

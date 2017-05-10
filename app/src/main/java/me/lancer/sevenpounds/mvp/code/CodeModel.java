@@ -6,6 +6,9 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -29,6 +32,8 @@ public class CodeModel {
     String usersUrl = "https://github-ranking.com/users?page=";
     String organizationsUrl = "https://github-ranking.com/organizations?page=";
     String repositoriesUrl = "https://github-ranking.com/repositories?page=";
+    String trendingUrl = "https://github.com/trending?since=";
+//    String trendingUrl = "https://trendings.herokuapp.com/api/repo/language/?since=";
 
     public CodeModel(ICodePresenter presenter) {
         this.presenter = presenter;
@@ -70,6 +75,18 @@ public class CodeModel {
         }
     }
 
+    public void loadTrending(String since) {
+        String content = contentGetterSetter.getContentFromHtml("Code.loadTrending", trendingUrl+since);
+        List<CodeBean> list;
+        if (!content.contains("失败")) {
+            list = getTrendingFromContent(content);
+            presenter.loadTrendingSuccess(list);
+        } else {
+            presenter.loadTrendingFailure(content);
+            Log.e("loadRepositories", content);
+        }
+    }
+
     public void loadDetail(String url) {
         String content = contentGetterSetter.getContentFromHtml("Code.loadDetail", url);
         CodeBean bean;
@@ -97,7 +114,24 @@ public class CodeModel {
             bean.setName(temp1);
             bean.setStar(elements.get(i).getElementsByClass("stargazers_count pull-right").text());
             bean.setImg(elements.get(i).getElementsByTag("img").attr("src"));
-            bean.setLink(rankUrl + elements.get(i).getElementsByClass("list-group-item paginated_item").attr("href"));
+            bean.setLink("https://github.com/" + elements.get(i).getElementsByClass("list-group-item paginated_item").attr("href"));
+            list.add(bean);
+        }
+        return list;
+    }
+
+    public List<CodeBean> getTrendingFromContent(String content) {
+        List<CodeBean> list = new ArrayList<>();
+        Document document = Jsoup.parse(content);
+        Elements elements = document.getElementsByClass("col-12 d-block width-full py-4 border-bottom");
+        for (int i = 0; i < elements.size(); i++) {
+            CodeBean bean = new CodeBean();
+            bean.setType(0);
+            bean.setRank((i+1)+".");
+            bean.setName(elements.get(i).getElementsByTag("a").attr("href"));
+            bean.setStar(elements.get(i).getElementsByClass("muted-link mr-3").text().split(" ")[0]);
+            bean.setImg(elements.get(i).getElementsByTag("img").attr("src"));
+            bean.setLink("https://github.com/"+bean.getName());
             list.add(bean);
         }
         return list;

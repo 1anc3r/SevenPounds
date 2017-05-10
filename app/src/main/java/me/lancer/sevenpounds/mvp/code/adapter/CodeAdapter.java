@@ -46,26 +46,37 @@ public class CodeAdapter extends RecyclerView.Adapter<CodeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
-        if (list.get(position) != null) {
+        CodeBean bean;
+        if ((bean = list.get(position)) != null) {
             if (getItemViewType(position) == TYPE_ZERO) {
-                viewHolder.tvRank.setText(list.get(position).getRank());
-                viewHolder.tvName.setText(list.get(position).getName());
-                viewHolder.tvStar.setText(list.get(position).getStar());
+                viewHolder.tvRank.setText(bean.getRank());
+                if (list.get(position).getName().length() >= 20) {
+                    viewHolder.tvName.setText(bean.getName().substring(0, 16) + "...");
+                } else {
+                    viewHolder.tvName.setText(bean.getName());
+                }
+                viewHolder.tvStar.setText(bean.getStar());
                 LruImageCache cache = LruImageCache.instance();
                 ImageLoader loader = new ImageLoader(mQueue, cache);
                 viewHolder.ivImg.setDefaultImageResId(R.mipmap.ic_pictures_no);
                 viewHolder.ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
-                viewHolder.ivImg.setImageUrl(list.get(position).getImg(), loader);
+                viewHolder.ivImg.setImageUrl(bean.getImg(), loader);
                 viewHolder.cvSmall.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         CodeDetailActivity.startActivity((Activity) context, list.get(position).getName(), list.get(position).getStar(), list.get(position).getRank(), list.get(position).getImg(), list.get(position).getLink(), viewHolder.ivImg);
                     }
                 });
-            }else if (getItemViewType(position)==TYPE_ONE){
+            } else if (getItemViewType(position) == TYPE_ONE) {
                 viewHolder.ivImg.setVisibility(View.GONE);
-                viewHolder.tvName.setText(list.get(position).getName());
-                viewHolder.tvStar.setText(list.get(position).getStar());
+                viewHolder.tvName.setText(bean.getName());
+                viewHolder.tvStar.setText(bean.getStar());
+                viewHolder.cvSmall.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CodeDetailActivity.startActivity((Activity) context, list.get(position).getName(), list.get(position).getStar(), list.get(position).getLink());
+                    }
+                });
             }
         }
     }

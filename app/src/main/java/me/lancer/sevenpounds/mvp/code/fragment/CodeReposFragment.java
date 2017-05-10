@@ -158,6 +158,11 @@ public class CodeReposFragment extends PresenterFragment<CodePresenter> implemen
     }
 
     @Override
+    public void showTrending(List<CodeBean> list) {
+
+    }
+
+    @Override
     public void showDetail(CodeBean bean) {
 
     }

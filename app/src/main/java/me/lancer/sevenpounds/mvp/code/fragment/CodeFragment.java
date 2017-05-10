@@ -77,6 +77,13 @@ public class CodeFragment extends BaseFragment {
         newfragment.setArguments(data);
         adapter.addFrag(newfragment, "项目");
 
+        newfragment = new CodeTrendingFragment();
+        data = new Bundle();
+        data.putInt("id", 3);
+        data.putString("title", "趋势");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "趋势");
+
         viewPager.setAdapter(adapter);
         if (getArguments() != null) {
             Bundle bundle = getArguments();

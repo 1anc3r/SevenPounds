@@ -9,23 +9,17 @@ import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.KeyEvent;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.android.volley.toolbox.Volley;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
@@ -33,23 +27,13 @@ import me.lancer.sevenpounds.mvp.base.activity.PresenterActivity;
 import me.lancer.sevenpounds.mvp.code.ICodeView;
 import me.lancer.sevenpounds.mvp.code.CodeBean;
 import me.lancer.sevenpounds.mvp.code.CodePresenter;
-import me.lancer.sevenpounds.mvp.code.adapter.CodeAdapter;
 import me.lancer.sevenpounds.ui.application.mParams;
-import me.lancer.sevenpounds.util.LruImageCache;
 
 public class CodeDetailActivity extends PresenterActivity<CodePresenter> implements ICodeView {
 
-    private NetworkImageView ivImg;
-    private TextView tvName, tvStar, tvRank;
-    private RecyclerView rvRepositories;
+    private WebView wvContent;
     private LoadToast loadToast;
 
-    private CodeAdapter mAdapter;
-
-    private LinearLayoutManager mLinearLayoutManager;
-    private List<CodeBean> mList = new ArrayList<>();
-
-    private RequestQueue mQueue;
     private int type;
     private String title, star, rank, img, link;
 
@@ -68,11 +52,8 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
                     break;
                 case 3:
                     if (msg.obj != null) {
+                        wvContent.loadUrl(link);
                         loadToast.success();
-                        CodeBean bb = (CodeBean) msg.obj;
-                        mList = bb.getRepositories();
-                        mAdapter = new CodeAdapter(CodeDetailActivity.this, mList);
-                        rvRepositories.setAdapter(mAdapter);
                     }
                     break;
             }
@@ -95,7 +76,6 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
     }
 
     private void initData() {
-        mQueue = Volley.newRequestQueue(this);
         title = getIntent().getStringExtra("title");
         star = getIntent().getStringExtra("star");
         rank = getIntent().getStringExtra("rank");
@@ -112,25 +92,15 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        ivImg = (NetworkImageView) findViewById(R.id.iv_img);
-        ViewCompat.setTransitionName(ivImg, mParams.TRANSITION_PIC);
-        LruImageCache cache = LruImageCache.instance();
-        ImageLoader loader = new ImageLoader(mQueue, cache);
-        ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
-        ivImg.setImageUrl(img, loader);
-        tvName = (TextView) findViewById(R.id.tv_title);
-        tvName.setText(title);
-        tvStar = (TextView) findViewById(R.id.tv_star);
-        tvStar.setText("Star : "+star);
-        tvRank = (TextView) findViewById(R.id.tv_rank);
-        tvRank.setText("Rank : "+rank);
-        rvRepositories = (RecyclerView) findViewById(R.id.rv_repositories);
-        mLinearLayoutManager = new LinearLayoutManager(this);
-        rvRepositories.setLayoutManager(mLinearLayoutManager);
-        rvRepositories.setItemAnimator(new DefaultItemAnimator());
-        rvRepositories.setHasFixedSize(true);
-        mAdapter = new CodeAdapter(this, mList);
-        rvRepositories.setAdapter(mAdapter);
+        wvContent = (WebView) findViewById(R.id.wv_content);
+        wvContent.getSettings().setJavaScriptEnabled(true);
+        wvContent.requestFocus();
+        wvContent.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
         loadToast = new LoadToast(this);
         loadToast.setTranslationY(160);
         loadToast.setText("玩命加载中...");
@@ -151,15 +121,33 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
+    public static void startActivity(Activity activity, String title, String star, String link) {
+        Intent intent = new Intent();
+        intent.setClass(activity, CodeDetailActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("star", star);
+        intent.putExtra("link", link);
+        ActivityOptionsCompat options = ActivityOptionsCompat
+                .makeSceneTransitionAnimation(activity, null, mParams.TRANSITION_PIC);
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
+    }
+
     @Override
     protected void onDestroy() {
-        ivImg.destroyDrawingCache();
         super.onDestroy();
     }
 
     @Override
     protected CodePresenter onCreatePresenter() {
         return new CodePresenter(this);
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && wvContent.canGoBack()) {
+            wvContent.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -196,6 +184,11 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
 
     @Override
     public void showRepositories(List<CodeBean> list) {
+
+    }
+
+    @Override
+    public void showTrending(List<CodeBean> list) {
 
     }
 

@@ -20,6 +20,10 @@ public interface ICodePresenter {
 
     void loadRepositoriesFailure(String log);
 
+    void loadTrendingSuccess(List<CodeBean> list);
+
+    void loadTrendingFailure(String log);
+
     void loadDetailSuccess(CodeBean bean);
 
     void loadDetailFailure(String log);
