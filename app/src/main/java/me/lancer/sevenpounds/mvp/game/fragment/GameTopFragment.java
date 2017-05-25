@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
-import me.lancer.sevenpounds.mvp.base.activity.PresenterFragment;
+import me.lancer.sevenpounds.mvp.base.fragment.PresenterFragment;
 import me.lancer.sevenpounds.mvp.game.IGameView;
 import me.lancer.sevenpounds.mvp.game.GameBean;
 import me.lancer.sevenpounds.mvp.game.GamePresenter;

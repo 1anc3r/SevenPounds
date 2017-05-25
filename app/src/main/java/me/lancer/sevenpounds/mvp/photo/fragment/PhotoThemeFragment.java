@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
-import me.lancer.sevenpounds.mvp.base.activity.PresenterFragment;
+import me.lancer.sevenpounds.mvp.base.fragment.PresenterFragment;
 import me.lancer.sevenpounds.mvp.photo.IPhotoView;
 import me.lancer.sevenpounds.mvp.photo.PhotoBean;
 import me.lancer.sevenpounds.mvp.photo.PhotoPresenter;

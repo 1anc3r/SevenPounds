@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
-import me.lancer.sevenpounds.mvp.base.activity.PresenterFragment;
+import me.lancer.sevenpounds.mvp.base.fragment.PresenterFragment;
 import me.lancer.sevenpounds.mvp.code.CodeBean;
 import me.lancer.sevenpounds.mvp.code.CodePresenter;
 import me.lancer.sevenpounds.mvp.code.ICodeView;

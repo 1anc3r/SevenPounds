@@ -1,4 +1,4 @@
-package me.lancer.sevenpounds.mvp.base.activity;
+package me.lancer.sevenpounds.mvp.base.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

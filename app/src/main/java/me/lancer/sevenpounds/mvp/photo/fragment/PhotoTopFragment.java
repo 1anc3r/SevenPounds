@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
-import me.lancer.sevenpounds.mvp.base.activity.PresenterFragment;
+import me.lancer.sevenpounds.mvp.base.fragment.PresenterFragment;
 import me.lancer.sevenpounds.mvp.photo.PhotoBean;
 import me.lancer.sevenpounds.mvp.photo.PhotoPresenter;
 import me.lancer.sevenpounds.mvp.photo.IPhotoView;

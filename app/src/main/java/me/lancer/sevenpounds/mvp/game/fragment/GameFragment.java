@@ -1,5 +1,6 @@
 package me.lancer.sevenpounds.mvp.game.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -10,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
+import me.lancer.sevenpounds.ui.activity.AboutActivity;
 import me.lancer.sevenpounds.ui.activity.MainActivity;
 import me.lancer.sevenpounds.mvp.base.fragment.BaseFragment;
 
@@ -116,7 +119,24 @@ public class GameFragment extends BaseFragment {
 
     private void inflateMenu() {
         toolbar.inflateMenu(R.menu.menu_search);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_about:
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), AboutActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+                return true;
+            }
+        });
     }
+
+//    private void inflateMenu() {
+//        toolbar.inflateMenu(R.menu.menu_search);
+//    }
 
     private void initSearchView() {
         final SearchView searchView = (SearchView) toolbar.getMenu()

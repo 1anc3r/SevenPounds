@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
-import me.lancer.sevenpounds.mvp.base.activity.PresenterFragment;
+import me.lancer.sevenpounds.mvp.base.fragment.PresenterFragment;
 import me.lancer.sevenpounds.mvp.news.INewsView;
 import me.lancer.sevenpounds.mvp.news.NewsBean;
 import me.lancer.sevenpounds.mvp.news.NewsPresenter;

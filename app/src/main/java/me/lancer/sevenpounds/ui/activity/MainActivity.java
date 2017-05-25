@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.base.activity.BaseActivity;
 import me.lancer.sevenpounds.mvp.photo.fragment.PhotoFragment;
+import me.lancer.sevenpounds.mvp.video.activity.VideoPlayerActivity;
 import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.ui.application.mParams;
 import me.lancer.sevenpounds.mvp.book.fragment.BookFragment;
@@ -166,6 +168,7 @@ public class MainActivity extends BaseActivity {
                             finish();
                         }
                     }, 180);
+                    return true;
                 default:
                     return true;
             }
@@ -186,14 +189,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_search, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         switch (id) {
             case R.id.action_bottomsheetdialog:
                 break;

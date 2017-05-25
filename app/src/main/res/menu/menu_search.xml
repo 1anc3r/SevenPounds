@@ -2,10 +2,18 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context=".activity.MainActivity">
+
     <item
         android:id="@+id/menu_search"
         android:icon="@drawable/ic_search_24dp"
+        android:visible="false"
         android:title="search"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_about"
+        android:title="Github"
+        app:showAsAction="never" />
+
 </menu>
