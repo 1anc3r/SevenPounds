@@ -40,6 +40,11 @@
 
         <item
             android:id="@+id/navigation_item_7"
+            android:icon="@mipmap/ic_mood_black_24dp"
+            android:title="滑稽如漫画" />
+
+        <item
+            android:id="@+id/navigation_item_8"
             android:icon="@mipmap/ic_code_black_24dp"
             android:title="编程如逆旅" />
 

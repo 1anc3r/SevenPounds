@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.base.activity.BaseActivity;
+import me.lancer.sevenpounds.mvp.comic.fragment.ComicFragment;
 import me.lancer.sevenpounds.mvp.photo.fragment.PhotoFragment;
 import me.lancer.sevenpounds.mvp.video.activity.VideoPlayerActivity;
 import me.lancer.sevenpounds.ui.application.mApp;
@@ -147,19 +148,19 @@ public class MainActivity extends BaseActivity {
                 case R.id.navigation_item_7:
                     currentIndex = 0;
                     menuItem.setChecked(true);
+                    currentFragment = new ComicFragment();
+                    bundle.putInt(getString(R.string.index), currentIndex);
+                    currentFragment.setArguments(bundle);
+                    switchContent(currentFragment);
+                    return true;
+                case R.id.navigation_item_8:
+                    currentIndex = 0;
+                    menuItem.setChecked(true);
                     currentFragment = new CodeFragment();
                     bundle.putInt(getString(R.string.index), currentIndex);
                     currentFragment.setArguments(bundle);
                     switchContent(currentFragment);
                     return true;
-//                case R.id.navigation_item_6:
-//                    currentIndex = 0;
-//                    menuItem.setChecked(true);
-//                    currentFragment = new GameFragment();
-//                    bundle.putInt(getString(R.string.index), currentIndex);
-//                    currentFragment.setArguments(bundle);
-//                    switchContent(currentFragment);
-//                    return true;
                 case R.id.navigation_setting:
                     handler.postDelayed(new Runnable() {
                         @Override
