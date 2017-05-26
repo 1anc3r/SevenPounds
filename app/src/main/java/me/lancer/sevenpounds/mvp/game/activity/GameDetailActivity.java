@@ -29,6 +29,7 @@ import me.lancer.sevenpounds.mvp.base.activity.PresenterActivity;
 import me.lancer.sevenpounds.mvp.game.IGameView;
 import me.lancer.sevenpounds.mvp.game.GameBean;
 import me.lancer.sevenpounds.mvp.game.GamePresenter;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.ui.application.mParams;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlTextView;
@@ -84,7 +85,7 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
     }
 
     private void initData() {
-        mQueue = Volley.newRequestQueue(this);
+        mQueue = ((mApp)getApplication()).getRequestQueue();
         title = getIntent().getStringExtra("title");
         img = getIntent().getStringExtra("img");
         link = getIntent().getStringExtra("link");

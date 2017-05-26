@@ -35,6 +35,7 @@ import me.lancer.sevenpounds.mvp.base.activity.PresenterActivity;
 import me.lancer.sevenpounds.mvp.photo.IPhotoView;
 import me.lancer.sevenpounds.mvp.photo.PhotoBean;
 import me.lancer.sevenpounds.mvp.photo.PhotoPresenter;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.ui.application.mParams;
 import me.lancer.sevenpounds.util.LruImageCache;
 
@@ -97,7 +98,7 @@ public class PhotoDetailActivity extends PresenterActivity<PhotoPresenter> imple
     }
 
     private void initData() {
-        mQueue = Volley.newRequestQueue(this);
+        mQueue = ((mApp)getApplication()).getRequestQueue();
         img = getIntent().getStringExtra("img");
         title = getIntent().getStringExtra("title");
     }

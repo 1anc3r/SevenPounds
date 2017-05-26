@@ -29,6 +29,7 @@ import me.lancer.sevenpounds.mvp.chapter.ChapterBean;
 import me.lancer.sevenpounds.mvp.chapter.ChapterPresenter;
 import me.lancer.sevenpounds.mvp.chapter.IChapterView;
 import me.lancer.sevenpounds.mvp.chapter.adapter.ChapterAdapter;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class ChapterActivity extends PresenterActivity<ChapterPresenter> implements IChapterView {
@@ -91,7 +92,7 @@ public class ChapterActivity extends PresenterActivity<ChapterPresenter> impleme
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        RequestQueue mQueue = Volley.newRequestQueue(this);
+        RequestQueue mQueue = ((mApp)getApplication()).getRequestQueue();
         LruImageCache cache = LruImageCache.instance();
         ImageLoader loader = new ImageLoader(mQueue, cache);
         ivCover = (NetworkImageView) findViewById(R.id.imageView);

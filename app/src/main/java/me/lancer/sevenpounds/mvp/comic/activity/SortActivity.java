@@ -29,6 +29,7 @@ import me.lancer.sevenpounds.mvp.comic.ComicBean;
 import me.lancer.sevenpounds.mvp.comic.ComicPresenter;
 import me.lancer.sevenpounds.mvp.comic.IComicView;
 import me.lancer.sevenpounds.mvp.comic.adapter.ComicAdapter;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class SortActivity extends PresenterActivity<ComicPresenter> implements IComicView {
@@ -90,7 +91,7 @@ public class SortActivity extends PresenterActivity<ComicPresenter> implements I
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        RequestQueue mQueue = Volley.newRequestQueue(this);
+        RequestQueue mQueue = ((mApp)getApplication()).getRequestQueue();
         LruImageCache cache = LruImageCache.instance();
         ImageLoader loader = new ImageLoader(mQueue, cache);
         ivCover = (NetworkImageView) findViewById(R.id.imageView);

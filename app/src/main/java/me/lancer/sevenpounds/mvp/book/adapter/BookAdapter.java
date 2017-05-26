@@ -1,5 +1,6 @@
 package me.lancer.sevenpounds.mvp.book.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -21,6 +22,7 @@ import java.util.List;
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.book.BookBean;
 import me.lancer.sevenpounds.mvp.book.activity.BookDetailActivity;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
@@ -32,7 +34,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     public BookAdapter(Context context, List<BookBean> list) {
         this.context = context;
         this.list = list;
-        mQueue = Volley.newRequestQueue(context);
+        mQueue = ((mApp)((Activity)context).getApplication()).getRequestQueue();
     }
 
     @Override

@@ -21,6 +21,7 @@ import java.util.List;
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.comic.ComicBean;
 import me.lancer.sevenpounds.mvp.comic.activity.SortActivity;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
@@ -35,7 +36,7 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
     public SortAdapter(Context context, List<ComicBean> list) {
         this.context = context;
         this.list = list;
-        mQueue = Volley.newRequestQueue(context);
+        mQueue = ((mApp)((Activity)context).getApplication()).getRequestQueue();
     }
 
     @Override

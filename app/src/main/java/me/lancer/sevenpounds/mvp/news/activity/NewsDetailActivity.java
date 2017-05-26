@@ -28,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import net.steamcrafted.loadtoast.LoadToast;
 
 import me.lancer.sevenpounds.mvp.news.adapter.NewsAdapter;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.ui.application.mParams;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlTextView;
@@ -123,7 +124,7 @@ public class NewsDetailActivity extends PresenterActivity<NewsPresenter> impleme
     }
 
     private void initData() {
-        mQueue = Volley.newRequestQueue(this);
+        mQueue = ((mApp)getApplication()).getRequestQueue();
         id = getIntent().getIntExtra("id", 2);
         title = getIntent().getStringExtra("title");
         img = getIntent().getStringExtra("img");

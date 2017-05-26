@@ -7,6 +7,12 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ClearCacheRequest;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.Volley;
+
+import java.io.File;
 import java.lang.reflect.Field;
 
 import me.lancer.sevenpounds.R;
@@ -16,6 +22,8 @@ import me.lancer.sevenpounds.R;
  */
 
 public class mApp extends Application {
+
+    private RequestQueue mRequestQueue;
 
     public static Typeface TypeFace;
 
@@ -40,5 +48,16 @@ public class mApp extends Application {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    public RequestQueue getRequestQueue() {
+        if (mRequestQueue == null) {
+            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+        }
+        File cacheDir = new File(this.getCacheDir(), "volley");
+        DiskBasedCache cache = new DiskBasedCache(cacheDir);
+        mRequestQueue.start();
+        mRequestQueue.add(new ClearCacheRequest(cache, null));
+        return mRequestQueue;
     }
 }

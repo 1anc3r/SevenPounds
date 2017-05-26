@@ -1,5 +1,6 @@
 package me.lancer.sevenpounds.mvp.page.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.base.fragment.BaseFragment;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class PagerFragment extends BaseFragment {
@@ -32,7 +34,7 @@ public class PagerFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mQueue = Volley.newRequestQueue(getActivity());
+        mQueue = ((mApp)getActivity().getApplication()).getRequestQueue();
         link = getArguments().getString("link");
         return inflater.inflate(R.layout.fragment_page, container, false);
     }

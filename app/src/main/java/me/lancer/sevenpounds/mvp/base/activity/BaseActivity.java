@@ -10,6 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.Volley;
+
+import java.io.File;
+
 import me.lancer.sevenpounds.R;
 
 /**

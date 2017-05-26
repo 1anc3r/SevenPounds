@@ -21,6 +21,7 @@ import java.util.List;
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.news.NewsBean;
 import me.lancer.sevenpounds.mvp.news.activity.NewsDetailActivity;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
@@ -36,7 +37,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public NewsAdapter(Context context, List<NewsBean> list) {
         this.context = context;
         this.list = list;
-        mQueue = Volley.newRequestQueue(context);
+        mQueue = ((mApp)((Activity)context).getApplication()).getRequestQueue();
     }
 
     @Override

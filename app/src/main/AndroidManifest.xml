@@ -50,6 +50,7 @@
             android:screenOrientation="sensorLandscape"></activity>
         <activity
             android:name=".ui.activity.AboutActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.Overlay" />
         <activity

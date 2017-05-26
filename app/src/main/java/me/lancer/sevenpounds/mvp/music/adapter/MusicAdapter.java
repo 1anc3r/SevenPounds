@@ -1,5 +1,6 @@
 package me.lancer.sevenpounds.mvp.music.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -20,6 +21,7 @@ import java.util.List;
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.music.MusicBean;
 import me.lancer.sevenpounds.mvp.music.activity.MusicDetailActivity;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> {
@@ -31,7 +33,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
     public MusicAdapter(Context context, List<MusicBean> list) {
         this.context = context;
         this.list = list;
-        mQueue = Volley.newRequestQueue(context);
+        mQueue = ((mApp)((Activity)context).getApplication()).getRequestQueue();
     }
 
     @Override

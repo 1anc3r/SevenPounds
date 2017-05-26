@@ -1,5 +1,6 @@
 package me.lancer.sevenpounds.mvp.repository.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.repository.RepositoryBean;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.ViewHolder> {
@@ -30,7 +32,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
     public RepositoryAdapter(Context context, List<RepositoryBean> list) {
         this.list = list;
         this.context = context;
-        mQueue = Volley.newRequestQueue(context);
+        mQueue = ((mApp)((Activity)context).getApplication()).getRequestQueue();
     }
 
     @Override

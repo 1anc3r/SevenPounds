@@ -26,6 +26,7 @@ import java.util.List;
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.photo.PhotoBean;
 import me.lancer.sevenpounds.mvp.photo.activity.PhotoDetailActivity;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.util.DensityUtil;
 import me.lancer.sevenpounds.util.LruImageCache;
 
@@ -41,7 +42,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
     public PhotoAdapter(Context context, List<PhotoBean> list) {
         this.context = context;
         this.list = list;
-        mQueue = Volley.newRequestQueue(context);
+        mQueue = ((mApp)((Activity)context).getApplication()).getRequestQueue();
     }
 
     @Override

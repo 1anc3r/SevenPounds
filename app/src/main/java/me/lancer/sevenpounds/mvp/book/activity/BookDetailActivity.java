@@ -28,6 +28,7 @@ import me.lancer.sevenpounds.mvp.base.activity.PresenterActivity;
 import me.lancer.sevenpounds.mvp.book.BookBean;
 import me.lancer.sevenpounds.mvp.book.BookPresenter;
 import me.lancer.sevenpounds.mvp.book.IBookView;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.ui.application.mParams;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlHttpImageGetter;
 import me.lancer.sevenpounds.ui.view.htmltextview.HtmlTextView;
@@ -92,7 +93,7 @@ public class BookDetailActivity extends PresenterActivity<BookPresenter> impleme
     }
 
     private void initData() {
-        mQueue = Volley.newRequestQueue(this);
+        mQueue = ((mApp)getApplication()).getRequestQueue();
         type = getIntent().getIntExtra("type", 0);
         title = getIntent().getStringExtra("title");
         img = getIntent().getStringExtra("img");

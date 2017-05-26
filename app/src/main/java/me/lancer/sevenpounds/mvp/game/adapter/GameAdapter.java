@@ -22,6 +22,7 @@ import java.util.List;
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.game.GameBean;
 import me.lancer.sevenpounds.mvp.game.activity.GameDetailActivity;
+import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
@@ -38,7 +39,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
         this.context = context;
         this.list = list;
         this.type = type;
-        mQueue = Volley.newRequestQueue(context);
+        mQueue = ((mApp)((Activity)context).getApplication()).getRequestQueue();
     }
 
     @Override
