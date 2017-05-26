@@ -50,7 +50,22 @@
             android:screenOrientation="sensorLandscape"></activity>
         <activity
             android:name=".ui.activity.AboutActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.Overlay" />
+        <activity
+            android:name=".mvp.chapter.activity.ChapterActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.Overlay" />
+        <activity
+            android:name=".mvp.comic.activity.SortActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar.Overlay" />
+        <activity
+            android:name=".mvp.page.activity.PagerActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar.Overlay" />
     </application>
 
 </manifest>
