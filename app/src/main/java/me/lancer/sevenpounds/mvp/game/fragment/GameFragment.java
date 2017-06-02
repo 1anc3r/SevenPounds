@@ -38,7 +38,7 @@ public class GameFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         toolbar = (Toolbar) view.findViewById(R.id.t_large);
-        toolbar.setTitle("游戏如人生");
+        toolbar.setTitle("游戏");
         ((MainActivity) getActivity()).initDrawer(toolbar);
         initTabLayout(view);
         inflateMenu();

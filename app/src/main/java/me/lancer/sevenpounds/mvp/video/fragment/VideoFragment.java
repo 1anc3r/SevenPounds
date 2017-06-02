@@ -38,7 +38,7 @@ public class VideoFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         toolbar = (Toolbar) view.findViewById(R.id.t_large);
-        toolbar.setTitle("吐槽如瀑布");
+        toolbar.setTitle("视频");
         ((MainActivity) getActivity()).initDrawer(toolbar);
         initTabLayout(view);
         inflateMenu();

@@ -38,7 +38,7 @@ public class CodeFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         toolbar = (Toolbar) view.findViewById(R.id.t_large);
-        toolbar.setTitle("编程如逆旅");
+        toolbar.setTitle("编程");
         ((MainActivity) getActivity()).initDrawer(toolbar);
         initTabLayout(view);
         inflateMenu();

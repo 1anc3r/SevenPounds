@@ -38,7 +38,7 @@ public class MusicFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         toolbar = (Toolbar) view.findViewById(R.id.t_large);
-        toolbar.setTitle("听音如沐风");
+        toolbar.setTitle("听音");
         ((MainActivity) getActivity()).initDrawer(toolbar);
         initTabLayout(view);
         inflateMenu();

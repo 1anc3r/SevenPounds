@@ -11,47 +11,47 @@
             android:id="@+id/navigation_item_1"
             android:checked="true"
             android:icon="@mipmap/ic_lightbulb_outline_black_24dp"
-            android:title="见闻如是说" />
+            android:title="见闻" />
 
         <item
             android:id="@+id/navigation_item_2"
             android:icon="@mipmap/ic_image_black_24dp"
-            android:title="览图如流水" />
+            android:title="图片" />
 
         <item
             android:id="@+id/navigation_item_3"
             android:icon="@mipmap/ic_book_black_24dp"
-            android:title="读书如抽丝" />
+            android:title="读书" />
 
         <item
             android:id="@+id/navigation_item_4"
             android:icon="@mipmap/ic_music_note_black_24dp"
-            android:title="听音如沐风" />
+            android:title="听音" />
 
         <item
             android:id="@+id/navigation_item_5"
             android:icon="@mipmap/ic_movie_black_24dp"
-            android:title="观影如造梦" />
+            android:title="观影" />
 
         <item
             android:id="@+id/navigation_item_6"
             android:icon="@mipmap/ic_assistant_photo_black_24dp"
-            android:title="吐槽如幕布" />
+            android:title="视频" />
 
         <item
             android:id="@+id/navigation_item_7"
             android:icon="@mipmap/ic_mood_black_24dp"
-            android:title="滑稽如漫画" />
+            android:title="漫画" />
 
         <item
             android:id="@+id/navigation_item_8"
             android:icon="@mipmap/ic_code_black_24dp"
-            android:title="编程如逆旅" />
+            android:title="编程" />
 
         <!--<item-->
             <!--android:id="@+id/navigation_item_7"-->
             <!--android:icon="@mipmap/ic_extension_black_24dp"-->
-            <!--android:title="游戏如人生" />-->
+            <!--android:title="游戏" />-->
 
     </group>
 
