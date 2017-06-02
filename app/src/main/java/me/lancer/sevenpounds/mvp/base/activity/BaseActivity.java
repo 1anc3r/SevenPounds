@@ -14,6 +14,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.Volley;
 
+import org.polaric.colorful.CActivity;
+
 import java.io.File;
 
 import me.lancer.sevenpounds.R;
@@ -22,7 +24,7 @@ import me.lancer.sevenpounds.R;
  * Created by HuangFangzhi on 2016/12/13.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends CActivity {
     public Activity mActivity;
 
     @Override

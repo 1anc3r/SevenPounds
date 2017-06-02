@@ -9,9 +9,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import org.polaric.colorful.CActivity;
+
 import me.lancer.sevenpounds.R;
 
-public class AboutActivity extends AppCompatActivity {
+public class AboutActivity extends CActivity {
 
     Toolbar toolbar;
     WebView webView;
