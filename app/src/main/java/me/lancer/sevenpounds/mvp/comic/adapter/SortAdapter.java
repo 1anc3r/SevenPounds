@@ -22,6 +22,7 @@ import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.comic.ComicBean;
 import me.lancer.sevenpounds.mvp.comic.activity.SortActivity;
 import me.lancer.sevenpounds.ui.application.mApp;
+import me.lancer.sevenpounds.util.DensityUtil;
 import me.lancer.sevenpounds.util.LruImageCache;
 
 public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
@@ -48,6 +49,9 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         if (list.get(position) != null) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHolder.ivCover.getLayoutParams();
+            params.height = DensityUtil.dip2px(context, 100);
+            viewHolder.ivCover.setLayoutParams(params);
             ComicBean bean = list.get(position);
             if (getItemViewType(position) == TYPE_CONTENT) {
                 viewHolder.tvTitle.setText(bean.getTitle());
