@@ -79,7 +79,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="4dp"
                 android:background="@mipmap/ic_star_black_24dp"
-                android:backgroundTint="@color/blue"
+                android:backgroundTint="?attr/colorPrimary"
                 android:scaleType="centerCrop" />
 
         </LinearLayout>
