@@ -73,9 +73,9 @@ public class GameDetailActivity extends PresenterActivity<GamePresenter> impleme
                         loadToast.success();
                         GameBean bb = (GameBean) msg.obj;
                         tvDiscount.setText("-"+bb.getDiscountPercent()+"%");
-                        tvOriginal.setText(""+bb.getOriginalPrice());
+                        tvOriginal.setText("￥"+bb.getOriginalPrice());
                         tvOriginal.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-                        tvFinal.setText(""+bb.getFinalPrice());
+                        tvFinal.setText("￥"+bb.getFinalPrice());
                         tvDevelopers.setText(bb.getDevelopers());
                         tvPublishers.setText(bb.getPublishers());
                         htvLanguages.setHtml(bb.getSupportedLanguages(), new HtmlHttpImageGetter(htvLanguages));

@@ -52,9 +52,9 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
         if (list.get(position) != null) {
             viewHolder.tvTitle.setText(list.get(position).getName());
             viewHolder.tvDiscount.setText("-"+list.get(position).getDiscountPercent()+"%");
-            viewHolder.tvOriginal.setText(""+list.get(position).getOriginalPrice());
+            viewHolder.tvOriginal.setText("￥"+list.get(position).getOriginalPrice());
             viewHolder.tvOriginal.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            viewHolder.tvFinal.setText(""+list.get(position).getFinalPrice());
+            viewHolder.tvFinal.setText("￥"+list.get(position).getFinalPrice());
             if (list.get(position).isWindowsAvailable()){
                 viewHolder.ivWindows.setVisibility(View.VISIBLE);
             }
