@@ -1,45 +1,67 @@
 package me.lancer.sevenpounds.mvp.game;
 
+import java.util.List;
+
 /**
  * Created by HuangFangzhi on 2017/3/13.
  */
 
 public class GameBean {
 
-    private int type;
-    private String appid;
+    private int id;
+    private int intType;
+    private String strType;
     private String name;
-    private String developer;
-    private String publisher;
-    private String score;
-    private String owners;
-    private String price;
-    private String img;
-    private String link;
-    private String tag;
+    private String description;
+    private String requirements;
+    private String supportedLanguages;
+    private String developers;
+    private String publishers;
+    private int score;
+    private boolean discounted;
+    private int discountPercent;
+    private int originalPrice;
+    private int finalPrice;
+    private String currency;
+    private String largeCapsuleImage;
+    private String smallCapsuleImage;
+    private String headerImage;
+    private String background;
+    private boolean windowsAvailable;
+    private boolean macAvailable;
+    private boolean linuxAvailable;
+    private List<String> screenshots;
 
     public GameBean() {
     }
 
     public GameBean(int type, String name) {
-        this.type = type;
+        this.intType = type;
         this.name = name;
     }
 
-    public int getType() {
-        return type;
+    public int getId() {
+        return id;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getAppid() {
-        return appid;
+    public int getIntType() {
+        return intType;
     }
 
-    public void setAppid(String appid) {
-        this.appid = appid;
+    public void setIntType(int intType) {
+        this.intType = intType;
+    }
+
+    public String getStrType() {
+        return strType;
+    }
+
+    public void setStrType(String strType) {
+        this.strType = strType;
     }
 
     public String getName() {
@@ -50,67 +72,155 @@ public class GameBean {
         this.name = name;
     }
 
-    public String getDeveloper() {
-        return developer;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDeveloper(String developer) {
-        this.developer = developer;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getSupportedLanguages() {
+        return supportedLanguages;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    public void setSupportedLanguages(String supportedLanguages) {
+        this.supportedLanguages = supportedLanguages;
     }
 
-    public String getScore() {
+    public String getDevelopers() {
+        return developers;
+    }
+
+    public void setDevelopers(String developers) {
+        this.developers = developers;
+    }
+
+    public String getPublishers() {
+        return publishers;
+    }
+
+    public void setPublishers(String publishers) {
+        this.publishers = publishers;
+    }
+
+    public int getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(int score) {
         this.score = score;
     }
 
-    public String getOwners() {
-        return owners;
+    public boolean isDiscounted() {
+        return discounted;
     }
 
-    public void setOwners(String owners) {
-        this.owners = owners;
+    public void setDiscounted(boolean discounted) {
+        this.discounted = discounted;
     }
 
-    public String getPrice() {
-        return price;
+    public int getDiscountPercent() {
+        return discountPercent;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setDiscountPercent(int discountPercent) {
+        this.discountPercent = discountPercent;
     }
 
-    public String getImg() {
-        return img;
+    public int getOriginalPrice() {
+        return originalPrice;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setOriginalPrice(int originalPrice) {
+        this.originalPrice = originalPrice;
     }
 
-    public String getLink() {
-        return link;
+    public int getFinalPrice() {
+        return finalPrice;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setFinalPrice(int finalPrice) {
+        this.finalPrice = finalPrice;
     }
 
-    public String getTag() {
-        return tag;
+    public String getCurrency() {
+        return currency;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public String getLargeCapsuleImage() {
+        return largeCapsuleImage;
+    }
+
+    public void setLargeCapsuleImage(String largeCapsuleImage) {
+        this.largeCapsuleImage = largeCapsuleImage;
+    }
+
+    public String getSmallCapsuleImage() {
+        return smallCapsuleImage;
+    }
+
+    public void setSmallCapsuleImage(String smallCapsuleImage) {
+        this.smallCapsuleImage = smallCapsuleImage;
+    }
+
+    public String getHeaderImage() {
+        return headerImage;
+    }
+
+    public void setHeaderImage(String headerImage) {
+        this.headerImage = headerImage;
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
+
+    public boolean isWindowsAvailable() {
+        return windowsAvailable;
+    }
+
+    public void setWindowsAvailable(boolean windowsAvailable) {
+        this.windowsAvailable = windowsAvailable;
+    }
+
+    public boolean isMacAvailable() {
+        return macAvailable;
+    }
+
+    public void setMacAvailable(boolean macAvailable) {
+        this.macAvailable = macAvailable;
+    }
+
+    public boolean isLinuxAvailable() {
+        return linuxAvailable;
+    }
+
+    public void setLinuxAvailable(boolean linuxAvailable) {
+        this.linuxAvailable = linuxAvailable;
+    }
+
+    public List<String> getScreenshots() {
+        return screenshots;
+    }
+
+    public void setScreenshots(List<String> screenshots) {
+        this.screenshots = screenshots;
+    }
+
+    public String getRequirements() {
+        return requirements;
+    }
+
+    public void setRequirements(String requirements) {
+        this.requirements = requirements;
     }
 }

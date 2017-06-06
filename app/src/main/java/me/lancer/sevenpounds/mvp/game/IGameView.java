@@ -10,9 +10,9 @@ import me.lancer.sevenpounds.mvp.base.IBaseView;
 
 public interface IGameView extends IBaseView {
 
-    void showTopGame(List<GameBean> list);
+    void showFeatured(List<GameBean> list);
 
-    void showTheme(List<GameBean> list);
+    void showCategories(List<GameBean> list);
 
     void showDetail(GameBean bean);
 }

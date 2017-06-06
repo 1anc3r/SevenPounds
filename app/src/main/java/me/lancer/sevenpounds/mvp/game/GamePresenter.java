@@ -28,56 +28,56 @@ public class GamePresenter implements IBasePresenter<IGameView>, IGamePresenter 
         this.view = null;
     }
 
-    public void loadTopGame() {
+    public void loadFeatured() {
         if (view != null) {
             view.showLoad();
-            model.loadTopGame();
+            model.loadFeatured();
         }
     }
 
     @Override
-    public void loadTopGameSuccess(List<GameBean> list) {
+    public void loadFeaturedSuccess(List<GameBean> list) {
         if (view != null) {
-            view.showTopGame(list);
+            view.showFeatured(list);
             view.hideLoad();
         }
     }
 
     @Override
-    public void loadTopGameFailure(String log) {
+    public void loadFeaturedFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();
         }
     }
 
-    public void loadTheme(String keyword) {
+    public void loadCategories(String keyword) {
         if (view != null) {
             view.showLoad();
-            model.loadTheme(keyword);
+            model.loadCategories(keyword);
         }
     }
 
     @Override
-    public void loadThemeSuccess(List<GameBean> list) {
+    public void loadCategoriesSuccess(List<GameBean> list) {
         if (view != null) {
-            view.showTheme(list);
+            view.showCategories(list);
             view.hideLoad();
         }
     }
 
     @Override
-    public void loadThemeFailure(String log) {
+    public void loadCategoriesFailure(String log) {
         if (log != null && log.length() > 0 && view != null) {
             view.showMsg(log);
             view.hideLoad();
         }
     }
 
-    public void loadDetail(String url) {
+    public void loadDetail(int id) {
         if (view != null) {
             view.showLoad();
-            model.loadDetail(url);
+            model.loadDetail(id);
         }
     }
 

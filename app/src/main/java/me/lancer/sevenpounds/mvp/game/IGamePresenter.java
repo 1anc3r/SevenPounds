@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface IGamePresenter {
 
-    void loadTopGameSuccess(List<GameBean> list);
+    void loadFeaturedSuccess(List<GameBean> list);
 
-    void loadTopGameFailure(String log);
+    void loadFeaturedFailure(String log);
 
-    void loadThemeSuccess(List<GameBean> list);
+    void loadCategoriesSuccess(List<GameBean> list);
 
-    void loadThemeFailure(String log);
+    void loadCategoriesFailure(String log);
 
     void loadDetailSuccess(GameBean bean);
 

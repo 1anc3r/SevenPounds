@@ -53,25 +53,46 @@ public class GameFragment extends BaseFragment {
         setupViewPager(viewPager);
         viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
-        Fragment newfragment = new GameTopFragment();
+        Fragment newfragment = new GameFeaturedFragment();
         Bundle data = new Bundle();
         data.putInt("id", 0);
-        data.putString("title", "周榜");
+        data.putString("title", "精选");
         newfragment.setArguments(data);
-        adapter.addFrag(newfragment, "周榜");
+        adapter.addFrag(newfragment, "精选");
 
-        newfragment = new GameThemeFragment();
+        newfragment = new GameCategoriesFragment();
         data = new Bundle();
         data.putInt("id", 1);
-        data.putString("title", "分类");
+        data.putString("title", "优惠");
         newfragment.setArguments(data);
-        adapter.addFrag(newfragment, "分类");
+        adapter.addFrag(newfragment, "优惠");
+
+        newfragment = new GameCategoriesFragment();
+        data = new Bundle();
+        data.putInt("id", 2);
+        data.putString("title", "热销");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "热销");
+
+        newfragment = new GameCategoriesFragment();
+        data = new Bundle();
+        data.putInt("id", 3);
+        data.putString("title", "新品");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "新品");
+
+        newfragment = new GameCategoriesFragment();
+        data = new Bundle();
+        data.putInt("id", 4);
+        data.putString("title", "即将推出");
+        newfragment.setArguments(data);
+        adapter.addFrag(newfragment, "即将推出");
 
         viewPager.setAdapter(adapter);
         if (getArguments() != null) {

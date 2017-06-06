@@ -26,7 +26,7 @@ import me.lancer.sevenpounds.mvp.game.adapter.GameAdapter;
  * Created by HuangFangzhi on 2016/12/18.
  */
 
-public class GameTopFragment extends PresenterFragment<GamePresenter> implements IGameView {
+public class GameFeaturedFragment extends PresenterFragment<GamePresenter> implements IGameView {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -70,10 +70,10 @@ public class GameTopFragment extends PresenterFragment<GamePresenter> implements
         }
     };
 
-    private Runnable loadTopGame = new Runnable() {
+    private Runnable loadFeatured = new Runnable() {
         @Override
         public void run() {
-            presenter.loadTopGame();
+            presenter.loadFeatured();
         }
     };
 
@@ -92,7 +92,7 @@ public class GameTopFragment extends PresenterFragment<GamePresenter> implements
     }
 
     private void initData() {
-        new Thread(loadTopGame).start();
+        new Thread(loadFeatured).start();
     }
 
     private void initView(View view) {
@@ -103,7 +103,7 @@ public class GameTopFragment extends PresenterFragment<GamePresenter> implements
             @Override
             public void onRefresh() {
                 pager = 0;
-                new Thread(loadTopGame).start();
+                new Thread(loadFeatured).start();
             }
         });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
@@ -123,7 +123,7 @@ public class GameTopFragment extends PresenterFragment<GamePresenter> implements
 
 
     @Override
-    public void showTopGame(List<GameBean> list) {
+    public void showFeatured(List<GameBean> list) {
         Message msg = new Message();
         msg.what = 3;
         msg.obj = list;
@@ -131,7 +131,7 @@ public class GameTopFragment extends PresenterFragment<GamePresenter> implements
     }
 
     @Override
-    public void showTheme(List<GameBean> list) {
+    public void showCategories(List<GameBean> list) {
 
     }
 

@@ -23,8 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.SettingActivity" />
-        <activity
-            android:name=".mvp.news.activity.NewsDetailActivity" />
+        <activity android:name=".mvp.news.activity.NewsDetailActivity" />
         <activity
             android:name=".mvp.photo.activity.PhotoDetailActivity"
             android:launchMode="singleTask" />
@@ -38,10 +37,10 @@
             android:name=".mvp.movie.activity.MovieDetailActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".mvp.code.activity.CodeDetailActivity"
+            android:name=".mvp.game.activity.GameDetailActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".mvp.game.activity.GameDetailActivity"
+            android:name=".mvp.code.activity.CodeDetailActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".mvp.video.activity.VideoPlayerActivity"

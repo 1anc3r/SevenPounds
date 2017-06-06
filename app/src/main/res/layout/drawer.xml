@@ -45,6 +45,11 @@
 
         <item
             android:id="@+id/navigation_item_8"
+            android:icon="@mipmap/ic_extension_black_24dp"
+            android:title="游戏" />
+
+        <item
+            android:id="@+id/navigation_item_9"
             android:icon="@mipmap/ic_code_black_24dp"
             android:title="编程" />
 

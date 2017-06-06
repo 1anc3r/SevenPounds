@@ -25,45 +25,44 @@ public class GameModel {
     IGamePresenter presenter;
 
     ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
-    String topGameUrl = "http://steamspy.com/api.php?request=top100in2weeks";
-    String themeUrl = "http://steamspy.com/api.php?request=genre&genre=";
-    String detailUrl = "http://steamspy.com/app/";
-    String imgStartUrl = "http://cdn.akamai.steamstatic.com/steam/apps/";
-    String imgEndUrl = "/capsule_184x69.jpg";
+    String featuredUrl = "http://store.steampowered.com/api/featured?l=zn_cn";
+    String categoriesUrl = "http://store.steampowered.com/api/featuredcategories?l=zn_cn";
+    String appdetailsUrl = "http://store.steampowered.com/api/appdetails?l=zn_cn&appids=";
 
     public GameModel(IGamePresenter presenter) {
         this.presenter = presenter;
     }
 
-    public void loadTopGame() {
-        String content = contentGetterSetter.getContentFromHtml("Game.loadTopGame", topGameUrl);
+    public void loadFeatured() {
+        String content = contentGetterSetter.getContentFromHtml("Game.loadFeatured", featuredUrl);
         List<GameBean> list;
         if (!content.contains("失败")) {
-            list = getGameFromContent(content);
-            presenter.loadTopGameSuccess(list);
+            list = getFeaturedFromContent(content);
+            presenter.loadFeaturedSuccess(list);
         } else {
-            presenter.loadTopGameFailure(content);
-            Log.e("loadTop", content);
+            presenter.loadFeaturedFailure(content);
+            Log.e("loadFeatured", content);
         }
     }
 
-    public void loadTheme(String keyword) {
-        String content = contentGetterSetter.getContentFromHtml("Game.loadTheme", themeUrl+keyword);
+    public void loadCategories(String keyword) {
+        String content = contentGetterSetter.getContentFromHtml("Game.loadCategories", categoriesUrl);
         List<GameBean> list;
         if (!content.contains("失败")) {
-            list = getThemeFromContent(content);
-            presenter.loadThemeSuccess(list);
+            list = getCategoriesFromContent(keyword, content);
+            presenter.loadCategoriesSuccess(list);
         } else {
-            presenter.loadThemeFailure(content);
-            Log.e("loadAll", content);
+            presenter.loadCategoriesFailure(content);
+            Log.e("loadCategories", content);
         }
     }
 
-    public void loadDetail(String url) {
-        String content = contentGetterSetter.getContentFromHtml("Game.loadDetail", url);
+    public void loadDetail(int id) {
+        Log.e("url", appdetailsUrl + id);
+        String content = contentGetterSetter.getContentFromHtml("Game.loadDetail", appdetailsUrl + id);
         GameBean bean;
         if (!content.contains("失败")) {
-            bean = getDetailFromContent(content);
+            bean = getDetailFromContent(id, content);
             presenter.loadDetailSuccess(bean);
         } else {
             presenter.loadDetailFailure(content);
@@ -71,30 +70,96 @@ public class GameModel {
         }
     }
 
-    public List<GameBean> getGameFromContent(String content) {
+    public List<GameBean> getFeaturedFromContent(String content) {
         try {
             List<GameBean> list = new ArrayList<>();
-            JSONObject jbGame = new JSONObject(content);
-            String temp = content;
-            String[] appids1 = temp.split("\"appid\":");
-            String[] appids2 = new String[appids1.length];
-            int turn = appids1.length - 1;
-            for (int i = 0; i < turn; i++) {
-                appids2[i] = appids1[i + 1].split(",\"name\"")[0];
-            }
-            for (int i = 0; i < turn; i++) {
-                JSONObject jbItem = jbGame.getJSONObject(appids2[i]);
+            JSONObject all = new JSONObject(content);
+            JSONArray largeCapsules = all.getJSONArray("large_capsules");
+            for (int i = 0; i < largeCapsules.length(); i++) {
+                JSONObject jbItem = (JSONObject) largeCapsules.get(i);
                 GameBean bean = new GameBean();
-                bean.setType(0);
-                bean.setAppid(jbItem.getString("appid"));
+                bean.setId(jbItem.getInt("id"));
+                bean.setIntType(0);
                 bean.setName(jbItem.getString("name"));
-                bean.setDeveloper(jbItem.getString("developer"));
-                bean.setPublisher(jbItem.getString("publisher"));
-                bean.setScore(jbItem.getString("score_rank"));
-                bean.setOwners(jbItem.getString("owners"));
-                bean.setPrice(jbItem.getString("price"));
-                bean.setImg(imgStartUrl + bean.getAppid() + imgEndUrl);
-                bean.setLink(detailUrl + bean.getAppid());
+                bean.setDiscounted(jbItem.getBoolean("discounted"));
+                bean.setDiscountPercent(jbItem.getInt("discount_percent"));
+                if (!jbItem.get("original_price").toString().equals("null")) {
+                    bean.setOriginalPrice(jbItem.getInt("original_price")/100);
+                }
+                if (!jbItem.get("final_price").toString().equals("null")) {
+                    bean.setFinalPrice(jbItem.getInt("final_price")/100);
+                }
+                bean.setWindowsAvailable(jbItem.getBoolean("windows_available"));
+                bean.setMacAvailable(jbItem.getBoolean("mac_available"));
+                bean.setLinuxAvailable(jbItem.getBoolean("linux_available"));
+                bean.setCurrency(jbItem.getString("currency"));
+                bean.setHeaderImage(jbItem.getString("header_image"));
+                list.add(bean);
+            }
+            JSONArray featuredWin = all.getJSONArray("featured_win");
+            for (int i = 0; i < featuredWin.length(); i++) {
+                JSONObject jbItem = (JSONObject) featuredWin.get(i);
+                GameBean bean = new GameBean();
+                bean.setId(jbItem.getInt("id"));
+                bean.setIntType(0);
+                bean.setName(jbItem.getString("name"));
+                bean.setDiscounted(jbItem.getBoolean("discounted"));
+                bean.setDiscountPercent(jbItem.getInt("discount_percent"));
+                if (!jbItem.get("original_price").toString().equals("null")) {
+                    bean.setOriginalPrice(jbItem.getInt("original_price")/100);
+                }
+                if (!jbItem.get("final_price").toString().equals("null")) {
+                    bean.setFinalPrice(jbItem.getInt("final_price")/100);
+                }
+                bean.setWindowsAvailable(jbItem.getBoolean("windows_available"));
+                bean.setMacAvailable(jbItem.getBoolean("mac_available"));
+                bean.setLinuxAvailable(jbItem.getBoolean("linux_available"));
+                bean.setCurrency(jbItem.getString("currency"));
+                bean.setHeaderImage(jbItem.getString("header_image"));
+                list.add(bean);
+            }
+            JSONArray featuredMac = all.getJSONArray("featured_mac");
+            for (int i = 0; i < featuredMac.length(); i++) {
+                JSONObject jbItem = (JSONObject) featuredMac.get(i);
+                GameBean bean = new GameBean();
+                bean.setId(jbItem.getInt("id"));
+                bean.setIntType(0);
+                bean.setName(jbItem.getString("name"));
+                bean.setDiscounted(jbItem.getBoolean("discounted"));
+                bean.setDiscountPercent(jbItem.getInt("discount_percent"));
+                if (!jbItem.get("original_price").toString().equals("null")) {
+                    bean.setOriginalPrice(jbItem.getInt("original_price")/100);
+                }
+                if (!jbItem.get("final_price").toString().equals("null")) {
+                    bean.setFinalPrice(jbItem.getInt("final_price")/100);
+                }
+                bean.setWindowsAvailable(jbItem.getBoolean("windows_available"));
+                bean.setMacAvailable(jbItem.getBoolean("mac_available"));
+                bean.setLinuxAvailable(jbItem.getBoolean("linux_available"));
+                bean.setCurrency(jbItem.getString("currency"));
+                bean.setHeaderImage(jbItem.getString("header_image"));
+                list.add(bean);
+            }
+            JSONArray featuredLinux = all.getJSONArray("featured_linux");
+            for (int i = 0; i < featuredLinux.length(); i++) {
+                JSONObject jbItem = (JSONObject) featuredLinux.get(i);
+                GameBean bean = new GameBean();
+                bean.setId(jbItem.getInt("id"));
+                bean.setIntType(0);
+                bean.setName(jbItem.getString("name"));
+                bean.setDiscounted(jbItem.getBoolean("discounted"));
+                bean.setDiscountPercent(jbItem.getInt("discount_percent"));
+                if (!jbItem.get("original_price").toString().equals("null")) {
+                    bean.setOriginalPrice(jbItem.getInt("original_price")/100);
+                }
+                if (!jbItem.get("final_price").toString().equals("null")) {
+                    bean.setFinalPrice(jbItem.getInt("final_price")/100);
+                }
+                bean.setWindowsAvailable(jbItem.getBoolean("windows_available"));
+                bean.setMacAvailable(jbItem.getBoolean("mac_available"));
+                bean.setLinuxAvailable(jbItem.getBoolean("linux_available"));
+                bean.setCurrency(jbItem.getString("currency"));
+                bean.setHeaderImage(jbItem.getString("header_image"));
                 list.add(bean);
             }
             return list;
@@ -104,30 +169,31 @@ public class GameModel {
         }
     }
 
-    public List<GameBean> getThemeFromContent(String content) {
+    public List<GameBean> getCategoriesFromContent(String keyword, String content) {
         try {
             List<GameBean> list = new ArrayList<>();
-            JSONObject jbGame = new JSONObject(content);
-            String temp = content;
-            String[] appids1 = temp.split("\"appid\":");
-            String[] appids2 = new String[appids1.length];
-            int turn = 10;
-            for (int i = 0; i < turn; i++) {
-                appids2[i] = appids1[i + 1].split(",\"name\"")[0];
-            }
-            for (int i = 0; i < turn; i++) {
-                JSONObject jbItem = jbGame.getJSONObject(appids2[i]);
+            JSONObject all = new JSONObject(content);
+            JSONObject object = all.getJSONObject(keyword);
+            JSONArray array = object.getJSONArray("items");
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jbItem = (JSONObject) array.get(i);
                 GameBean bean = new GameBean();
-                bean.setType(0);
-                bean.setAppid(jbItem.getString("appid"));
+                bean.setId(jbItem.getInt("id"));
+                bean.setIntType(0);
                 bean.setName(jbItem.getString("name"));
-                bean.setDeveloper(jbItem.getString("developer"));
-                bean.setPublisher(jbItem.getString("publisher"));
-                bean.setScore(jbItem.getString("score_rank"));
-                bean.setOwners(jbItem.getString("owners"));
-                bean.setPrice(jbItem.getString("price"));
-                bean.setImg(imgStartUrl + bean.getAppid() + imgEndUrl);
-                bean.setLink(detailUrl + bean.getAppid());
+                bean.setDiscounted(jbItem.getBoolean("discounted"));
+                bean.setDiscountPercent(jbItem.getInt("discount_percent"));
+                if (!jbItem.get("original_price").toString().equals("null")) {
+                    bean.setOriginalPrice(jbItem.getInt("original_price")/100);
+                }
+                if (!jbItem.get("final_price").toString().equals("null")) {
+                    bean.setFinalPrice(jbItem.getInt("final_price")/100);
+                }
+                bean.setWindowsAvailable(jbItem.getBoolean("windows_available"));
+                bean.setMacAvailable(jbItem.getBoolean("mac_available"));
+                bean.setLinuxAvailable(jbItem.getBoolean("linux_available"));
+                bean.setCurrency(jbItem.getString("currency"));
+                bean.setHeaderImage(jbItem.getString("header_image"));
                 list.add(bean);
             }
             return list;
@@ -137,24 +203,72 @@ public class GameModel {
         }
     }
 
-    public GameBean getDetailFromContent(String content) {
-        GameBean bean = new GameBean();
-        Document document = Jsoup.parse(content);
-        String tag = document.getElementsByTag("p").get(1).html();
-        bean.setTag(tag.substring(tag.indexOf("class=\"img-responsive\">")+23)
-                .replace("Developer", "开发商").replace("Publisher", "<br>发行商")
-                .replace("Genre", "风格").replace("Languages", "语言")
-                .replace("Tags", "标签").replace("Category", "类型")
-                .replace("Release date", "发行日期").replace("Price", "价格")
-                .replace("Price", "价格").replace("Score rank", "评分等级")
-                .replace("Userscore", "<br>用户评分").replace("Old userscore", "<br>老用户评分")
-                .replace("Metascore", "<br>媒体评分").replace("Owners", "用户量")
-                .replace("Players in the last 2 weeks", "最近两周在线人数")
-                .replace("Players total", "总在线人数")
-                .replace("Peak concurrent players yesterday", "昨日同时在线人数")
-                .replace("YouTube stats", "YouTube统计")
-                .replace("Playtime in the last 2 weeks", "最近两周游戏时间")
-                .replace("Playtime total", "总游戏时间"));
-        return bean;
+    public GameBean getDetailFromContent(int id, String content) {
+        try {
+            GameBean bean = new GameBean();
+            JSONObject all = new JSONObject(content);
+            all = all.getJSONObject("" + id);
+            if (all.getBoolean("success")) {
+                JSONObject data = all.getJSONObject("data");
+                bean.setIntType(0);
+                bean.setName(data.getString("name"));
+                bean.setDescription(data.getString("detailed_description"));
+                bean.setSupportedLanguages(data.getString("supported_languages"));
+                String requirements = "";
+                JSONObject pc = data.getJSONObject("pc_requirements");
+                if (pc.has("minimum")) {
+                    requirements += pc.getString("minimum") + "<br>";
+                }
+                if (pc.has("recommended")) {
+                    requirements += pc.getString("recommended") + "<br>";
+                }
+//                if (data.getJSONArray("mac_requirements").length() == 0) {
+//                    Log.e("mac", "mac_requirements");
+//                } else {
+//                    Log.e("mac", "mac:" + data.getJSONObject("mac_requirements").toString());
+//                    JSONObject mac = data.getJSONObject("mac_requirements");
+//                    if (mac.has("minimum")) {
+//                        requirements += mac.getString("minimum") + "<br>";
+//                    }
+//                    if (mac.has("recommended")) {
+//                        requirements += mac.getString("recommended") + "<br>";
+//                    }
+//                }
+//                if (data.getJSONArray("linux_requirements").length() == 0) {
+//                    Log.e("linux", "linux_requirements");
+//                } else {
+//                    Log.e("linux", "linux:" + data.getJSONObject("linux_requirements").toString());
+//                    JSONObject linux = data.getJSONObject("linux_requirements");
+//                    if (linux.has("minimum")) {
+//                        requirements += linux.getString("minimum") + "<br>";
+//                    }
+//                    if (linux.has("recommended")) {
+//                        requirements += linux.getString("recommended") + "<br>";
+//                    }
+//                }
+                bean.setRequirements(requirements);
+                bean.setDevelopers((String) data.getJSONArray("developers").get(0));
+                bean.setPublishers((String) data.getJSONArray("publishers").get(0));
+                JSONObject priceOverview = data.getJSONObject("price_overview");
+                bean.setCurrency(priceOverview.getString("currency"));
+                if (!priceOverview.get("initial").toString().equals("null")) {
+                    bean.setOriginalPrice(priceOverview.getInt("initial")/100);
+                }
+                if (!priceOverview.get("final").toString().equals("null")) {
+                    bean.setFinalPrice(priceOverview.getInt("final")/100);
+                }
+                bean.setDiscountPercent(priceOverview.getInt("discount_percent"));
+                JSONArray jshots = data.getJSONArray("screenshots");
+                List<String> lshots = new ArrayList<>();
+                for (int j = 0; j < jshots.length(); j++) {
+                    lshots.add(((JSONObject) jshots.get(j)).getString("path_thumbnail"));
+                }
+                bean.setScreenshots(lshots);
+            }
+            return bean;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

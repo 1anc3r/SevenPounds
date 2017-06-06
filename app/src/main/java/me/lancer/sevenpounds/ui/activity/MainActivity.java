@@ -156,6 +156,14 @@ public class MainActivity extends BaseActivity {
                 case R.id.navigation_item_8:
                     currentIndex = 0;
                     menuItem.setChecked(true);
+                    currentFragment = new GameFragment();
+                    bundle.putInt(getString(R.string.index), currentIndex);
+                    currentFragment.setArguments(bundle);
+                    switchContent(currentFragment);
+                    return true;
+                case R.id.navigation_item_9:
+                    currentIndex = 0;
+                    menuItem.setChecked(true);
                     currentFragment = new CodeFragment();
                     bundle.putInt(getString(R.string.index), currentIndex);
                     currentFragment.setArguments(bundle);
