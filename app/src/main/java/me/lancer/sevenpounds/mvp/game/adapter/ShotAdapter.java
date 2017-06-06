@@ -2,6 +2,7 @@ package me.lancer.sevenpounds.mvp.game.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.game.GameBean;
+import me.lancer.sevenpounds.mvp.photo.activity.PhotoDetailActivity;
 import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.util.LruImageCache;
 
@@ -51,8 +53,11 @@ public class ShotAdapter extends RecyclerView.Adapter<ShotAdapter.ViewHolder> {
             viewHolder.cvShot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                }
+                    Intent intent = new Intent();
+                    intent.putExtra("img", list.get(position));
+                    intent.putExtra("title", "");
+                    intent.setClass(context, PhotoDetailActivity.class);
+                    context.startActivity(intent);}
             });
         }
     }

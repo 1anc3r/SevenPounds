@@ -25,9 +25,9 @@ public class GameModel {
     IGamePresenter presenter;
 
     ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
-    String featuredUrl = "http://store.steampowered.com/api/featured?l=zn_cn";
-    String categoriesUrl = "http://store.steampowered.com/api/featuredcategories?l=zn_cn";
-    String appdetailsUrl = "http://store.steampowered.com/api/appdetails?l=zn_cn&appids=";
+    String featuredUrl = "http://store.steampowered.com/api/featured?l=cn";
+    String categoriesUrl = "http://store.steampowered.com/api/featuredcategories?l=cn";
+    String appdetailsUrl = "http://store.steampowered.com/api/appdetails?l=cn&appids=";
 
     public GameModel(IGamePresenter presenter) {
         this.presenter = presenter;
@@ -58,7 +58,7 @@ public class GameModel {
     }
 
     public void loadDetail(int id) {
-        Log.e("url", appdetailsUrl + id);
+//        Log.e("url", appdetailsUrl + id);
         String content = contentGetterSetter.getContentFromHtml("Game.loadDetail", appdetailsUrl + id);
         GameBean bean;
         if (!content.contains("失败")) {

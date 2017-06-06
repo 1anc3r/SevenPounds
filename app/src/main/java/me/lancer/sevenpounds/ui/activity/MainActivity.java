@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.internal.NavigationMenuView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -85,6 +86,7 @@ public class MainActivity extends BaseActivity {
 
     private void initNavigationViewHeader() {
         navigationView = (NavigationView) findViewById(R.id.nv_main);
+        disableNavigationViewScrollbars(navigationView);
         View view = navigationView.inflateHeaderView(R.layout.drawer_header);
         CircleImageView civHead = (CircleImageView) view.findViewById(R.id.civ_head);
         TextView tvHead = (TextView) view.findViewById(R.id.tv_head);
@@ -194,6 +196,15 @@ public class MainActivity extends BaseActivity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(mParams.CURRENT_INDEX, currentIndex);
         super.onSaveInstanceState(outState);
+    }
+
+    private void disableNavigationViewScrollbars(NavigationView navigationView) {
+        if (navigationView != null) {
+            NavigationMenuView navigationMenuView = (NavigationMenuView) navigationView.getChildAt(0);
+            if (navigationMenuView != null) {
+                navigationMenuView.setVerticalScrollBarEnabled(false);
+            }
+        }
     }
 
     @Override

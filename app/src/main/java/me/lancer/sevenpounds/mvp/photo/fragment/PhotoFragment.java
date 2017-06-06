@@ -62,9 +62,9 @@ public class PhotoFragment extends BaseFragment {
         Fragment newfragment = new PhotoWelfareFragment();
         Bundle data = new Bundle();
         data.putInt("id", 0);
-        data.putString("title", "佳人");
+        data.putString("title", "妹子");
         newfragment.setArguments(data);
-        adapter.addFrag(newfragment, "佳人");
+        adapter.addFrag(newfragment, "妹子");
 
         newfragment = new PhotoTopFragment();
         data = new Bundle();
