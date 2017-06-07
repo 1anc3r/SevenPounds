@@ -140,12 +140,12 @@ public class NewsHotestFragment extends PresenterFragment<NewsPresenter> impleme
 
     @Override
     public void showLatest(List<NewsBean> list) {
-        
+
     }
 
     @Override
     public void showBefore(List<NewsBean> list) {
-        
+
     }
 
     @Override

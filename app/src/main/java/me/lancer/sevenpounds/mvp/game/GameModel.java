@@ -25,9 +25,9 @@ public class GameModel {
     IGamePresenter presenter;
 
     ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
-    String featuredUrl = "http://store.steampowered.com/api/featured?l=cn";
-    String categoriesUrl = "http://store.steampowered.com/api/featuredcategories?l=cn";
-    String appdetailsUrl = "http://store.steampowered.com/api/appdetails?l=cn&appids=";
+    String featuredUrl = "http://store.steampowered.com/api/featured/";
+    String categoriesUrl = "http://store.steampowered.com/api/featuredcategories/";
+    String appdetailsUrl = "http://store.steampowered.com/api/appdetails?appids=";
 
     public GameModel(IGamePresenter presenter) {
         this.presenter = presenter;
@@ -58,12 +58,16 @@ public class GameModel {
     }
 
     public void loadDetail(int id) {
-//        Log.e("url", appdetailsUrl + id);
+        Log.e("url", appdetailsUrl + id);
         String content = contentGetterSetter.getContentFromHtml("Game.loadDetail", appdetailsUrl + id);
         GameBean bean;
         if (!content.contains("失败")) {
             bean = getDetailFromContent(id, content);
-            presenter.loadDetailSuccess(bean);
+            if (bean != null) {
+                presenter.loadDetailSuccess(bean);
+            }else{
+                presenter.loadDetailFailure("获取失败!坏数据");
+            }
         } else {
             presenter.loadDetailFailure(content);
             Log.e("loadDetail", content);
@@ -264,8 +268,10 @@ public class GameModel {
                     lshots.add(((JSONObject) jshots.get(j)).getString("path_thumbnail"));
                 }
                 bean.setScreenshots(lshots);
+                return bean;
+            }else{
+                return null;
             }
-            return bean;
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

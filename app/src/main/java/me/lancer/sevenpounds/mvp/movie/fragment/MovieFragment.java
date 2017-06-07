@@ -38,7 +38,7 @@ public class MovieFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         toolbar = (Toolbar) view.findViewById(R.id.t_large);
-        toolbar.setTitle("观影");
+        toolbar.setTitle("电影");
         ((MainActivity) getActivity()).initDrawer(toolbar);
         initTabLayout(view);
         inflateMenu();

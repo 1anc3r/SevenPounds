@@ -25,7 +25,7 @@ public class ContentGetterSetter {
         StringBuilder content = new StringBuilder();
         OkHttpClient client = new OkHttpClient();
         client.setFollowRedirects(false);
-        Request request = new Request.Builder().url(url).build();
+        Request request = new Request.Builder().url(url).addHeader("Accept-Language", "zh-CN,zh;q=0.8").build();
         try {
             Response response = client.newCall(request).execute();
             if (response.code() == 200) {

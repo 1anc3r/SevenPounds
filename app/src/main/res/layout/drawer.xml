@@ -21,21 +21,21 @@
         <item
             android:id="@+id/navigation_item_3"
             android:icon="@mipmap/ic_book_black_24dp"
-            android:title="读书" />
+            android:title="图书" />
 
         <item
             android:id="@+id/navigation_item_4"
             android:icon="@mipmap/ic_music_note_black_24dp"
-            android:title="听音" />
+            android:title="音乐" />
 
         <item
             android:id="@+id/navigation_item_5"
             android:icon="@mipmap/ic_movie_black_24dp"
-            android:title="观影" />
+            android:title="电影" />
 
         <item
             android:id="@+id/navigation_item_6"
-            android:icon="@mipmap/ic_assistant_photo_black_24dp"
+            android:icon="@mipmap/ic_play_circle_outline_black_24dp"
             android:title="视频" />
 
         <item
