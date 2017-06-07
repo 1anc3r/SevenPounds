@@ -35,6 +35,13 @@ public class ComicPresenter implements IBasePresenter<IComicView>, IComicPresent
         }
     }
 
+    public void loadList(String query) {
+        if (view != null) {
+            view.showLoad();
+            model.loadList(query);
+        }
+    }
+
     @Override
     public void loadListSuccess(List<ComicBean> list) {
         if (view != null) {

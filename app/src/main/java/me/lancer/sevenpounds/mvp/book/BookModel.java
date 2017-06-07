@@ -16,6 +16,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.lancer.sevenpounds.mvp.movie.MovieBean;
 import me.lancer.sevenpounds.util.ContentGetterSetter;
 
 /**
@@ -29,6 +30,7 @@ public class BookModel {
     ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
     String reviewerUrl = "https://book.douban.com/review/best/?start=";
     String topBookUrl = "https://book.douban.com/top250?start=";
+    String searchBookUrl = "https://book.douban.com/subject_search?search_text=";
 
     public BookModel(IBookPresenter presenter) {
         this.presenter = presenter;
@@ -55,6 +57,18 @@ public class BookModel {
         } else {
             presenter.loadTopBookFailure(content);
             Log.e("loadTopBook", content);
+        }
+    }
+
+    public void loadTopBook(String query) {//电影top250
+        String content = contentGetterSetter.getContentFromHtml("Book.loadTopBook", searchBookUrl + query);
+        List<BookBean> list;
+        if (!content.contains("失败")) {
+            list = getQueryBookFromContent(content);
+            presenter.loadTopBookSuccess(list);
+        } else {
+            presenter.loadTopBookFailure(content);
+            Log.e("loadTopMovie", content);
         }
     }
 
@@ -112,6 +126,27 @@ public class BookModel {
             mbItem.setAuthor(elements.get(i).getElementsByClass("pl").text());
             mbItem.setContent(elements.get(i).getElementsByClass("inq").text());
             mbItem.setStar(elements.get(i).getElementsByClass("rating_nums").text());
+            mbItem.setImg(elements.get(i).getElementsByTag("img").attr("src"));
+            mbItem.setMainLink(elements.get(i).getElementsByTag("a").attr("href"));
+            list.add(mbItem);
+        }
+        return list;
+    }
+
+    public List<BookBean> getQueryBookFromContent(String content) {
+        List<BookBean> list = new ArrayList<>();
+        Document document = Jsoup.parse(content);
+        Element element = document.getElementById("content");
+        Elements elements = element.getElementsByClass("subject-item");
+        for (int i = 0; i < elements.size(); i++) {
+            BookBean mbItem = new BookBean();
+            mbItem.setMainTitle(elements.get(i).getElementsByTag("a").attr("title"));
+            mbItem.setAuthor(elements.get(i).getElementsByClass("pub").text());
+            if (elements.get(i).getElementsByTag("span").hasClass("rating_nums")) {
+                mbItem.setStar(elements.get(i).getElementsByClass("rating_nums").text());
+            }else{
+                mbItem.setStar("0");
+            }
             mbItem.setImg(elements.get(i).getElementsByTag("img").attr("src"));
             mbItem.setMainLink(elements.get(i).getElementsByTag("a").attr("href"));
             list.add(mbItem);

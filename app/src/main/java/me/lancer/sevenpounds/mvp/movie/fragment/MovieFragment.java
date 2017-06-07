@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
+import me.lancer.sevenpounds.mvp.movie.activity.MovieDetailActivity;
+import me.lancer.sevenpounds.mvp.movie.activity.MovieSearchActivity;
 import me.lancer.sevenpounds.ui.activity.AboutActivity;
 import me.lancer.sevenpounds.ui.activity.MainActivity;
 import me.lancer.sevenpounds.mvp.base.fragment.BaseFragment;
@@ -150,11 +153,15 @@ public class MovieFragment extends BaseFragment {
     private void initSearchView() {
         final SearchView searchView = (SearchView) toolbar.getMenu()
                 .findItem(R.id.menu_search).getActionView();
+        searchView.setVisibility(View.VISIBLE);
         searchView.setQueryHint("搜索...");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                showToast("...");
+                Intent intent = new Intent();
+                intent.putExtra("query", query);
+                intent.setClass(getActivity(), MovieSearchActivity.class);
+                getActivity().startActivity(intent);
                 return false;
             }
 

@@ -141,7 +141,7 @@ public class MovieTopFragment extends PresenterFragment<MoviePresenter> implemen
 
     @Override
     public void showReviewer(List<MovieBean> list) {
-        
+
     }
 
     @Override

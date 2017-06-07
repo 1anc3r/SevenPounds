@@ -58,6 +58,13 @@ public class BookPresenter implements IBasePresenter<IBookView>, IBookPresenter 
         }
     }
 
+    public void loadTopBook(String query) {
+        if (view != null) {
+            view.showLoad();
+            model.loadTopBook(query);
+        }
+    }
+
     @Override
     public void loadTopBookSuccess(List<BookBean> list) {
         if (view != null) {

@@ -31,10 +31,19 @@
             android:name=".mvp.book.activity.BookDetailActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".mvp.book.activity.BookSearchActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".mvp.music.activity.MusicDetailActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".mvp.music.activity.MusicSearchActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".mvp.movie.activity.MovieDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".mvp.movie.activity.MovieSearchActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".mvp.game.activity.GameDetailActivity"
@@ -66,6 +75,9 @@
             android:name=".mvp.page.activity.PagerActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar.Overlay" />
+        <activity
+            android:name=".mvp.comic.activity.ComicSearchActivity"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

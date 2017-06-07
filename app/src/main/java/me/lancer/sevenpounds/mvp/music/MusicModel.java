@@ -23,6 +23,7 @@ public class MusicModel {
     ContentGetterSetter contentGetterSetter = new ContentGetterSetter();
     String reviewerUrl = "https://music.douban.com/review/pop/?start=";
     String topMusicUrl = "https://music.douban.com/top250?start=";
+    String searchMusicUrl = "https://music.douban.com/subject_search?search_text=";
 
     public MusicModel(IMusicPresenter presenter) {
         this.presenter = presenter;
@@ -49,6 +50,18 @@ public class MusicModel {
         } else {
             presenter.loadTopMusicFailure(content);
             Log.e("loadTopMusic", content);
+        }
+    }
+
+    public void loadTopMusic(String query) {//电影top250
+        String content = contentGetterSetter.getContentFromHtml("Music.loadTopMusic", searchMusicUrl + query);
+        List<MusicBean> list;
+        if (!content.contains("失败")) {
+            list = getQueryMusicFromContent(content);
+            presenter.loadTopMusicSuccess(list);
+        } else {
+            presenter.loadTopMusicFailure(content);
+            Log.e("loadTopMovie", content);
         }
     }
 
@@ -96,6 +109,22 @@ public class MusicModel {
     }
 
     public List<MusicBean> getTopMusicFromContent(String content) {
+        List<MusicBean> list = new ArrayList<>();
+        Document document = Jsoup.parse(content);
+        Element element = document.getElementById("content");
+        Elements elements = element.getElementsByClass("item");
+        for (int i = 0; i < elements.size(); i++) {
+            MusicBean mbItem = new MusicBean();
+            mbItem.setMainTitle(elements.get(i).getElementsByClass("nbg").attr("title"));
+            mbItem.setStar(elements.get(i).getElementsByClass("rating_nums").text());
+            mbItem.setImg(elements.get(i).getElementsByTag("img").attr("src"));
+            mbItem.setMainLink(elements.get(i).getElementsByTag("a").attr("href"));
+            list.add(mbItem);
+        }
+        return list;
+    }
+
+    public List<MusicBean> getQueryMusicFromContent(String content) {
         List<MusicBean> list = new ArrayList<>();
         Document document = Jsoup.parse(content);
         Element element = document.getElementById("content");

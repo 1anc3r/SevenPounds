@@ -58,6 +58,13 @@ public class MusicPresenter implements IBasePresenter<IMusicView>, IMusicPresent
         }
     }
 
+    public void loadTopMusic(String query) {
+        if (view != null) {
+            view.showLoad();
+            model.loadTopMusic(query);
+        }
+    }
+
     @Override
     public void loadTopMusicSuccess(List<MusicBean> list) {
         if (view != null) {

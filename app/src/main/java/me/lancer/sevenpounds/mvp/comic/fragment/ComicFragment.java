@@ -20,6 +20,7 @@ import java.util.List;
 
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.base.fragment.BaseFragment;
+import me.lancer.sevenpounds.mvp.comic.activity.ComicSearchActivity;
 import me.lancer.sevenpounds.ui.activity.AboutActivity;
 import me.lancer.sevenpounds.ui.activity.MainActivity;
 
@@ -161,7 +162,10 @@ public class ComicFragment extends BaseFragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                showToast("...");
+                Intent intent = new Intent();
+                intent.putExtra("query", query);
+                intent.setClass(getActivity(), ComicSearchActivity.class);
+                getActivity().startActivity(intent);
                 return false;
             }
 

@@ -58,6 +58,13 @@ public class MoviePresenter implements IBasePresenter<IMovieView>, IMoviePresent
         }
     }
 
+    public void loadTopMovie(String query) {
+        if (view != null) {
+            view.showLoad();
+            model.loadTopMovie(query);
+        }
+    }
+
     @Override
     public void loadTopMovieSuccess(List<MovieBean> list) {
         if (view != null) {

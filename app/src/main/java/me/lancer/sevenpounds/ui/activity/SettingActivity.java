@@ -179,6 +179,10 @@ public class SettingActivity extends BaseActivity {
                 "\t\t\t\t排行 : 漫画排行榜\n" +
                 "\t\t\t\t分类 : 来自有妖气各分区排行榜\n" +
                 "\t\t\t\t — 数据来源 : 有妖气\n\t\t\t\t（https://www.u17.com）");
+        funcList.add("游戏 : \n" +
+                "\t\t\t\t精选 : 精选各大平台热门游戏\n" +
+                "\t\t\t\t优惠、热销、新品、即将推出\n" +
+                "\t\t\t\t — 数据来源 : Steam\n\t\t\t\t（https://store.steampowered.com）");
         funcList.add("编程 : \n" +
                 "\t\t\t\t个人 : GitHub上Star最多的个人\n" +
                 "\t\t\t\t组织 : GitHub上Star最多的组织\n" +

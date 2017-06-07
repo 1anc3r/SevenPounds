@@ -125,7 +125,7 @@ public class NewsFragment extends BaseFragment {
     }
 
     private void inflateMenu() {
-        toolbar.inflateMenu(R.menu.menu_search);
+        toolbar.inflateMenu(R.menu.menu_normal);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {

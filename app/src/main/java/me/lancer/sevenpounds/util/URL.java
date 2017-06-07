@@ -18,4 +18,7 @@ public final class URL {
     public static final String BOOK_URL = "http://app.u17.com/v3/appV3/android/phone/comic/detail_static?android_id=0A00270000130000&v=3070099&model=VPhone&come_from=wandoujia&comicid=";
     public static final String CHAPTER_URL = "http://app.u17.com/v3/appV3/android/phone/comic/chapterNew?v=3120100&chapter_id=";
     public static final String CONTENT_URL = "http://app.u17.com/v3/appV3/android/phone/comic/chapterlist?android_id=3000048383665174&v=3070099&model=GT-P5210&come_from=wandoujia&comicid=";
+
+    public static final String SEARCH_HEAD = "http://app.u17.com/v3/appV3/android/phone/search/relative?android_id=3000048383665174&v=3070099&model=GT-P5210&inputText=";
+    public static final String SEARCH_TAIL = "&come_from=wandoujia";
 }

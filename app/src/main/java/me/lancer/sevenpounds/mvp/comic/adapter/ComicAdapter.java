@@ -2,9 +2,11 @@ package me.lancer.sevenpounds.mvp.comic.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import java.util.List;
 import me.lancer.sevenpounds.R;
 import me.lancer.sevenpounds.mvp.chapter.activity.ChapterActivity;
 import me.lancer.sevenpounds.mvp.comic.ComicBean;
+import me.lancer.sevenpounds.mvp.comic.activity.ComicSearchActivity;
 import me.lancer.sevenpounds.ui.application.mApp;
 import me.lancer.sevenpounds.util.LruImageCache;
 
@@ -36,7 +39,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     public ComicAdapter(Context context, List<ComicBean> list) {
         this.context = context;
         this.list = list;
-        mQueue = ((mApp)((Activity)context).getApplication()).getRequestQueue();
+        mQueue = ((mApp) ((Activity) context).getApplication()).getRequestQueue();
     }
 
     @Override
@@ -65,7 +68,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
                         ChapterActivity.startActivity((Activity) context, list.get(position).getLink(), list.get(position).getCover(), list.get(position).getTitle(), list.get(position).getCategory(), viewHolder.ivCover);
                     }
                 });
-            }else if (getItemViewType(position) == TYPE_TITLE) {
+            } else if (getItemViewType(position) == TYPE_TITLE) {
                 StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
                 layoutParams.setFullSpan(true);
                 viewHolder.tvTitle.setText(bean.getTitle());
@@ -73,11 +76,23 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
                 viewHolder.ivCover.setVisibility(View.GONE);
                 viewHolder.ivIconLeft.setVisibility(View.VISIBLE);
                 viewHolder.ivIconRight.setVisibility(View.VISIBLE);
-                if(!bean.getCover().equals("")){
+                if (!bean.getCover().equals("")) {
                     LruImageCache cache = LruImageCache.instance();
                     ImageLoader loader = new ImageLoader(mQueue, cache);
                     viewHolder.ivIconLeft.setImageUrl(list.get(position).getCover(), loader);
                     viewHolder.ivIconRight.setImageUrl(list.get(position).getCover(), loader);
+                }
+                if (bean.getLink() != null && !bean.getLink().equals("")) {
+                    viewHolder.container.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent();
+                            intent.putExtra("title", list.get(position).getTitle());
+                            intent.putExtra("link", list.get(position).getLink());
+                            intent.setClass(context, ChapterActivity.class);
+                            context.startActivity(intent);
+                        }
+                    });
                 }
             }
         }

@@ -38,6 +38,18 @@ public class ComicModel {
         }
     }
 
+    public void loadList(String query) {
+        String content = contentGetterSetter.getContentFromHtml("Book.loadList", URL.SEARCH_HEAD + query + URL.SEARCH_TAIL);
+        List<ComicBean> list;
+        if (!content.contains("获取失败!")) {
+            list = getSearchFromContent(content);
+            presenter.loadListSuccess(list);
+        } else {
+            presenter.loadListFailure(content);
+            Log.e("loadList", content);
+        }
+    }
+
     public void loadRankTitle() {
         String content = contentGetterSetter.getContentFromHtml("Book.loadRankTitle", URL.RANK_TITLE_URL);
         List<ComicBean> list;
@@ -82,6 +94,33 @@ public class ComicModel {
         } else {
             presenter.loadSortFailure(content);
             Log.e("loadRankContent", content);
+        }
+    }
+
+    private List<ComicBean> getSearchFromContent(String content) {
+        try {
+            List<ComicBean> list = new ArrayList<>();
+            JSONObject all = new JSONObject(content);
+            int code = all.getInt("code");
+            if (code == 1) {
+                JSONObject data = all.getJSONObject("data");
+                int stateCode = data.getInt("stateCode");
+                String message = data.getString("message");
+                if (stateCode == 1 && message.equals("成功")) {
+                    JSONArray returnData = data.getJSONArray("returnData");
+                    for (int i = 0; i < returnData.length(); i++){
+                        JSONObject comic = returnData.getJSONObject(i);
+                        String title = comic.getString("name");
+                        String link = URL.BOOK_URL + comic.getInt("comic_id");
+                        ComicBean item = new ComicBean(title, "", 0, "", link);
+                        list.add(item);
+                    }
+                }
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -139,9 +178,9 @@ public class ComicModel {
                     JSONArray rankingList = returnData.getJSONArray("rankinglist");
                     for (int i = 0; i < rankingList.length(); i++) {
                         JSONObject ranking = rankingList.getJSONObject(i);
-                        String title = ranking.getString("title")+"排行";
+                        String title = ranking.getString("title") + "排行";
                         String category = ranking.getString("subTitle");
-                        String link = URL.RANK_CONTENT_URL+ranking.getInt("argValue");
+                        String link = URL.RANK_CONTENT_URL + ranking.getInt("argValue");
                         ComicBean bean = new ComicBean(title, category, 0, "", link);
                         list.add(bean);
                         list.addAll(loadRankContent(link));
@@ -171,7 +210,7 @@ public class ComicModel {
                         JSONObject ranking = rankingList.getJSONObject(i);
                         String title = ranking.getString("sortName");
                         String cover = ranking.getString("cover");
-                        String link = URL.SORT_CONTENT_URL+"&argValue="+ranking.getInt("argValue")+"&argName="+ranking.getString("argName");
+                        String link = URL.SORT_CONTENT_URL + "&argValue=" + ranking.getInt("argValue") + "&argName=" + ranking.getString("argName");
                         ComicBean bean = new ComicBean(title, "", 1, cover, link);
                         list.add(bean);
                     }
