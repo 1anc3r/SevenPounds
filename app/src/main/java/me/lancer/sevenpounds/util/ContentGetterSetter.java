@@ -46,4 +46,53 @@ public class ContentGetterSetter {
             return "获取失败!捕获异常:" + e.toString();
         }
     }
+
+    public String getContentFromFile(String path, String arg1) {
+        try {
+            File dir = new File(path + "/me.lancer.sevenpounds");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            File file = new File(dir.getPath() + "/" + arg1);
+            FileInputStream fis = new FileInputStream(file);
+            byte[] bytes = new byte[fis.available()];
+            fis.read(bytes);
+            String content = new String(bytes);
+            if (content == null) {
+                Log.e("gettersetter.fromFile", "加载文件失败!空文件");
+                return "加载文件失败!空文件";
+            }
+            if (fis != null) {
+                fis.close();
+            }
+            Log.e("gettersetter.fromFile", "加载文件成功!");
+            return content;
+        } catch (IOException e) {
+            Log.e("gettersetter.fromFile", "加载文件失败!捕获异常:" + e.toString());
+            return "加载文件失败!捕获异常:" + e.toString();
+        }
+    }
+
+    public void setContentToFile(String path, String arg1, String arg2, String content) {
+        try {
+            File dir = new File(path + "/me.lancer.sevenpounds");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            File file1 = new File(dir.getPath() + "/" + arg1);
+            File file2 = new File(dir.getPath() + "/" + arg2);
+            if (file2.exists()) {
+                file2.delete();
+                file1.createNewFile();
+            }
+            FileOutputStream fos = new FileOutputStream(file1);
+            fos.write(content.getBytes());
+            if (fos != null) {
+                fos.close();
+            }
+            Log.e("gettersetter.toFile", "配置文件成功!");
+        } catch (Exception e) {
+            Log.e("gettersetter.toFile", "配置文件失败!捕获异常:" + e.toString());
+        }
+    }
 }

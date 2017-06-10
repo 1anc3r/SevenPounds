@@ -1,5 +1,6 @@
 package me.lancer.sevenpounds.mvp.game;
 
+import android.os.Environment;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -10,7 +11,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import me.lancer.sevenpounds.mvp.news.NewsBean;
@@ -46,9 +49,19 @@ public class GameModel {
     }
 
     public void loadCategories(String keyword) {
-        String content = contentGetterSetter.getContentFromHtml("Game.loadCategories", categoriesUrl);
+        String path = Environment.getExternalStorageDirectory().toString();
+        String content;
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        Date today = new Date(new Date().getTime());
+        Date yestoday = new Date(new Date().getTime()-24*60*60*1000);
+        String arg1 = format.format(today);
+        String arg2 = format.format(yestoday);
         List<GameBean> list;
-        if (!content.contains("失败")) {
+        if (!(content = contentGetterSetter.getContentFromFile(path, arg1)).contains("失败")) {
+            list = getCategoriesFromContent(keyword, content);
+            presenter.loadCategoriesSuccess(list);
+        } else if (!(content = contentGetterSetter.getContentFromHtml("Game.loadCategories", categoriesUrl)).contains("失败")) {
+            contentGetterSetter.setContentToFile(path, arg1, arg2, content);
             list = getCategoriesFromContent(keyword, content);
             presenter.loadCategoriesSuccess(list);
         } else {
@@ -58,6 +71,9 @@ public class GameModel {
     }
 
     public void loadDetail(int id) {
+        if (id == 54029) {
+            id = 730;
+        }
         Log.e("url", appdetailsUrl + id);
         String content = contentGetterSetter.getContentFromHtml("Game.loadDetail", appdetailsUrl + id);
         GameBean bean;
@@ -65,7 +81,7 @@ public class GameModel {
             bean = getDetailFromContent(id, content);
             if (bean != null) {
                 presenter.loadDetailSuccess(bean);
-            }else{
+            } else {
                 presenter.loadDetailFailure("获取失败!坏数据");
             }
         } else {
@@ -88,10 +104,10 @@ public class GameModel {
                 bean.setDiscounted(jbItem.getBoolean("discounted"));
                 bean.setDiscountPercent(jbItem.getInt("discount_percent"));
                 if (!jbItem.get("original_price").toString().equals("null")) {
-                    bean.setOriginalPrice(jbItem.getInt("original_price")/100);
+                    bean.setOriginalPrice(jbItem.getInt("original_price") / 100);
                 }
                 if (!jbItem.get("final_price").toString().equals("null")) {
-                    bean.setFinalPrice(jbItem.getInt("final_price")/100);
+                    bean.setFinalPrice(jbItem.getInt("final_price") / 100);
                 }
                 bean.setWindowsAvailable(jbItem.getBoolean("windows_available"));
                 bean.setMacAvailable(jbItem.getBoolean("mac_available"));
@@ -110,10 +126,10 @@ public class GameModel {
                 bean.setDiscounted(jbItem.getBoolean("discounted"));
                 bean.setDiscountPercent(jbItem.getInt("discount_percent"));
                 if (!jbItem.get("original_price").toString().equals("null")) {
-                    bean.setOriginalPrice(jbItem.getInt("original_price")/100);
+                    bean.setOriginalPrice(jbItem.getInt("original_price") / 100);
                 }
                 if (!jbItem.get("final_price").toString().equals("null")) {
-                    bean.setFinalPrice(jbItem.getInt("final_price")/100);
+                    bean.setFinalPrice(jbItem.getInt("final_price") / 100);
                 }
                 bean.setWindowsAvailable(jbItem.getBoolean("windows_available"));
                 bean.setMacAvailable(jbItem.getBoolean("mac_available"));
@@ -132,10 +148,10 @@ public class GameModel {
                 bean.setDiscounted(jbItem.getBoolean("discounted"));
                 bean.setDiscountPercent(jbItem.getInt("discount_percent"));
                 if (!jbItem.get("original_price").toString().equals("null")) {
-                    bean.setOriginalPrice(jbItem.getInt("original_price")/100);
+                    bean.setOriginalPrice(jbItem.getInt("original_price") / 100);
                 }
                 if (!jbItem.get("final_price").toString().equals("null")) {
-                    bean.setFinalPrice(jbItem.getInt("final_price")/100);
+                    bean.setFinalPrice(jbItem.getInt("final_price") / 100);
                 }
                 bean.setWindowsAvailable(jbItem.getBoolean("windows_available"));
                 bean.setMacAvailable(jbItem.getBoolean("mac_available"));
@@ -154,10 +170,10 @@ public class GameModel {
                 bean.setDiscounted(jbItem.getBoolean("discounted"));
                 bean.setDiscountPercent(jbItem.getInt("discount_percent"));
                 if (!jbItem.get("original_price").toString().equals("null")) {
-                    bean.setOriginalPrice(jbItem.getInt("original_price")/100);
+                    bean.setOriginalPrice(jbItem.getInt("original_price") / 100);
                 }
                 if (!jbItem.get("final_price").toString().equals("null")) {
-                    bean.setFinalPrice(jbItem.getInt("final_price")/100);
+                    bean.setFinalPrice(jbItem.getInt("final_price") / 100);
                 }
                 bean.setWindowsAvailable(jbItem.getBoolean("windows_available"));
                 bean.setMacAvailable(jbItem.getBoolean("mac_available"));
@@ -188,10 +204,10 @@ public class GameModel {
                 bean.setDiscounted(jbItem.getBoolean("discounted"));
                 bean.setDiscountPercent(jbItem.getInt("discount_percent"));
                 if (!jbItem.get("original_price").toString().equals("null")) {
-                    bean.setOriginalPrice(jbItem.getInt("original_price")/100);
+                    bean.setOriginalPrice(jbItem.getInt("original_price") / 100);
                 }
                 if (!jbItem.get("final_price").toString().equals("null")) {
-                    bean.setFinalPrice(jbItem.getInt("final_price")/100);
+                    bean.setFinalPrice(jbItem.getInt("final_price") / 100);
                 }
                 bean.setWindowsAvailable(jbItem.getBoolean("windows_available"));
                 bean.setMacAvailable(jbItem.getBoolean("mac_available"));
@@ -253,15 +269,17 @@ public class GameModel {
                 bean.setRequirements(requirements);
                 bean.setDevelopers((String) data.getJSONArray("developers").get(0));
                 bean.setPublishers((String) data.getJSONArray("publishers").get(0));
-                JSONObject priceOverview = data.getJSONObject("price_overview");
-                bean.setCurrency(priceOverview.getString("currency"));
-                if (!priceOverview.get("initial").toString().equals("null")) {
-                    bean.setOriginalPrice(priceOverview.getInt("initial")/100);
+                if (data.has("price_overview")) {
+                    JSONObject priceOverview = data.getJSONObject("price_overview");
+                    bean.setCurrency(priceOverview.getString("currency"));
+                    if (!priceOverview.get("initial").toString().equals("null")) {
+                        bean.setOriginalPrice(priceOverview.getInt("initial") / 100);
+                    }
+                    if (!priceOverview.get("final").toString().equals("null")) {
+                        bean.setFinalPrice(priceOverview.getInt("final") / 100);
+                    }
+                    bean.setDiscountPercent(priceOverview.getInt("discount_percent"));
                 }
-                if (!priceOverview.get("final").toString().equals("null")) {
-                    bean.setFinalPrice(priceOverview.getInt("final")/100);
-                }
-                bean.setDiscountPercent(priceOverview.getInt("discount_percent"));
                 JSONArray jshots = data.getJSONArray("screenshots");
                 List<String> lshots = new ArrayList<>();
                 for (int j = 0; j < jshots.length(); j++) {
@@ -269,7 +287,7 @@ public class GameModel {
                 }
                 bean.setScreenshots(lshots);
                 return bean;
-            }else{
+            } else {
                 return null;
             }
         } catch (JSONException e) {

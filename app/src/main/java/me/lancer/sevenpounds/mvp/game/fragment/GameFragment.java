@@ -53,21 +53,21 @@ public class GameFragment extends BaseFragment {
         setupViewPager(viewPager);
         viewPager.setOffscreenPageLimit(viewPager.getAdapter().getCount());
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
-        Fragment newfragment = new GameFeaturedFragment();
-        Bundle data = new Bundle();
-        data.putInt("id", 0);
-        data.putString("title", "精选");
-        newfragment.setArguments(data);
-        adapter.addFrag(newfragment, "精选");
+//        Fragment newfragment = new GameFeaturedFragment();
+//        Bundle data = new Bundle();
+//        data.putInt("id", 0);
+//        data.putString("title", "精选");
+//        newfragment.setArguments(data);
+//        adapter.addFrag(newfragment, "精选");
 
-        newfragment = new GameCategoriesFragment();
-        data = new Bundle();
+        Fragment newfragment = new GameCategoriesFragment();
+        Bundle data = new Bundle();
         data.putInt("id", 1);
         data.putString("title", "优惠");
         newfragment.setArguments(data);
