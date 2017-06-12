@@ -39,7 +39,7 @@ public class GameModel {
     public void loadFeatured() {
         String content = contentGetterSetter.getContentFromHtml("Game.loadFeatured", featuredUrl);
         List<GameBean> list;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             list = getFeaturedFromContent(content);
             presenter.loadFeaturedSuccess(list);
         } else {
@@ -57,10 +57,10 @@ public class GameModel {
         String arg1 = format.format(today);
         String arg2 = format.format(yestoday);
         List<GameBean> list;
-        if (!(content = contentGetterSetter.getContentFromFile(path, arg1)).contains("失败")) {
+        if (!(content = contentGetterSetter.getContentFromFile(path, arg1)).contains("失败!")) {
             list = getCategoriesFromContent(keyword, content);
             presenter.loadCategoriesSuccess(list);
-        } else if (!(content = contentGetterSetter.getContentFromHtml("Game.loadCategories", categoriesUrl)).contains("失败")) {
+        } else if (!(content = contentGetterSetter.getContentFromHtml("Game.loadCategories", categoriesUrl)).contains("获取失败!")) {
             contentGetterSetter.setContentToFile(path, arg1, arg2, content);
             list = getCategoriesFromContent(keyword, content);
             presenter.loadCategoriesSuccess(list);
@@ -77,7 +77,7 @@ public class GameModel {
         Log.e("url", appdetailsUrl + id);
         String content = contentGetterSetter.getContentFromHtml("Game.loadDetail", appdetailsUrl + id);
         GameBean bean;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             bean = getDetailFromContent(id, content);
             if (bean != null) {
                 presenter.loadDetailSuccess(bean);

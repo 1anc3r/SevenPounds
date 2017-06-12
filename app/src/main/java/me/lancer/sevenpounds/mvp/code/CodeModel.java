@@ -42,7 +42,7 @@ public class CodeModel {
     public void loadUsers(int pager) {//个人
         String content = contentGetterSetter.getContentFromHtml("Code.loadUsers", usersUrl + pager);
         List<CodeBean> list;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             list = getListFromContent(content);
             presenter.loadUsersSuccess(list);
         } else {
@@ -54,7 +54,7 @@ public class CodeModel {
     public void loadOrganizations(int pager) {//组织
         String content = contentGetterSetter.getContentFromHtml("Code.loadOrganizations", organizationsUrl + pager);
         List<CodeBean> list;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             list = getListFromContent(content);
             presenter.loadOrganizationsSuccess(list);
         } else {
@@ -66,7 +66,7 @@ public class CodeModel {
     public void loadRepositories(int pager) {//项目
         String content = contentGetterSetter.getContentFromHtml("Code.loadRepositories", repositoriesUrl + pager);
         List<CodeBean> list;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             list = getListFromContent(content);
             presenter.loadRepositoriesSuccess(list);
         } else {
@@ -78,7 +78,7 @@ public class CodeModel {
     public void loadTrending(String since) {
         String content = contentGetterSetter.getContentFromHtml("Code.loadTrending", trendingUrl+since);
         List<CodeBean> list;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             list = getTrendingFromContent(content);
             presenter.loadTrendingSuccess(list);
         } else {

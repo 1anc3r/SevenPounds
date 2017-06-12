@@ -32,7 +32,7 @@ public class MovieModel {
     public void loadReviewer(int pager) {//评论
         String content = contentGetterSetter.getContentFromHtml("Movie.loadReviewer", reviewerUrl + pager);
         List<MovieBean> list;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             list = getReviewerFromContent(content);
             presenter.loadReviewerSuccess(list);
         } else {
@@ -44,7 +44,7 @@ public class MovieModel {
     public void loadTopMovie(int pager) {//电影top250
         String content = contentGetterSetter.getContentFromHtml("Movie.loadTopMovie", topMovieUrl + pager);
         List<MovieBean> list;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             list = getTopMovieFromContent(content);
             presenter.loadTopMovieSuccess(list);
         } else {
@@ -56,7 +56,7 @@ public class MovieModel {
     public void loadTopMovie(String query) {//电影top250
         String content = contentGetterSetter.getContentFromHtml("Movie.loadTopMovie", searchMovieUrl + query);
         List<MovieBean> list;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             list = getQueryMovieFromContent(content);
             presenter.loadTopMovieSuccess(list);
         } else {

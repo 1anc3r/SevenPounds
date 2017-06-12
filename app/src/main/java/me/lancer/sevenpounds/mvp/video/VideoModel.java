@@ -35,7 +35,7 @@ public class VideoModel {
     public void loadTheme(int pager) {
         String content = contentGetterSetter.getContentFromHtml("Video.loadTheme", ThemeUrl);
         List<VideoBean> list;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             list = getThemeFromContent(content, pager);
             presenter.loadThemeSuccess(list);
         } else {
@@ -47,7 +47,7 @@ public class VideoModel {
     public void loadDetail(String url) {
         String content = contentGetterSetter.getContentFromHtml("Video.loadDetail", url);
         VideoBean bean;
-        if (!content.contains("失败")) {
+        if (!content.contains("获取失败!")) {
             bean = getDetailFromContent(content);
             presenter.loadDetailSuccess(bean);
         } else {
