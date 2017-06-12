@@ -33,7 +33,7 @@ public class CodeModel {
     String organizationsUrl = "https://github-ranking.com/organizations?page=";
     String repositoriesUrl = "https://github-ranking.com/repositories?page=";
     String trendingUrl = "https://github.com/trending?since=";
-//    String trendingUrl = "https://trendings.herokuapp.com/api/repo/language/?since=";
+    String searchUrl = "https://github.com/search?utf8=✓&q=";
 
     public CodeModel(ICodePresenter presenter) {
         this.presenter = presenter;
@@ -76,14 +76,26 @@ public class CodeModel {
     }
 
     public void loadTrending(String since) {
-        String content = contentGetterSetter.getContentFromHtml("Code.loadTrending", trendingUrl+since);
+        String content = contentGetterSetter.getContentFromHtml("Code.loadTrending", trendingUrl + since);
         List<CodeBean> list;
         if (!content.contains("获取失败!")) {
             list = getTrendingFromContent(content);
             presenter.loadTrendingSuccess(list);
         } else {
             presenter.loadTrendingFailure(content);
-            Log.e("loadRepositories", content);
+            Log.e("loadTrending", content);
+        }
+    }
+
+    public void loadSearching(String keyword) {
+        String content = contentGetterSetter.getContentFromHtml("Code.loadSearching", searchUrl + keyword);
+        List<CodeBean> list;
+        if (!content.contains("获取失败!")) {
+            list = getSearchingFromContent(content);
+            presenter.loadSearchingSuccess(list);
+        } else {
+            presenter.loadSearchingFailure(content);
+            Log.e("loadSearching", content);
         }
     }
 
@@ -127,11 +139,32 @@ public class CodeModel {
         for (int i = 0; i < elements.size(); i++) {
             CodeBean bean = new CodeBean();
             bean.setType(0);
-            bean.setRank((i+1)+".");
+            bean.setRank((i + 1) + ".");
             bean.setName(elements.get(i).getElementsByTag("a").attr("href"));
             bean.setStar(elements.get(i).getElementsByClass("muted-link mr-3").text().split(" ")[0]);
             bean.setImg(elements.get(i).getElementsByTag("img").attr("src"));
-            bean.setLink("https://github.com/"+bean.getName());
+            bean.setLink("https://github.com/" + bean.getName());
+            list.add(bean);
+        }
+        return list;
+    }
+
+    public List<CodeBean> getSearchingFromContent(String content) {
+        List<CodeBean> list = new ArrayList<>();
+        Document document = Jsoup.parse(content);
+        Elements elements = document.getElementsByClass("repo-list-item d-flex flex-justify-start py-4 public source");
+        for (int i = 0; i < elements.size(); i++) {
+            CodeBean bean = new CodeBean();
+            bean.setType(0);
+            bean.setRank((i + 1) + ".");
+            bean.setName(elements.get(i).getElementsByTag("a").attr("href"));
+            if (elements.get(i).hasClass("muted-link")) {
+                bean.setStar(elements.get(i).getElementsByClass("muted-link").text().split(" ")[0]);
+            } else {
+                bean.setStar("0");
+            }
+            bean.setImg("https://avatars3.githubusercontent.com/u/9919?v=3&s=200");
+            bean.setLink("https://github.com/" + bean.getName());
             list.add(bean);
         }
         return list;

@@ -155,6 +155,11 @@ public class CodeTrendingFragment extends PresenterFragment<CodePresenter> imple
     }
 
     @Override
+    public void showSearching(List<CodeBean> list) {
+
+    }
+
+    @Override
     public void showDetail(CodeBean bean) {
 
     }

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.lancer.sevenpounds.R;
+import me.lancer.sevenpounds.mvp.code.activity.CodeSearchActivity;
 import me.lancer.sevenpounds.ui.activity.AboutActivity;
 import me.lancer.sevenpounds.ui.activity.MainActivity;
 import me.lancer.sevenpounds.mvp.base.fragment.BaseFragment;
@@ -132,7 +133,7 @@ public class CodeFragment extends BaseFragment {
     }
 
     private void inflateMenu() {
-        toolbar.inflateMenu(R.menu.menu_normal);
+        toolbar.inflateMenu(R.menu.menu_search);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -168,7 +169,10 @@ public class CodeFragment extends BaseFragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                showToast("...");
+                Intent intent = new Intent();
+                intent.putExtra("query", query);
+                intent.setClass(getActivity(), CodeSearchActivity.class);
+                getActivity().startActivity(intent);
                 return false;
             }
 

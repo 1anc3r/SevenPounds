@@ -193,6 +193,11 @@ public class CodeDetailActivity extends PresenterActivity<CodePresenter> impleme
     }
 
     @Override
+    public void showSearching(List<CodeBean> list) {
+
+    }
+
+    @Override
     public void showDetail(CodeBean bean) {
         Message msg = new Message();
         msg.what = 3;

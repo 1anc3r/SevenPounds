@@ -24,6 +24,10 @@ public interface ICodePresenter {
 
     void loadTrendingFailure(String log);
 
+    void loadSearchingSuccess(List<CodeBean> list);
+
+    void loadSearchingFailure(String log);
+
     void loadDetailSuccess(CodeBean bean);
 
     void loadDetailFailure(String log);

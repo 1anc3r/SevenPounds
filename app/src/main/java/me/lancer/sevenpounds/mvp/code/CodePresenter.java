@@ -120,6 +120,29 @@ public class CodePresenter implements IBasePresenter<ICodeView>, ICodePresenter 
         }
     }
 
+    public void loadSearching(String keyword) {
+        if (view != null) {
+            view.showLoad();
+            model.loadSearching(keyword);
+        }
+    }
+
+    @Override
+    public void loadSearchingSuccess(List<CodeBean> list) {
+        if (view != null) {
+            view.showSearching(list);
+            view.hideLoad();
+        }
+    }
+
+    @Override
+    public void loadSearchingFailure(String log) {
+        if (log != null && log.length() > 0 && view != null) {
+            view.showMsg(log);
+            view.hideLoad();
+        }
+    }
+
     public void loadDetail(String url) {
         if (view != null) {
             view.showLoad();

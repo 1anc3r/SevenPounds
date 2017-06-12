@@ -52,6 +52,9 @@
             android:name=".mvp.code.activity.CodeDetailActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".mvp.code.activity.CodeSearchActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".mvp.video.activity.VideoPlayerActivity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"

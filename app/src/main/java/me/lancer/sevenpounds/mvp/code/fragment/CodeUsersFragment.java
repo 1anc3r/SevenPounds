@@ -163,6 +163,11 @@ public class CodeUsersFragment extends PresenterFragment<CodePresenter> implemen
     }
 
     @Override
+    public void showSearching(List<CodeBean> list) {
+
+    }
+
+    @Override
     public void showDetail(CodeBean bean) {
 
     }
