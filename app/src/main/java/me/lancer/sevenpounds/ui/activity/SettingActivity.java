@@ -148,7 +148,7 @@ public class SettingActivity extends BaseActivity {
         night = sharedPreferences.getBoolean(mParams.ISNIGHT, false);
         scNight.setChecked(night);
         scNight.setClickable(false);
-        funcList.add("见闻 : \n" +
+        funcList.add("趣闻 : \n" +
                 "\t\t\t\t每日 : 知乎日报的每日信息\n" +
                 "\t\t\t\t热门 : 知乎日报的热门信息\n" +
                 "\t\t\t\t分类 : 包括动漫、游戏、财经、电影、音乐、互联网安全等日报\n" +
