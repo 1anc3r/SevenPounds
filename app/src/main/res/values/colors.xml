@@ -30,4 +30,7 @@
     <color name="orange">#FE9700</color>
     <color name="deeporange">#FE5722</color>
 
+    <color name="md_deep_orange_500">@color/black_dark</color>
+    <color name="md_deep_orange_700">@color/black_dark</color>
+
 </resources>

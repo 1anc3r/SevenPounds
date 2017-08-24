@@ -19,4 +19,7 @@
     <color name="yellow">#FFC107</color>
     <color name="purple">#9C27B0</color>
 
+    <color name="md_deep_orange_500">@color/black_dark</color>
+    <color name="md_deep_orange_700">@color/black_dark</color>
+
 </resources>

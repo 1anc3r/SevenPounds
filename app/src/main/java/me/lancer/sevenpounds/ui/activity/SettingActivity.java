@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
@@ -196,36 +197,31 @@ public class SettingActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             if (v == llNight) {
-                if (!night) {
-//                    editor.putBoolean(mParams.ISNIGHT, true);
-//                    editor.apply();
-//                    scNight.setChecked(true);
-//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                    recreate();
+                if (!app.isNight()) {
                     scNight.setChecked(true);
+                    app.setNight(true);
                     editor.putBoolean(mParams.ISNIGHT, true);
                     editor.apply();
                     Colorful.config(SettingActivity.this)
+                            .primaryColor(Colorful.ThemeColor.DEEP_ORANGE)
+                            .accentColor(Colorful.ThemeColor.DEEP_ORANGE)
                             .translucent(false)
                             .dark(true)
                             .apply();
                     recreate();
                 } else {
-//                    editor.putBoolean(mParams.ISNIGHT, false);
-//                    editor.apply();
-//                    scNight.setChecked(false);
-//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                    recreate();
                     scNight.setChecked(false);
+                    app.setNight(false);
                     editor.putBoolean(mParams.ISNIGHT, false);
                     editor.apply();
                     Colorful.config(SettingActivity.this)
+                            .primaryColor(Colorful.ThemeColor.GREEN)
+                            .accentColor(Colorful.ThemeColor.GREEN)
                             .translucent(false)
                             .dark(false)
                             .apply();
                     recreate();
                 }
-                night = !night;
             } else if (v == llTheme) {
                 ColorPickerDialog dialog = new ColorPickerDialog(SettingActivity.this);
                 dialog.setTitle("切换主题");
