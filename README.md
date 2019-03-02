@@ -1,14 +1,14 @@
 # 七磅(SevenPounds)
-<img src="http://o7gy5l0ax.bkt.clouddn.com/ic_sevenpounds.png" width = "96" height = "96" alt="icon"/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/app/src/main/ic_launcher-web.png?raw=true" width = "96" height = "96" alt="icon"/>
 
 ## 应用简介:
 七磅（榜）—— 灵魂的重量。 汇（pa）聚（qu）网络优质信息于七张榜单，为灵魂增重。 
 
 ## 相关链接:
 * Github: [![](https://img.shields.io/badge/github-1anc3r-yellowgreen.svg)](https://github.com/1anc3r)
-* 我的博客: [![](https://img.shields.io/badge/blog-1anc3r-green.svg)](http://www.1anc3r.me/)
+* 我的博客: [![](https://img.shields.io/badge/blog-1anc3r-green.svg)](http://1anc3r.github.io/)
 * 实验室主页: [![](https://img.shields.io/badge/wiki-xiyoumobile-brightgreen.svg)](http://www.xiyoumobile.com/)
-* 应用下载链接: [![](https://img.shields.io/badge/download-v1.1-blue.svg)](https://fir.im/sevenponuds)
+* 应用下载链接: [![](https://img.shields.io/badge/download-v1.1-blue.svg)](https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/SevenPounds.apk?raw=true)
 
 ## 功能介绍:
 
@@ -106,21 +106,32 @@
 
 ## 应用界面:
 
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085145.gif?raw=true" width = "288" height = "512" alt="" /><img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085146.gif?raw=true" width = "288" height = "512" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085149.png?raw=true" width = "288" height = "512" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085147.png?raw=true" width = "288" height = "512" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085148.png?raw=true" width = "288" height = "512" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/screenshot/Screenshot_1490085150.png?raw=true" width = "288" height = "512" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/动图1.gif?raw=true" width = "288" height = "512" alt="" /><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/动图2.gif?raw=true" width = "288" height = "512" alt=""/>
+
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/侧边栏.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/见闻如是说.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/见闻如是说_详情.jpeg?raw=true" width = "288" height = "369" alt=""/>
+
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/读书如抽丝_书评.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/读书如抽丝_书榜.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/读书如抽丝_详情.jpeg?raw=true" width = "288" height = "369" alt=""/>
+
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/听音如沐风_乐评.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/听音如沐风_乐榜.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/览图如流水.jpeg?raw=true" width = "288" height = "369" alt=""/>
+
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/观音如造梦_影评.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/观影如造梦_影榜.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/吐槽如瀑布.jpeg?raw=true" width = "288" height = "369" alt=""/>
+
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/游戏如人生_分类.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/游戏如人生_周榜.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/编程如逆旅_详情.jpeg?raw=true" width = "288" height = "369" alt=""/>
+
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/编程如逆旅_个人.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/编程如逆旅_项目.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/编程如逆旅_组织.jpeg?raw=true" width = "288" height = "369" alt=""/>
 
 ## 技术要点
 
 项目采用 MVP 架构，Okhttp 和 Volley 加载网络数据，JSoup 解析 Json 数据；使用 RecyclerView 加载多种布局，支持下拉刷 新上拉加载；应用支持主题换色、夜间模式、亮度调节。通过此项目掌握了 MVP 设计思想， 掌握了多种数据处理方式，学习了各种Android的性能优化技巧。 
-
-## 关于
-### 组织
-<img src="http://o7gy5l0ax.bkt.clouddn.com/ic_xiyoumobile.png" width = "100" height = "100" alt=""/>
-
-西安邮电大学移动应用开发实验室，亦称西安邮电大学3G手机应用开发实验室，创建于2011年，并被设为“Google 中国大学合作部--Android 人才培养示范基地”。实验室分为苹果iOS、谷歌Android、微软Windows Phone三个小组，是西安邮电大学唯一专注于移动平台应用开发的实验室。
-
-实验室位于西安邮电大学长安校区东区教学楼一层FZ155教室，设有多部移动应用开发设备，可供成员测试相关应用程序。Android开发组还配有由公司提供的Android底层开发箱，可用于开发和测试Android底层程序。
-
-### 作者
-<img src="http://o7gy5l0ax.bkt.clouddn.com/ic_lancer.jpg" width = "100" height = "100" alt=""/>
-
-我是1anc3r, 西安邮电大学计算机学院软件工程2018应届毕业生, 正在努力学习Android开发。联系我: huangfangzhi0@foxmail.com。
