@@ -108,29 +108,17 @@
 
 <img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/动图1.gif?raw=true" width = "288" height = "512" alt="" /><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/动图2.gif?raw=true" width = "288" height = "512" alt=""/>
 
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/侧边栏.jpeg?raw=true" width = "288" height = "369" alt=""/>
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/见闻如是说.jpeg?raw=true" width = "288" height = "369" alt=""/>
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/见闻如是说_详情.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/侧边栏.jpeg?raw=true" width = "288" height = "369" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/见闻如是说.jpeg?raw=true" width = "288" height = "369" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/见闻如是说_详情.jpeg?raw=true" width = "288" height = "369" alt=""/>
 
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/读书如抽丝_书评.jpeg?raw=true" width = "288" height = "369" alt=""/>
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/读书如抽丝_书榜.jpeg?raw=true" width = "288" height = "369" alt=""/>
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/读书如抽丝_详情.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/读书如抽丝_书评.jpeg?raw=true" width = "288" height = "369" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/读书如抽丝_书榜.jpeg?raw=true" width = "288" height = "369" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/读书如抽丝_详情.jpeg?raw=true" width = "288" height = "369" alt=""/>
 
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/听音如沐风_乐评.jpeg?raw=true" width = "288" height = "369" alt=""/>
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/听音如沐风_乐榜.jpeg?raw=true" width = "288" height = "369" alt=""/>
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/览图如流水.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/听音如沐风_乐评.jpeg?raw=true" width = "288" height = "369" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/听音如沐风_乐榜.jpeg?raw=true" width = "288" height = "369" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/览图如流水.jpeg?raw=true" width = "288" height = "369" alt=""/>
 
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/观音如造梦_影评.jpeg?raw=true" width = "288" height = "369" alt=""/>
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/观影如造梦_影榜.jpeg?raw=true" width = "288" height = "369" alt=""/>
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/吐槽如瀑布.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/观音如造梦_影评.jpeg?raw=true" width = "288" height = "369" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/观影如造梦_影榜.jpeg?raw=true" width = "288" height = "369" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/吐槽如瀑布.jpeg?raw=true" width = "288" height = "369" alt=""/>
 
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/游戏如人生_分类.jpeg?raw=true" width = "288" height = "369" alt=""/>
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/游戏如人生_周榜.jpeg?raw=true" width = "288" height = "369" alt=""/>
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/编程如逆旅_详情.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/游戏如人生_分类.jpeg?raw=true" width = "288" height = "369" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/游戏如人生_周榜.jpeg?raw=true" width = "288" height = "369" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/编程如逆旅_详情.jpeg?raw=true" width = "288" height = "369" alt=""/>
 
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/编程如逆旅_个人.jpeg?raw=true" width = "288" height = "369" alt=""/>
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/编程如逆旅_项目.jpeg?raw=true" width = "288" height = "369" alt=""/>
-<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/编程如逆旅_组织.jpeg?raw=true" width = "288" height = "369" alt=""/>
+<img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/编程如逆旅_个人.jpeg?raw=true" width = "288" height = "369" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/编程如逆旅_项目.jpeg?raw=true" width = "288" height = "369" alt=""/><img src="https://github.com/1anc3r/SevenPounds/blob/master/Screenshots/编程如逆旅_组织.jpeg?raw=true" width = "288" height = "369" alt=""/>
 
 ## 技术要点
 
